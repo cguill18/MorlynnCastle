@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Label">
+         <font>
+            <Font name="Book Antiqua" size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#51bf1a" height="20.0" stroke="BLACK" strokeType="INSIDE" width="246.0" />
+      <HBox alignment="CENTER" prefHeight="193.0" prefWidth="308.0">
+         <children>
+            <Label alignment="CENTER" maxWidth="9.0" minWidth="1.0" prefHeight="158.0" prefWidth="6.0" style="-fx-wrap-text: true;" text="Inventory" textAlignment="CENTER" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </HBox.margin></ImageView>
+            <Label alignment="CENTER" maxWidth="9.0" minWidth="1.0" prefHeight="158.0" prefWidth="6.0" style="-fx-wrap-text: true;" text="Equipment" textAlignment="CENTER" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

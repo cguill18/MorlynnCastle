@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+
+<Group xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.hallController">
+   <children>
+      <ImageView fx:id="background" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../res/background.png" />
+         </image>
+      </ImageView>
+      <ImageView id="chest" fitHeight="76.0" fitWidth="54.0" layoutX="98.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../res/unlocked_chest.png" />
+         </image>
+      </ImageView>
+      <ImageView id="armor" fitHeight="87.0" fitWidth="101.0" layoutX="214.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../res/armor.png" />
+         </image>
+      </ImageView>
+      <ImageView id="old_man" fitHeight="64.0" fitWidth="73.0" layoutX="486.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../res/non_hostile_character.png" />
+         </image>
+      </ImageView>
+      <ImageView id="weapon" fitHeight="74.0" fitWidth="54.0" layoutX="325.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../res/weapon.png" />
+         </image>
+      </ImageView>
+   </children>
+</Group>
