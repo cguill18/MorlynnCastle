@@ -1,4 +1,4 @@
-package space;
+package MorlynnCastle.model.space;
 
 public class Door extends Interaction {
 

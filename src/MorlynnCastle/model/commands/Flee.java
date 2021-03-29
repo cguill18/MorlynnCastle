@@ -1,10 +1,11 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Hero;
+
+import MorlynnCastle.model.characters.Hero;
 
 import java.util.List;
 
-public class Flee extends Command{
+public class Flee extends Command {
 
     private final static int NB_ARG = 0;
 

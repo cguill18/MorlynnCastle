@@ -1,6 +1,6 @@
-package item;
+package MorlynnCastle.model.item;
 
-import space.Interaction;
+import MorlynnCastle.model.space.Interaction;
 
 public abstract class Item extends Interaction {
 

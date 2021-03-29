@@ -1,9 +1,10 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Attackable;
-import characters.Combat;
-import characters.Hero;
-import characters.NonPlayerCharacter;
+
+import MorlynnCastle.model.characters.Attackable;
+import MorlynnCastle.model.characters.Combat;
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.characters.NonPlayerCharacter;
 
 import java.util.List;
 import java.util.Scanner;

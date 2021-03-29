@@ -1,6 +1,7 @@
-package characters;
+package MorlynnCastle.model.characters;
 
-import commands.Interpreter;
+
+import MorlynnCastle.model.commands.Interpreter;
 
 import java.io.Serializable;
 import java.util.HashMap;

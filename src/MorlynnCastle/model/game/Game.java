@@ -1,8 +1,9 @@
-package game;
+package MorlynnCastle.model.game;
 
-import characters.Hero;
-import commands.Interpreter;
-import space.World;
+
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.commands.Interpreter;
+import MorlynnCastle.model.space.World;
 
 import java.io.*;
 import java.util.Scanner;

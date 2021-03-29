@@ -1,8 +1,8 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Hero;
-import space.Door;
-import space.Place;
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.space.Door;
+import MorlynnCastle.model.space.Place;
 
 import java.util.List;
 

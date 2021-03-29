@@ -1,4 +1,4 @@
-package commands;
+package MorlynnCastle.model.commands;
 
 public class InvalidArgumentNumberException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import game.Game;
+import MorlynnCastle.model.game.Game;
 
 import java.util.List;
 

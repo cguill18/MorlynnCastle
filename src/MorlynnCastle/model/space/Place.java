@@ -1,8 +1,8 @@
-package space;
+package MorlynnCastle.model.space;
 
-import characters.Character;
-import characters.NonPlayerCharacter;
-import item.Item;
+import MorlynnCastle.model.characters.Character;
+import MorlynnCastle.model.characters.NonPlayerCharacter;
+import MorlynnCastle.model.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;

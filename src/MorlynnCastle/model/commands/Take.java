@@ -1,8 +1,9 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Hero;
-import item.Container;
-import item.Item;
+
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.item.Container;
+import MorlynnCastle.model.item.Item;
 
 import java.util.List;
 

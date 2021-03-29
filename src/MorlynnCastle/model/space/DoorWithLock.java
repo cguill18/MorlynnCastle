@@ -1,8 +1,8 @@
-package space;
+package MorlynnCastle.model.space;
 
-import item.Key;
-import item.Scroll;
-import item.Usable;
+import MorlynnCastle.model.item.Key;
+import MorlynnCastle.model.item.Scroll;
+import MorlynnCastle.model.item.Usable;
 
 public class DoorWithLock extends Door implements Lockable {
 

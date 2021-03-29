@@ -1,9 +1,10 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Hero;
-import game.Game;
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.game.Game;
 
 import java.util.*;
+
 
 public class Interpreter {
 

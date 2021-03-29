@@ -1,7 +1,7 @@
-package space;
+package MorlynnCastle.model.space;
 
-import item.Key;
-import item.Receiver;
+import MorlynnCastle.model.item.Key;
+import MorlynnCastle.model.item.Receiver;
 
 public interface Lockable extends Receiver {
 

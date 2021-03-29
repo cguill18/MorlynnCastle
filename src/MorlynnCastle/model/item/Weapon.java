@@ -1,6 +1,6 @@
-package item;
+package MorlynnCastle.model.item;
 
-import characters.Character;
+import MorlynnCastle.model.characters.Character;
 
 public class Weapon extends Item implements Equipable{
 

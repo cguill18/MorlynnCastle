@@ -1,4 +1,4 @@
-package space;
+package MorlynnCastle.model.space;
 
 import java.io.Serializable;
 

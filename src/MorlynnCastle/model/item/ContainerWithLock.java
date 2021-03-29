@@ -1,6 +1,7 @@
-package item;
+package MorlynnCastle.model.item;
 
-import space.Lockable;
+
+import MorlynnCastle.model.space.Lockable;
 
 public class ContainerWithLock extends Container implements Lockable {
 	

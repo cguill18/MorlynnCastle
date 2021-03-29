@@ -1,4 +1,4 @@
-package item;
+package MorlynnCastle.model.item;
 
 public class Key extends Item implements Usable {
 

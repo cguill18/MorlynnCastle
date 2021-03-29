@@ -1,10 +1,11 @@
-package characters;
+package MorlynnCastle.model.characters;
 
-import item.Armor;
-import item.Item;
-import item.Weapon;
-import space.Interaction;
-import space.Place;
+
+import MorlynnCastle.model.item.Armor;
+import MorlynnCastle.model.item.Item;
+import MorlynnCastle.model.item.Weapon;
+import MorlynnCastle.model.space.Interaction;
+import MorlynnCastle.model.space.Place;
 
 import java.util.HashMap;
 import java.util.Map;

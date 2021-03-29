@@ -1,10 +1,11 @@
-package commands;
+package MorlynnCastle.model.commands;
 
-import characters.Hero;
-import item.Usable;
-import space.Interaction;
-import space.Place;
-import item.Receiver;
+
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.item.Receiver;
+import MorlynnCastle.model.item.Usable;
+import MorlynnCastle.model.space.Interaction;
+import MorlynnCastle.model.space.Place;
 
 import java.util.List;
 import java.util.Map;

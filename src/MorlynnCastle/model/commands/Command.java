@@ -1,4 +1,4 @@
-package commands;
+package MorlynnCastle.model.commands;
 
 import java.util.List;
 

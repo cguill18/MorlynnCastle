@@ -1,12 +1,9 @@
-package characters;
+package MorlynnCastle.model.characters;
 
-import item.Container;
-import item.Equipable;
-import item.Item;
-import item.Usable;
-import space.Door;
-import space.Interaction;
-import item.Receiver;
+
+import MorlynnCastle.model.item.*;
+import MorlynnCastle.model.space.Door;
+import MorlynnCastle.model.space.Interaction;
 
 import java.util.Scanner;
 

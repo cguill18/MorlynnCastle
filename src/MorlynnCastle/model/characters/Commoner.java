@@ -1,4 +1,4 @@
-package characters;
+package MorlynnCastle.model.characters;
 
 public class Commoner extends Folk{
 

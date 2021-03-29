@@ -1,7 +1,7 @@
-package space;
+package MorlynnCastle.model.space;
 
-import characters.*;
-import item.*;
+import MorlynnCastle.model.characters.*;
+import MorlynnCastle.model.item.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;

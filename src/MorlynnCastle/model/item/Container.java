@@ -1,4 +1,4 @@
-package item;
+package MorlynnCastle.model.item;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package characters;
+package MorlynnCastle.model.characters;
 
 import java.io.Serializable;
 import java.util.ArrayList;
