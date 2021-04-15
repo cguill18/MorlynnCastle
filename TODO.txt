@@ -12,6 +12,7 @@ TODOLISTE:
 11.Map de proximité
 12.Points de vie
 13.Map agrandie
+ajou14.Réaction quand mouse over interaction (éléments cliquables)
 
 
 Ce qu'il faudra faire pour la vue :
