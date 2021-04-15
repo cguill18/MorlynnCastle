@@ -9,6 +9,11 @@ public class Book extends Item implements Usable {
 		this.content = content;
 	}
 
+	public Book(String description, int posx, int posy, String name, String content) {
+		super(description, posx, posy, name, true);
+		this.content = content;
+	}
+
 	@Override
 	public void use() {
 		System.out.println(this.content);	

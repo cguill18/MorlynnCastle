@@ -11,4 +11,8 @@ public class Sword extends Weapon{
     public Sword(String name, String description, int attackPowerBonus) {
         super(name, description, Sword.DEFAULT_ATTACK_POWER + attackPowerBonus);
     }
+
+    public Sword(String description, int posx, int posy, String name) {
+        super(description, posx, posy, name, Sword.DEFAULT_ATTACK_POWER);
+    }
 }

@@ -9,8 +9,12 @@ public class Container extends Item {
 	
 	public Container(String name, String description) {
 		super(name, false, description);
-	}	
-	
+	}
+
+	public Container(String description, int posx, int posy, String name, boolean takable) {
+		super(description, posx, posy, name, takable);
+	}
+
 	public Map<String, Item> getContent() {
 		return this.content;
 	}

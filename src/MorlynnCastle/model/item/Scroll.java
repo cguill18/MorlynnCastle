@@ -8,6 +8,10 @@ public class Scroll extends Book{
 		super(name, description, content);
 	}
 
+	public Scroll(String description, int posx, int posy, String name, String content) {
+		super(description, posx, posy, name, content);
+	}
+
 	@Override
 	public void use(Receiver obj) {
 		if (obj instanceof Lockable) {

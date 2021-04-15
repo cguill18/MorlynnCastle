@@ -10,4 +10,6 @@ public class Commoner extends Folk{
     public Commoner(String name, String description, Dialog dialog) {
         super(name, description, Commoner.DEFAULT_HOSTILE, dialog, Commoner.DEFAULT_HP, Commoner.DEFAULT_ATTACK_BONUS, Commoner.DEFAULT_DAMAGE_BONUS);
     }
+
+
 }

@@ -6,6 +6,10 @@ public class Key extends Item implements Usable {
         super(name, true, description);
     }
 
+    public Key(String description, int posx, int posy, String name) {
+        super(description, posx, posy, name, true);
+    }
+
     @Override
     public void use() {
         System.out.println("You can't use this alone.");

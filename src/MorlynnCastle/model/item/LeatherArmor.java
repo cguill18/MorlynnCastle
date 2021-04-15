@@ -12,4 +12,10 @@ public class LeatherArmor extends Armor {
     public LeatherArmor(String name, String description, int armorClassBonus) {
         super(name,  description, LeatherArmor.DEFAULT_ARMOR_CLASS + armorClassBonus);
     }
+
+    public LeatherArmor(String description, int posx, int posy, String name) {
+        super(description, posx, posy, name, LeatherArmor.DEFAULT_ARMOR_CLASS);
+    }
+
+
 }

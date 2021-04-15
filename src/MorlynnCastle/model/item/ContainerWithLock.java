@@ -13,7 +13,13 @@ public class ContainerWithLock extends Container implements Lockable {
 		this.key = key;
         this.isLocked = true;
 	}
-	
+
+	public ContainerWithLock(String description, int posx, int posy, String name, boolean takable, boolean isLocked, Key key) {
+		super(description, posx, posy, name, takable);
+		this.isLocked = isLocked;
+		this.key = key;
+	}
+
 	public boolean getIsLocked() {
 		return this.isLocked;
 	}

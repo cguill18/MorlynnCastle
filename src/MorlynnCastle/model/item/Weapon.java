@@ -11,6 +11,11 @@ public class Weapon extends Item implements Equipable{
         this.attackPower = attackPower;
     }
 
+    public Weapon(String description, int posx, int posy, String name, int attackPower) {
+        super(description, posx, posy, name, true);
+        this.attackPower = attackPower;
+    }
+
     public int getAttackPower() {
         return this.attackPower;
     }

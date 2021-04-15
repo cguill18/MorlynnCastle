@@ -11,4 +11,8 @@ public class Guard extends NonPlayerCharacter{
     public Guard(String name, String description) {
         super(name, description, Guard.DEFAULT_HOSTILE, Guard.DEFAULT_HP, Guard.DEFAULT_ATTACK_BONUS, Guard.DEFAULT_DAMAGE_BONUS);
     }
+
+    public Guard(String description, int posx, int posy, String name) {
+        super(description, posx, posy, name, Guard.DEFAULT_HP, Guard.DEFAULT_ATTACK_BONUS, Guard.DEFAULT_DAMAGE_BONUS, Guard.DEFAULT_HOSTILE);
+    }
 }

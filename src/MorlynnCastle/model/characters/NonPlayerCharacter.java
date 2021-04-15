@@ -8,6 +8,11 @@ public class NonPlayerCharacter extends Character {
         this.isHostile = isHostile;
     }
 
+    public NonPlayerCharacter(String description, int posx, int posy, String name, int maxHealthPoints, int attackBonus, int damageBonus, boolean isHostile) {
+        super(description, posx, posy, name, maxHealthPoints, attackBonus, damageBonus);
+        this.isHostile = isHostile;
+    }
+
     public boolean isHostile() {
         return isHostile;
     }

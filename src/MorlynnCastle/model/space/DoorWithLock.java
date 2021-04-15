@@ -14,6 +14,11 @@ public class DoorWithLock extends Door implements Lockable {
         this.key = key;
         this.isLocked = true;
     }
+    public DoorWithLock(Key key, String description, int posx, int posy) {
+        super(description, posx, posy);
+        this.key = key;
+        this.isLocked = true;
+    }
 
     @Override
     public void setMirrorDoor(Door mirrorDoor) {

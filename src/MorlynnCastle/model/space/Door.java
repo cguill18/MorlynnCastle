@@ -12,7 +12,13 @@ public class Door extends Interaction {
         this.exit = null;
         this.mirrorDoor = null;
     }
-    
+    public Door(String description, int posx, int posy) {
+        super(description, posx, posy);
+        this.entrance = null;
+        this.exit = null;
+        this.mirrorDoor = null;
+    }
+
     public void setMirrorDoor(Door mirrorDoor) {
     	this.mirrorDoor = mirrorDoor;   
     }

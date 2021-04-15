@@ -5,11 +5,12 @@ import java.io.Serializable;
 public abstract class Interaction implements Serializable {
 
     private final String description;
-    private int posx;
-    private int posy;
+    private int posx = 0;
+    private int posy = 0;
 
     public Interaction(String description) {
         this.description = description;
+
     }
 
     public Interaction(String description, int posx, int posy){

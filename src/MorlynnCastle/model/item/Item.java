@@ -13,6 +13,12 @@ public abstract class Item extends Interaction {
         this.takable = takable;
     }
 
+    public Item(String description, int posx, int posy, String name, boolean takable) {
+        super(description, posx, posy);
+        this.name = name;
+        this.takable = takable;
+    }
+
     public String getName() {
         return this.name;
     }

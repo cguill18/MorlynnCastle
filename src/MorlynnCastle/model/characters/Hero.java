@@ -21,6 +21,8 @@ public class Hero extends Character {
         super(Hero.NAME, Hero.DESCRIPTION, Hero.STARTING_HP, Hero.STARTING_ATT_BONUS, Hero.STARTING_DMG_BONUS);
     }
 
+
+
     public boolean isGoalAchieved() {
         return this.goalAchieved;
     }
