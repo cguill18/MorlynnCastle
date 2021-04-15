@@ -11,8 +11,8 @@ public class Folk extends NonPlayerCharacter implements Talkable {
         this.dialog = dialog;
     }
 
-    public Folk(String description, int posx, int posy, String name, int maxHealthPoints, int attackBonus, int damageBonus, boolean isHostile, Dialog dialog) {
-        super(description, posx, posy, name, maxHealthPoints, attackBonus, damageBonus, isHostile);
+    public Folk(String name, String description, boolean isHostile, Dialog dialog, int maxHealthPoints, int attackBonus, int damageBonus, int posx, int posy) {
+        super(name, description, isHostile, maxHealthPoints, attackBonus, damageBonus, posx, posy);
         this.dialog = dialog;
     }
 

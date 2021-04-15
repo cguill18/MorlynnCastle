@@ -11,8 +11,8 @@ public class Armor extends Item implements Equipable {
         this.armorClass = armorClass;
     }
 
-    public Armor(String description, int posx, int posy, String name, int armorClass) {
-        super(description, posx, posy, name, true);
+    public Armor(String name, String description, int armorClass, int posx, int posy) {
+        super(name, true, description, posx, posy);
         this.armorClass = armorClass;
     }
 

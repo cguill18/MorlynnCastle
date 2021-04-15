@@ -6,7 +6,7 @@ public class Gold extends Item {
         super(name, true, description);
     }
 
-    public Gold(String description, int posx, int posy, String name, boolean takable) {
-        super(description, posx, posy, name, takable);
+    public Gold(String name, String description, int posx, int posy) {
+        super(name, true, description, posx, posy);
     }
 }

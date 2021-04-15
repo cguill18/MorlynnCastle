@@ -11,5 +11,7 @@ public class Commoner extends Folk{
         super(name, description, Commoner.DEFAULT_HOSTILE, dialog, Commoner.DEFAULT_HP, Commoner.DEFAULT_ATTACK_BONUS, Commoner.DEFAULT_DAMAGE_BONUS);
     }
 
-
+    public Commoner(String name, String description, Dialog dialog, int posx, int posy) {
+        super(name, description, Commoner.DEFAULT_HOSTILE, dialog, Commoner.DEFAULT_HP, Commoner.DEFAULT_ATTACK_BONUS, Commoner.DEFAULT_DAMAGE_BONUS, posx, posy);
+    }
 }

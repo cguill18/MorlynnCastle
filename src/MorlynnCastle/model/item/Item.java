@@ -13,7 +13,7 @@ public abstract class Item extends Interaction {
         this.takable = takable;
     }
 
-    public Item(String description, int posx, int posy, String name, boolean takable) {
+    public Item(String name, boolean takable, String description, int posx, int posy) {
         super(description, posx, posy);
         this.name = name;
         this.takable = takable;

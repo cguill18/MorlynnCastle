@@ -42,7 +42,7 @@ public abstract class Character extends Interaction implements Attackable, Attac
         this.damageBonus = damageBonus;
     }
 
-    public Character(String description, int posx, int posy, String name, int maxHealthPoints, int attackBonus, int damageBonus) {
+    public Character(String name, String description, int maxHealthPoints, int attackBonus, int damageBonus, int posx, int posy) {
         super(description, posx, posy);
         this.name = name;
         this.currentHealthPoints = maxHealthPoints;

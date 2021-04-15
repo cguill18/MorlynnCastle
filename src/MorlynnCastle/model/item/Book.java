@@ -9,8 +9,8 @@ public class Book extends Item implements Usable {
 		this.content = content;
 	}
 
-	public Book(String description, int posx, int posy, String name, String content) {
-		super(description, posx, posy, name, true);
+	public Book(String name, String description, String content, int posx, int posy) {
+		super(name, true, description, posx, posy);
 		this.content = content;
 	}
 

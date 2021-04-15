@@ -8,8 +8,8 @@ public class Scroll extends Book{
 		super(name, description, content);
 	}
 
-	public Scroll(String description, int posx, int posy, String name, String content) {
-		super(description, posx, posy, name, content);
+	public Scroll(String name, String description, String content, int posx, int posy) {
+		super(name, description, content, posx, posy);
 	}
 
 	@Override

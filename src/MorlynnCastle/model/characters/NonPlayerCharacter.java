@@ -8,8 +8,8 @@ public class NonPlayerCharacter extends Character {
         this.isHostile = isHostile;
     }
 
-    public NonPlayerCharacter(String description, int posx, int posy, String name, int maxHealthPoints, int attackBonus, int damageBonus, boolean isHostile) {
-        super(description, posx, posy, name, maxHealthPoints, attackBonus, damageBonus);
+    public NonPlayerCharacter(String name, String description, boolean isHostile, int maxHealthPoints, int attackBonus, int damageBonus, int posx, int posy) {
+        super(name, description, maxHealthPoints, attackBonus, damageBonus,posx, posy);
         this.isHostile = isHostile;
     }
 

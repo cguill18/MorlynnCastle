@@ -11,8 +11,8 @@ public class Container extends Item {
 		super(name, false, description);
 	}
 
-	public Container(String description, int posx, int posy, String name, boolean takable) {
-		super(description, posx, posy, name, takable);
+	public Container(String name, String description, int posx, int posy) {
+		super(name, false, description, posx, posy);
 	}
 
 	public Map<String, Item> getContent() {

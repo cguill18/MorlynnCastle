@@ -12,7 +12,7 @@ public class Dagger extends Weapon{
         super(name, description, Dagger.DEFAULT_ATTACK_POWER + attackPowerBonus);
     }
 
-    public Dagger(String description, int posx, int posy, String name, int attackPower) {
-        super(description, posx, posy, name, attackPower);
+    public Dagger(String name, String description, int posx, int posy) {
+        super(name, description, Dagger.DEFAULT_ATTACK_POWER, posx, posy);
     }
 }

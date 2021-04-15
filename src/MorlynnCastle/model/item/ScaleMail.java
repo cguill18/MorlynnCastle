@@ -12,7 +12,7 @@ public class ScaleMail extends Armor {
         super(name, description, ScaleMail.DEFAULT_ARMOR_CLASS + armorClassBonus);
     }
 
-    public ScaleMail(String description, int posx, int posy, String name) {
-        super(description, posx, posy, name, ScaleMail.DEFAULT_ARMOR_CLASS);
+    public ScaleMail(String name,String description, int posx, int posy) {
+        super(name, description, ScaleMail.DEFAULT_ARMOR_CLASS, posx, posy);
     }
 }

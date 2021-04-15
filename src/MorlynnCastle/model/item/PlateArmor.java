@@ -12,7 +12,7 @@ public class PlateArmor extends Armor {
         super(name, description, PlateArmor.DEFAULT_ARMOR_CLASS + armorClassBonus);
     }
 
-    public PlateArmor(String description, int posx, int posy, String name) {
-        super(description, posx, posy, name, PlateArmor.DEFAULT_ARMOR_CLASS);
+    public PlateArmor(String name, String description, int posx, int posy) {
+        super(name, description, PlateArmor.DEFAULT_ARMOR_CLASS, posx, posy);
     }
 }

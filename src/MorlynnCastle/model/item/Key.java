@@ -6,8 +6,8 @@ public class Key extends Item implements Usable {
         super(name, true, description);
     }
 
-    public Key(String description, int posx, int posy, String name) {
-        super(description, posx, posy, name, true);
+    public Key(String name, String description, int posx, int posy) {
+        super(name, true, description, posx, posy);
     }
 
     @Override

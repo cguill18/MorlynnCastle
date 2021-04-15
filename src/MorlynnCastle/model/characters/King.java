@@ -11,7 +11,7 @@ public class King extends Folk {
 		super(name, description, King.DEFAULT_HOSTILE, dialog, King.DEFAULT_HP, King.DEFAULT_ATTACK_BONUS, King.DEFAULT_DAMAGE_BONUS);
 	}
 
-	public King(String description, int posx, int posy, String name, Dialog dialog) {
-		super(description, posx, posy, name, King.DEFAULT_HP, King.DEFAULT_ATTACK_BONUS, King.DEFAULT_DAMAGE_BONUS, King.DEFAULT_HOSTILE, dialog);
+	public King(String name, String description, Dialog dialog, int posx, int posy) {
+		super(name, description, King.DEFAULT_HOSTILE, dialog, King.DEFAULT_HP, King.DEFAULT_ATTACK_BONUS, King.DEFAULT_DAMAGE_BONUS, posx, posy);
 	}
 }
