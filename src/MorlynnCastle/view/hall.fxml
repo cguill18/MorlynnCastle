@@ -12,22 +12,23 @@
             <Image url="@../../res/background.png" />
          </image>
       </ImageView>
-      <ImageView id="chest" fitHeight="76.0" fitWidth="54.0" layoutX="98.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+     
+      <ImageView fx:id="chest" fitHeight="76.0" fitWidth="54.0" layoutX="98.0" layoutY="236.0" onMouseClicked="#chooseObject"pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/unlocked_chest.png" />
          </image>
       </ImageView>
-      <ImageView id="armor" fitHeight="87.0" fitWidth="101.0" layoutX="214.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="armor" fitHeight="87.0" fitWidth="101.0" layoutX="214.0" layoutY="53.0" onMouseClicked="#chooseObject"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/armor.png" />
          </image>
       </ImageView>
-      <ImageView id="old_man" fitHeight="64.0" fitWidth="73.0" layoutX="486.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="old_man" fitHeight="64.0" fitWidth="73.0" layoutX="486.0" layoutY="108.0" onMouseClicked="#chooseObject" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/non_hostile_character.png" />
          </image>
       </ImageView>
-      <ImageView id="weapon" fitHeight="74.0" fitWidth="54.0" layoutX="325.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="weapon" fitHeight="74.0" fitWidth="54.0" layoutX="325.0" layoutY="276.0" onMouseClicked="#chooseObject" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/weapon.png" />
          </image>
