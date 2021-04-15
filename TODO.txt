@@ -1,0 +1,27 @@
+TODOLISTE:
+1.déplacement du personnage avec changement du background du sceneryPane
+2.Ajouter les interactions
+3.Commande Take
+4.Inventaire
+5.Commande Use
+6.Equipement et commande equip
+7.Commande Look
+8.Interface de combat et commande Attack (et commande Attack et Flee en combat)
+9.Commande Talk (et dialogues dans le texflow)
+10."Réglages" -> commande save, load et quit
+11.Map de proximité
+12.Points de vie
+13.Map agrandie
+
+
+Ce qu'il faudra faire pour la vue :
+- le commandpane de combat
+- popup ou menubar pour réglages
+- inventaire : gridpane dans un scrollpane, truc dans le genre
+- equipement
+
+Si jamais inventaire et equipement trop compliqué en mode popup, utiliser les onglets
+
+
+Pour le modèle :
+- position x,y 
