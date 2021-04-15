@@ -16,6 +16,14 @@ public class Game {
     private final Scanner scanner;
     private Interpreter interpreter;
 
+    public Game(){
+        this.hero = new Hero();
+        this.world = new World();
+        this.scanner = null;
+        this.interpreter = new Interpreter(this.hero,this);
+
+    }
+
     public Game(Scanner input) {
         this.hero = new Hero();
         this.world = new World();
@@ -23,6 +31,13 @@ public class Game {
         this.interpreter = new Interpreter(this.hero,this);
     }
 
+    public Hero getHero() {
+        return hero;
+    }
+
+    public World getWorld() {
+        return world;
+    }
 
     public Scanner getScanner() {
         return scanner;
@@ -104,7 +119,24 @@ public class Game {
         }
     }
 
-    public void showSaveFiles(){
+    public void save(String fileName){
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName + ".sav"));
+            oos.writeObject(this.running);
+            oos.writeObject(this.hero);
+            oos.writeObject(this.world);
+            oos.flush();
+            oos.close();
+            System.out.println("your progress has been successfully saved in" + fileName + ".");
+        } catch (FileNotFoundException e){
+            System.out.println("It seems you can't save in this directory.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String[] showSaveFiles(){
         String pathname = System.getProperty("user.dir");
         File file = new File(pathname);
         FilenameFilter filter = (f, name) -> name.endsWith(".sav");
@@ -112,6 +144,7 @@ public class Game {
         for (String fileName : filesNames) {
             System.out.println(fileName);
         }
+        return filesNames;
     }
 
 
@@ -135,68 +168,83 @@ public class Game {
         }
         return success;
     }
+    public boolean load(String fileName)
+    {
+        boolean success = false;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName + ".sav"));
+            this.running = (boolean) ois.readObject();
+            this.hero = (Hero) ois.readObject();
+            this.world = (World) ois.readObject();
+            this.interpreter = new Interpreter(this.hero,this);
+            success = true;
+            System.out.println("The save has been successfully loaded.");
+        } catch (FileNotFoundException e){
+            System.out.println("This file doesn't exist.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error, the file you wish to load might not be a save or is corrupted.");
+        }
+        return success;
+    }
 
     public void initGame(){
         this.history();
-        System.out.println("Press Return to continue.");
-        scanner.nextLine();
         this.help();
-        System.out.println("Press Return to continue.");
-        scanner.nextLine();
         this.world.setStart(this.hero);
-    }
-
-    public void launchGame() {
-        System.out.println("To start a fresh game, please type \"start\" and press Return.");
-        System.out.println("If you wish to load a save, type \"load\" and press Return.");
-        String input = scanner.nextLine();
-        while (!(input.equals("start") || input.equals("load")) && scanner.hasNext()) {
-            System.out.println("I didn't understand your command.");
-        }
-        if (!(input.equals("load") && this.load())){
-            this.initGame();
-        }
         this.hero.look();
     }
 
+//    public void launchGame() {
+//        System.out.println("To start a fresh game, please type \"start\" and press Return.");
+//        System.out.println("If you wish to load a save, type \"load\" and press Return.");
+//        String input = scanner.nextLine();
+//        while (!(input.equals("start") || input.equals("load")) && scanner.hasNext()) {
+//            System.out.println("I didn't understand your command.");
+//        }
+//        if (!(input.equals("load") && this.load())){
+//            this.initGame();
+//        }
+//        this.hero.look();
+//    }
 
-    public void runGame() {
-        String input;
-        boolean executed_command;
-        while (this.running && this.hero.isAlive() && !this.hero.isGoalAchieved()) {
-            if (this.hero.getPlace().randomEncoutner()) {
-                //attaque le "premier" ennemi dans la hashmap pour déclencher le combat
-                input = ("attack " + this.hero.getPlace().getAnEnemyName());
-                System.out.println("You're being attacked !");
-                this.interpreter.interpret(input);
-            } else {
-                do {
-                    input = this.scanner.nextLine();
-                    executed_command = this.interpreter.interpret(input);
-                } while (!executed_command);
-            }
-        }
-    }
 
-    public void ending() {
-        if (this.hero.isAlive()) {
-            if (this.hero.isGoalAchieved()) {
-                System.out.println("You have completed the story !");
-            }
-        } else System.out.println("You died.");
-        System.out.println("Thank you for playing Morlynn Castle.");
-        System.out.println("This game was made by :");
-        System.out.println("FRADET Amandine");
-        System.out.println("GUILLOT Clémentine");
-        System.out.println("FORESTIER Louis");
-    }
+//    public void runGame() {
+//        String input;
+//        boolean executed_command;
+//        while (this.running && this.hero.isAlive() && !this.hero.isGoalAchieved()) {
+//            if (this.hero.getPlace().randomEncoutner()) {
+//                //attaque le "premier" ennemi dans la hashmap pour déclencher le combat
+//                input = ("attack " + this.hero.getPlace().getAnEnemyName());
+//                System.out.println("You're being attacked !");
+//                this.interpreter.interpret(input);
+//            } else {
+//                do {
+//                    input = this.scanner.nextLine();
+//                    executed_command = this.interpreter.interpret(input);
+//                } while (!executed_command);
+//            }
+//        }
+//    }
+
+//    public void ending() {
+//        if (this.hero.isAlive()) {
+//            if (this.hero.isGoalAchieved()) {
+//                System.out.println("You have completed the story !");
+//            }
+//        } else System.out.println("You died.");
+//        System.out.println("Thank you for playing Morlynn Castle.");
+//        System.out.println("This game was made by :");
+//        System.out.println("FRADET Amandine");
+//        System.out.println("GUILLOT Clémentine");
+//        System.out.println("FORESTIER Louis");
+//    }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Game g = new Game(input);
-        g.launchGame();
-        g.runGame();
-        g.ending();
+//        Scanner input = new Scanner(System.in);
+//        Game g = new Game(input);
+//        g.launchGame();
+//        g.runGame();
+//        g.ending();
     }
 
 
