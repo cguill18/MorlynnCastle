@@ -37,28 +37,28 @@ public class World implements Serializable {
         String keyDesc4 = "This is a big old key, made of iron. ";
 
         //création des clefs
-        Key key1 = new Key("small_key", keyDesc1);
-        Key key2 = new Key("gold_key", keyDesc2);
-        Key key3 = new Key("heavy_key", keyDesc3);
-        Key key4 = new Key("big_key", keyDesc4);
+        Key key1 = new Key("small_key", keyDesc1,3,2);
+        Key key2 = new Key("gold_key", keyDesc2,1,2);
+        Key key3 = new Key("heavy_key", keyDesc3,1,4);
+        Key key4 = new Key("big_key", keyDesc4,3,6);
         
         //description des coffres
         String chestDesc1 = "This looks like an old wooden chest. ";
         String chestDesc2 = "This looks like a big gold chest. ";
         
         //creation des coffres
-        Container chest1 = new Container("wooden_chest", chestDesc1);
-        ContainerWithLock chest2 = new ContainerWithLock("golden_chest", chestDesc2, key4);
+        Container chest1 = new Container("wooden_chest", chestDesc1,5,6);
+        ContainerWithLock chest2 = new ContainerWithLock("golden_chest", chestDesc2, key4,4,1);
         
         //descriptions d'objets divers
         String goldDesc1 = "There are gold_coins.";
-        Gold gold1 = new Gold("gold_coins", goldDesc1);
+        Gold gold1 = new Gold("gold_coins", goldDesc1,8,5);
         
         String scrollDesc1 = "This is an old tattered scroll. ";
         
         String scrollContent1 = "This scroll allows you to know the key to a door.";
         
-        Scroll scroll1 = new Scroll("knock_scroll", scrollDesc1, scrollContent1);
+        Scroll scroll1 = new Scroll("knock_scroll", scrollDesc1, scrollContent1,5,6);
         
         //ajout de contenus dans les coffres
         chest1.getContent().put(scroll1.getName(), scroll1);
@@ -72,25 +72,25 @@ public class World implements Serializable {
         String heavyDoorDesc = "This is an heavy wooden door.";
 
         //creation des portes
-        Door dhg = new Door(woodenDoorDesc);
-        Door dgh = new Door(woodenDoorDesc);
+        Door dhg = new Door(woodenDoorDesc,0,5);
+        Door dgh = new Door(woodenDoorDesc,11,5);
         
-        DoorWithLock dhw = new DoorWithLock(key1, ironDoorDesc);
-        DoorWithLock dwh = new DoorWithLock(key1, ironDoorDesc);
+        DoorWithLock dhw = new DoorWithLock(key1, ironDoorDesc,5,11);
+        DoorWithLock dwh = new DoorWithLock(key1, ironDoorDesc,5,0);
         
-        DoorWithLock dgt = new DoorWithLock(key2, goldenDoorDesc);
-        DoorWithLock dtg = new DoorWithLock(key2, goldenDoorDesc );
+        DoorWithLock dgt = new DoorWithLock(key2, goldenDoorDesc,0,5);
+        DoorWithLock dtg = new DoorWithLock(key2, goldenDoorDesc,11,5);
         
-        Door dgc = new Door(woodenDoorDesc);
-        Door dcg = new Door(woodenDoorDesc );
+        Door dgc = new Door(woodenDoorDesc,5,11);
+        Door dcg = new Door(woodenDoorDesc,5,0);
         
-        DoorWithLock dwgr = new DoorWithLock(key1, ironDoorDesc);
-        DoorWithLock dgrw = new DoorWithLock(key1, ironDoorDesc);
+        DoorWithLock dwgr = new DoorWithLock(key1, ironDoorDesc,0,5);
+        DoorWithLock dgrw = new DoorWithLock(key1, ironDoorDesc,11,5);
         
-        Door dgrc = new Door(woodenDoorDesc);
-        Door dcgr = new Door(woodenDoorDesc);
+        Door dgrc = new Door(woodenDoorDesc,5,0);
+        Door dcgr = new Door(woodenDoorDesc,5,11);
         
-        DoorWithLock de = new DoorWithLock(key3, heavyDoorDesc);
+        DoorWithLock de = new DoorWithLock(key3, heavyDoorDesc,5,11);
         
 
         //creation de listes pour l'interaction talk
@@ -125,47 +125,47 @@ public class World implements Serializable {
         Dialog dialog3 = new Dialog(playerChoice3, dialogs3);
 
         //creation d'un pnj
-        Commoner oldman = new Commoner("old_man", "Just an old man",dialog1);
+        Commoner oldman = new Commoner("old_man", "Just an old man",dialog1,5,6);
         interactionsH.put(oldman.getName(), oldman);
         
-        Commoner servant = new Commoner("servant", "A big servant, with red noze", dialog2);
+        Commoner servant = new Commoner("servant", "A big servant, with red noze", dialog2,3,8);
         interactionsC.put(servant.getName(), servant);
         
-        King king = new King("king", "He looks much richer than you, your deduction talents tell you he's the king.", dialog3);
+        King king = new King("king", "He looks much richer than you, your deduction talents tell you he's the king.", dialog3,5,3);
         interactionsT.put(king.getName(), king);
 
-        Guard guard1 = new Guard("guard1", "A dangerous guard, armed with a spike");
+        Guard guard1 = new Guard("guard1", "A dangerous guard, armed with a spike",4,5);
         interactionsW.put(guard1.getName(), guard1);
         
-        Guard guard2 = new Guard("guard2", "A tall an dangerous guard, armed with a spike");
+        Guard guard2 = new Guard("guard2", "A tall an dangerous guard, armed with a spike",5,5);
         interactionsGr.put(guard2.getName(), guard2);
         
-        Guard guard3 = new Guard("guard3", "A dangerous guard, armed with a spike");
+        Guard guard3 = new Guard("guard3", "A dangerous guard, armed with a spike",4,6);
         interactionsT.put(guard3.getName(), guard3);
         
-        Guard guard4 = new Guard("guard4", "A dangerous guard, armed with a spike");
+        Guard guard4 = new Guard("guard4", "A dangerous guard, armed with a spike",6,6);
         interactionsT.put(guard4.getName(), guard4);
 
         String leatherArmorDesc = "The breastplate and shoulder protectors of this armor are made of leather that has been stiffened \n" +
                 "by being boiled in oil. The rest of the armor is made of softer and more flexible materials.";
-        LeatherArmor leatherArmor = new LeatherArmor("leather_armor", leatherArmorDesc);
+        LeatherArmor leatherArmor = new LeatherArmor("leather_armor", leatherArmorDesc,7,8);
 
 
         String scaleMailDesc = "This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with \n" +
                 "overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.";
-        ScaleMail scaleMail = new ScaleMail("scale_mail", scaleMailDesc);
+        ScaleMail scaleMail = new ScaleMail("scale_mail", scaleMailDesc,9,9);
         chest2.getContent().put(scaleMail.getName(), scaleMail);
 
         String plateArmorDesc = "Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes\n" +
                 "gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor.\n" +
                 "Buckles and straps distribute the weight over the body.";
-        PlateArmor plateArmor = new PlateArmor("plate_armor", plateArmorDesc);
+        PlateArmor plateArmor = new PlateArmor("plate_armor", plateArmorDesc,1,9);
 
-        Dagger dagger = new Dagger("dagger", "iron dagger" );
-        Sword sword = new Sword("sword", "iron sword");
+        Dagger dagger = new Dagger("dagger", "iron dagger",4,4);
+        Sword sword = new Sword("sword", "iron sword",3,7);
         chest2.getContent().put(sword.getName(), sword);
         
-        Greatsword greatsword = new Greatsword("greatsword", "iron greatsword");
+        Greatsword greatsword = new Greatsword("greatsword", "iron greatsword",7,2);
 
 
         //ajout des objets (coffres, clefs) dans les pieces qui serviront d'interaction
