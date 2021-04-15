@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Button?>
 
 <GridPane fx:id="directionPane" prefHeight="100.0" prefWidth="125.0"
-          xmlns="http://javafx.com/javafx/15.0.1"
+          xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml/1"
 >
     <columnConstraints>

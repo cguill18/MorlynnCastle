@@ -7,7 +7,7 @@
 
 <GridPane fx:id="gridPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="500" prefWidth="750"
-          xmlns="http://javafx.com/javafx/15.0.1"
+          xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="MorlynnCastle.controller.MorlynnCastleController"
           style="-fx-font-family:'Book Antiqua';"
