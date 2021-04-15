@@ -1,9 +1,14 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.item.Item;
+import MorlynnCastle.model.space.World;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class HallController {
+
+    private World world;
 
     @FXML
     private ImageView chest;
@@ -16,6 +21,15 @@ public class HallController {
 
     @FXML
     private ImageView weapon;
+
+    @FXML
+    public void chooseObject(MouseEvent event) {
+        ImageView img = (ImageView) event.getTarget();
+    }
+
+    public void setWorld(World world){
+        this.world = world;
+    }
 
     @FXML
     public void initialize(){
