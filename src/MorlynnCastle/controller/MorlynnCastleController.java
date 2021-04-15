@@ -1,40 +1,34 @@
 package MorlynnCastle.controller;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 
 
 public class MorlynnCastleController {
 
     @FXML
-    private Pane scenery;
+    private GridPane gridPaneRoot;
+
+    @FXML
+    private GridPane sceneryPane;
 
     @FXML
     private GridPane commandPane;
 
     @FXML
-    private Button takeButtonCommand;
+    private VBox characterPane;
 
     @FXML
-    private Button attackButtonCommand;
+    private GridPane directionPane;
 
-    @FXML
-    private Button lookButtonCommand;
-
-    @FXML
-    private Button useButtonCommand;
 
     @FXML
     public void initialize() {
-        try {
-            scenery.getChildren().add(FXMLLoader.load(getClass().getResource("../view/hall.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sceneryPane.setStyle("-fx-background-image:url(\"/res/background.png\")");
+        gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:",gridPaneRoot.widthProperty().divide(60).asString(),";",gridPaneRoot.getStyle()));
     }
 }

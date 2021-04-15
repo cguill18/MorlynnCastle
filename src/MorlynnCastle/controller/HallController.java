@@ -3,7 +3,7 @@ package MorlynnCastle.controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
-public class hallController {
+public class HallController {
 
     @FXML
     private ImageView chest;

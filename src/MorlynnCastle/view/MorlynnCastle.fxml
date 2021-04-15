@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:id="gridPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="500" prefWidth="750"
+          xmlns="http://javafx.com/javafx/15.0.1"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="MorlynnCastle.controller.MorlynnCastleController"
+          style="-fx-font-family:'Book Antiqua';"
+>
+
+    <columnConstraints>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <fx:include fx:id="commandPane" source="CommandPane.fxml" GridPane.rowIndex="3"></fx:include>
+        <fx:include fx:id="directionPane" source="DirectionPane.fxml" GridPane.rowIndex="3"
+                    GridPane.columnIndex="3"></fx:include>
+        <fx:include fx:id="dialogBox" source="DialogBox.fxml" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                    GridPane.rowIndex="3" style="-fx-font-family:'Book Antiqua'"></fx:include>
+        <fx:include fx:id="characterPane" source="CharacterPane.fxml" GridPane.columnIndex="3" GridPane.rowIndex="1"
+                    GridPane.rowSpan="2" alignment="CENTER" maxHeight="1.7976931348623157E308"
+                    maxWidth="1.7976931348623157E308"></fx:include>
+        <fx:include fx:id="sceneryPane" source="SceneryPane.fxml" GridPane.columnSpan="3"
+                    GridPane.rowSpan="3"></fx:include>
+        <fx:include fx:id="mapPane" source="MapPane.fxml" GridPane.columnIndex="3"></fx:include>
+    </children>
+
+
+</GridPane>
+

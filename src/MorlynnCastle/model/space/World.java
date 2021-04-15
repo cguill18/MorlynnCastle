@@ -243,24 +243,24 @@ public class World implements Serializable {
         de.setExit(exit);
 
         //ajout des portes dans chaque piece
-        hall.getInteractions().put(dhg.getExit().getName(), dhg);
-        hall.getInteractions().put(dhw.getExit().getName(), dhw);
+        hall.getInteractions().put("east", dhg);
+        hall.getInteractions().put("west", dhw);
 
-        weaponroom.getInteractions().put(dwh.getExit().getName(), dwh);
-        weaponroom.getInteractions().put(dwgr.getExit().getName(), dwgr);
+        weaponroom.getInteractions().put("west", dwh);
+        weaponroom.getInteractions().put("north", dwgr);
 
-        gallery.getInteractions().put(dgh.getExit().getName(), dgh);
-        gallery.getInteractions().put(dgt.getExit().getName(), dgt);
-        gallery.getInteractions().put(dgc.getExit().getName(), dgc);
+        gallery.getInteractions().put("south", dgh);
+        gallery.getInteractions().put("north", dgt);
+        gallery.getInteractions().put("east", dgc);
         
-        guardroom.getInteractions().put(dgrw.getExit().getName(), dgrw);
-        guardroom.getInteractions().put(dgrc.getExit().getName(), dgrc);
+        guardroom.getInteractions().put("south", dgrw);
+        guardroom.getInteractions().put("west", dgrc);
         
-        cellar.getInteractions().put(dcgr.getExit().getName(), dcgr);
-        cellar.getInteractions().put(dcg.getExit().getName(), dcg);
+        cellar.getInteractions().put("east", dcgr);
+        cellar.getInteractions().put("west", dcg);
         
-        throneroom.getInteractions().put(dtg.getExit().getName(), dtg);
-        throneroom.getInteractions().put(de.getExit().getName(), de);
+        throneroom.getInteractions().put("south", dtg);
+        throneroom.getInteractions().put("east", de);
 
         //ajout des pieces dans le monde
         this.places.put(hall.getName(), hall);
