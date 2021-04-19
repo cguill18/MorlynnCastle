@@ -34,4 +34,6 @@ public abstract class Interaction implements Serializable {
     public int getPosy() {
         return posy;
     }
+
+
 }

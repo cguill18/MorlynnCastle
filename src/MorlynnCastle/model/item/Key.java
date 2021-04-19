@@ -7,6 +7,7 @@ public class Key extends Item implements Usable {
     }
 
     public Key(String name, String description, int posx, int posy) {
+
         super(name, true, description, posx, posy);
     }
 

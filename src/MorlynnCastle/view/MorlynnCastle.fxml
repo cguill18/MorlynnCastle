@@ -14,16 +14,16 @@
 >
 
     <columnConstraints>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="25.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="25.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="25.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="25.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" percentHeight="25.0"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" percentHeight="25.0"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" percentHeight="25.0"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" percentHeight="25.0"/>
     </rowConstraints>
     <children>
         <fx:include fx:id="commandPane" source="CommandPane.fxml" GridPane.rowIndex="3"></fx:include>
