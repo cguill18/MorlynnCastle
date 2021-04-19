@@ -27,6 +27,10 @@ public class SceneryPaneController {
     public void setGame(Game game){ this.game = game; }
 
     public Game getGame() { return this.game; }
+    
+    public void setBackground(String img){
+        this.sceneryPane.setStyle("-fx-background-image:url(\"/res/pieces/" + img +"\")");
+    }
 
     public void initScenery() {
         this.generateRoomItems();

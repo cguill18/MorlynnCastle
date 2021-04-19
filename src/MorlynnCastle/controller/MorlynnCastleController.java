@@ -27,6 +27,9 @@ public class MorlynnCastleController {
 
     @FXML
     private GridPane directionPane;
+    
+    @FXML
+    private DirectionPaneController directionPaneController;
 
     private Game game;
 
@@ -35,7 +38,9 @@ public class MorlynnCastleController {
         this.game = new Game();
         this.game.initGame();
         this.sceneryPaneController.setGame(this.game);
+        this.directionPaneController.setGame(this.game);
         this.sceneryPaneController.initScenery();
+        this.directionPaneController.setSceneryPaneController(sceneryPaneController);
         gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:",gridPaneRoot.widthProperty().divide(60).asString(),";",gridPaneRoot.getStyle()));
     }
 

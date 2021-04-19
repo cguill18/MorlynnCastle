@@ -15,4 +15,8 @@ public class DialogBoxController {
     public void initialize(){
 
     }
+    
+    public void setText(String text) {
+        this.textArea.setText(text);
+    }
 }
