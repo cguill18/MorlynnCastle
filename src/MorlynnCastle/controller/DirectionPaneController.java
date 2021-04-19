@@ -85,7 +85,7 @@ public class DirectionPaneController {
             moveRoomImg(name);
         }
         else {
-           this.dialogBoxController.setText(this.noDoorMessage());
+           this.dialogBoxController.addText(this.noDoorMessage());
         }
     }
     
