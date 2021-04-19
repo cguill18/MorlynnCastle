@@ -243,8 +243,8 @@ public class World implements Serializable {
         de.setExit(exit);
 
         //ajout des portes dans chaque piece
-        hall.getInteractions().put("east", dhg);
-        hall.getInteractions().put("west", dhw);
+        hall.getInteractions().put("west", dhg);
+        hall.getInteractions().put("east", dhw);
 
         weaponroom.getInteractions().put("west", dwh);
         weaponroom.getInteractions().put("north", dwgr);
