@@ -6,8 +6,10 @@ import MorlynnCastle.model.item.Key;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.model.space.Place;
 import MorlynnCastle.view.InteractionView;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
@@ -19,6 +21,8 @@ public class SceneryPaneController {
 
     private Game game;
 
+    private MorlynnCastleController morlynnCastleController;
+
     @FXML
     public void initialize() {
         this.sceneryPane.setStyle("-fx-background-image:url(\"/res/background.png\")");
@@ -27,7 +31,11 @@ public class SceneryPaneController {
     public void setGame(Game game){ this.game = game; }
 
     public Game getGame() { return this.game; }
-    
+
+    public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {
+        this.morlynnCastleController = morlynnCastleController;
+    }
+
     public void setBackground(String img){
         this.sceneryPane.setStyle("-fx-background-image:url(\"/res/pieces/" + img +"\")");
     }
@@ -35,6 +43,15 @@ public class SceneryPaneController {
     public void initScenery() {
         this.generateRoomItems();
     }
+
+    @FXML
+    public void handleClick(MouseEvent event){
+        EventTarget eventTarget = event.getTarget();
+        if (eventTarget instanceof InteractionView){
+            this.morlynnCastleController.launchCommand((InteractionView) eventTarget);
+        }
+    }
+
 
     //methodes pour les objets dans la piece
     public void generateRoomItems() {
@@ -53,6 +70,10 @@ public class SceneryPaneController {
             this.sceneryPane.add(inte,objects.getValue().getPosx(),objects.getValue().getPosy());
             System.out.println(""+objects.getValue().getPosx()+";"+objects.getValue().getPosy());
         }
+    }
+
+    public void removeInteractionView(InteractionView interactionView){
+        this.sceneryPane.getChildren().remove(interactionView);
     }
 
 /*    private InteractionView createKey(int id){
