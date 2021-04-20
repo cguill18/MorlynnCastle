@@ -50,9 +50,6 @@ public class MorlynnCastleController {
     @FXML
     private DialogBoxController dialogBoxController;
 
-    private ScrollPane inventoryPane;
-
-    private InventoryPaneController inventoryPaneController;
 
     private Game game;
 
@@ -65,12 +62,6 @@ public class MorlynnCastleController {
         this.directionPaneController.setGame(this.game);
         this.sceneryPaneController.initScenery();
         this.directionPaneController.setSceneryPaneController(sceneryPaneController);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/InventoryPane.fxml"));
-        this.inventoryPane = loader.load();
-        this.inventoryPaneController = loader.getController();
-        this.characterPaneController.setMorlynnCastleController(this);
-        this.inventoryPane.prefHeightProperty().bind(this.characterPane.heightProperty());
-        this.inventoryPane.prefWidthProperty().bind(this.characterPane.widthProperty());
         gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
     }
 
@@ -89,7 +80,7 @@ public class MorlynnCastleController {
                 if (interaction instanceof Item) {
                     if (this.take((Item) interaction)){
                         this.sceneryPaneController.removeInteractionView(interactionView);
-                        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());
+                        this.characterPaneController.displayInventory(this.game.getHero().getInventory());
                     }
                 }
                 break;
@@ -118,16 +109,16 @@ public class MorlynnCastleController {
         }
     }
 
-    public void openInventory(){
-        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());
-        Stage inventoryStage = new Stage();
-        inventoryStage.initOwner(this.gridPaneRoot.getScene().getWindow());
-        if (this.inventoryPane.getScene() == null){
-            inventoryStage.setScene(new Scene(this.inventoryPane));
-        }
-        else
-            inventoryStage.setScene(this.inventoryPane.getScene());
-        inventoryStage.setTitle("Inventory");
-        inventoryStage.show();
-    }
+//    public void openInventory(){
+//        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());
+//        Stage inventoryStage = new Stage();
+//        inventoryStage.initOwner(this.gridPaneRoot.getScene().getWindow());
+//        if (this.inventoryPane.getScene() == null){
+//            inventoryStage.setScene(new Scene(this.inventoryPane));
+//        }
+//        else
+//            inventoryStage.setScene(this.inventoryPane.getScene());
+//        inventoryStage.setTitle("Inventory");
+//        inventoryStage.show();
+//    }
 }
