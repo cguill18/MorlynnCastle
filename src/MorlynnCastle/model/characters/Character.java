@@ -137,7 +137,7 @@ public abstract class Character extends Interaction implements Attackable, Attac
     }
 
     @Override
-    public void isAttacked(int attackRoll, int damage) {
+    public int isAttacked(int attackRoll, int damage) {
         if (attackRoll >= this.armorClass) {
             this.currentHealthPoints -= damage;
             System.out.println(" hit " + this.name + ".");
@@ -147,15 +147,19 @@ public abstract class Character extends Interaction implements Attackable, Attac
                 this.alive = false;
                 System.out.println(this.name + " is dead.");
             }
-        } else System.out.println(" miss " + this.name + ".");
+            return damage;
+        } else {
+            System.out.println(" miss " + this.name + ".");
+            return 0;
+        }
     }
 
     @Override
-    public void attack(Attackable attackable) {
+    public int attack(Attackable attackable) {
         int attackRoll = this.dice.nextInt(Character.MAX_DICE) + Character.MIN_DICE;
         int damageRoll = this.dice.nextInt(this.attackPower) + Character.MIN_DICE;
         System.out.print(this.name);
-        attackable.isAttacked(attackRoll + this.attackBonus, damageRoll + this.damageBonus);
+        return attackable.isAttacked(attackRoll + this.attackBonus, damageRoll + this.damageBonus);
     }
 
     public void equipArmor(Armor armor) {

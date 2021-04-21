@@ -11,15 +11,21 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Combat implements Serializable {
 
+    private Hero hero;
     private final Map<String, Character> enemies = new HashMap<>();
-    private final Interpreter combatInterpreter;
+    private Interpreter combatInterpreter = null;
     private boolean running = true;
-    private final Scanner scanner;
+    private Scanner scanner = null;
 
     public Combat(Hero hero, Map<String, Character> enemies, Scanner input) {
-        this.combatInterpreter = new Interpreter(hero,input);
+        this.combatInterpreter = new Interpreter(hero, input);
         this.enemies.putAll(enemies);
         scanner = input;
+    }
+
+    public Combat(Hero hero, Map<String, Character> enemies) {
+        this.enemies.putAll(enemies);
+        this.hero = hero;
     }
 
     public Map<String, Character> getEnemies() {
@@ -38,14 +44,12 @@ public class Combat implements Serializable {
         } while (!executed_command);
     }
 
-    public void enemyTurn(Hero hero, Character enemy) {
-        if (enemy.isAlive())
-            enemy.attack(hero);
+    public int enemyTurn(Hero hero, Character enemy) {
+        return enemy.attack(hero);
     }
 
-    public void combatTurn(Hero hero) {
-        this.heroTurn();
-        this.enemies.forEach((k, v) -> this.enemyTurn(hero, v));
+    public void combatTurn() {
+        this.enemies.values().stream().filter(enemy -> enemy.isAlive()).forEach(enemy -> this.enemyTurn(hero, enemy));
     }
 
     public void printCombatInfo(Hero hero) {
@@ -53,18 +57,17 @@ public class Combat implements Serializable {
         this.enemies.forEach((k, v) -> System.out.println(k + " - HP : " + v.getCurrentHealthPoints() + "/" + v.getMaxHealthPoints()));
     }
 
-    public boolean endCombat(Hero hero) {
-        AtomicBoolean enemiesStillAlive = new AtomicBoolean(false); //besoin d'un atomic boolean pour le foreach, aurait sinon pu utiliser  map.entrySet
-        this.enemies.forEach((k, v) -> enemiesStillAlive.set(enemiesStillAlive.get() || v.isAlive()));
-        return hero.isAlive() && enemiesStillAlive.get();
+    public boolean enemiesStillAlive() {
+        return enemies.values().stream().anyMatch(enemy -> enemy.isAlive());
     }
 
     public void runCombat(Hero hero) {
         System.out.println("Start of combat");
         while (this.running) {
             this.printCombatInfo(hero);
-            this.combatTurn(hero);
-            this.running = this.running && this.endCombat(hero);
+            this.heroTurn();
+            this.combatTurn();
+            this.running = this.running && this.enemiesStillAlive() && hero.isAlive();
         }
         System.out.println("End of combat");
         hero.setOngoingCombat(null);

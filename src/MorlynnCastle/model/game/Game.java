@@ -194,57 +194,57 @@ public class Game {
         this.hero.look();
     }
 
-//    public void launchGame() {
-//        System.out.println("To start a fresh game, please type \"start\" and press Return.");
-//        System.out.println("If you wish to load a save, type \"load\" and press Return.");
-//        String input = scanner.nextLine();
-//        while (!(input.equals("start") || input.equals("load")) && scanner.hasNext()) {
-//            System.out.println("I didn't understand your command.");
-//        }
-//        if (!(input.equals("load") && this.load())){
-//            this.initGame();
-//        }
-//        this.hero.look();
-//    }
+    public void launchGame() {
+        System.out.println("To start a fresh game, please type \"start\" and press Return.");
+        System.out.println("If you wish to load a save, type \"load\" and press Return.");
+        String input = scanner.nextLine();
+        while (!(input.equals("start") || input.equals("load")) && scanner.hasNext()) {
+            System.out.println("I didn't understand your command.");
+        }
+        if (!(input.equals("load") && this.load())){
+            this.initGame();
+        }
+        this.hero.look();
+    }
 
 
-//    public void runGame() {
-//        String input;
-//        boolean executed_command;
-//        while (this.running && this.hero.isAlive() && !this.hero.isGoalAchieved()) {
-//            if (this.hero.getPlace().randomEncoutner()) {
-//                //attaque le "premier" ennemi dans la hashmap pour déclencher le combat
-//                input = ("attack " + this.hero.getPlace().getAnEnemyName());
-//                System.out.println("You're being attacked !");
-//                this.interpreter.interpret(input);
-//            } else {
-//                do {
-//                    input = this.scanner.nextLine();
-//                    executed_command = this.interpreter.interpret(input);
-//                } while (!executed_command);
-//            }
-//        }
-//    }
+    public void runGame() {
+        String input;
+        boolean executed_command;
+        while (this.running && this.hero.isAlive() && !this.hero.isGoalAchieved()) {
+            if (this.hero.getPlace().randomEncoutner()) {
+                //attaque le "premier" ennemi dans la hashmap pour déclencher le combat
+                input = ("attack " + this.hero.getPlace().getAnEnemyName());
+                System.out.println("You're being attacked !");
+                this.interpreter.interpret(input);
+            } else {
+                do {
+                    input = this.scanner.nextLine();
+                    executed_command = this.interpreter.interpret(input);
+                } while (!executed_command);
+            }
+        }
+    }
 
-//    public void ending() {
-//        if (this.hero.isAlive()) {
-//            if (this.hero.isGoalAchieved()) {
-//                System.out.println("You have completed the story !");
-//            }
-//        } else System.out.println("You died.");
-//        System.out.println("Thank you for playing Morlynn Castle.");
-//        System.out.println("This game was made by :");
-//        System.out.println("FRADET Amandine");
-//        System.out.println("GUILLOT Clémentine");
-//        System.out.println("FORESTIER Louis");
-//    }
+    public void ending() {
+        if (this.hero.isAlive()) {
+            if (this.hero.isGoalAchieved()) {
+                System.out.println("You have completed the story !");
+            }
+        } else System.out.println("You died.");
+        System.out.println("Thank you for playing Morlynn Castle.");
+        System.out.println("This game was made by :");
+        System.out.println("FRADET Amandine");
+        System.out.println("GUILLOT Clémentine");
+        System.out.println("FORESTIER Louis");
+    }
 
     public static void main(String[] args) {
-//        Scanner input = new Scanner(System.in);
-//        Game g = new Game(input);
-//        g.launchGame();
-//        g.runGame();
-//        g.ending();
+        Scanner input = new Scanner(System.in);
+        Game g = new Game(input);
+        g.launchGame();
+        g.runGame();
+        g.ending();
     }
 
 
