@@ -1,5 +1,9 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.characters.Attackable;
+import MorlynnCastle.model.characters.Combat;
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.Item;
 import MorlynnCastle.model.space.Interaction;
@@ -7,6 +11,7 @@ import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
@@ -50,12 +55,14 @@ public class MorlynnCastleController {
     @FXML
     private DialogBoxController dialogBoxController;
 
-
     private Game game;
+    
+    private Hero hero;
 
     @FXML
     public void initialize() throws IOException {
         this.game = new Game();
+        this.hero = this.game.getHero();
         this.game.initGame();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
@@ -74,14 +81,18 @@ public class MorlynnCastleController {
         this.game = game;
     }
 
-    public void launchCommand(InteractionView interactionView) {
+    public GridPane getGridPaneRoot() {
+        return gridPaneRoot;
+    }
+
+    public void launchCommand(InteractionView interactionView) throws IOException {
+        Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
             case TAKE:
-                Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Item) {
                     if (this.take((Item) interaction)){
                         this.sceneryPaneController.removeInteractionView(interactionView);
-                        this.characterPaneController.displayInventory(this.game.getHero().getInventory());
+                        this.characterPaneController.displayInventory(this.hero.getInventory());
                     }
                 }
                 break;
@@ -92,6 +103,9 @@ public class MorlynnCastleController {
             case EQUIP:
                 break;
             case ATTACK:
+                if (interaction instanceof Attackable){
+                    this.attack((Attackable) interaction);
+                }
                 break;
             case TALK:
                 break;
@@ -100,7 +114,7 @@ public class MorlynnCastleController {
 
     public boolean take(Item item) {
         if (item.isTakable()) {
-            this.game.getHero().take(item);
+            this.hero.take(item);
             this.dialogBoxController.addText("You add this" + item.getName() + " to your inventory.\n");
             return true;
         }
@@ -110,8 +124,39 @@ public class MorlynnCastleController {
         }
     }
 
+    public void attack(Attackable attackable) throws IOException {
+        if (attackable instanceof NonPlayerCharacter) {
+            this.attackNonPlayerCharacter((NonPlayerCharacter) attackable);
+        } else this.hero.attack(attackable);
+    }
+
+    public void attackNonPlayerCharacter(NonPlayerCharacter npc) throws IOException {
+        if (npc.isAlive()) {
+            if (this.hero.getOngoingCombat() == null) {
+                this.startCombat(npc);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
+                Parent root = loader.load();
+                CombatPaneController combatPaneController = loader.getController();
+                combatPaneController.setMorlynnCastleController(this);
+                combatPaneController.initCombat(this.hero);
+                this.gridPaneRoot.getScene().setRoot(root);
+            }
+        } 
+    }
+
+
+    public void startCombat(NonPlayerCharacter npc) {
+        if (!npc.isHostile()) {
+            npc.setHostile(true);
+        }
+        Combat c = new Combat(this.hero, this.hero.getPlace().getEnemiesInPlace());
+        this.hero.setOngoingCombat(c);
+    }
+
+
+
 //    public void openInventory(){
-//        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());
+//        this.inventoryPaneController.displayInventory(this.hero.getInventory());
 //        Stage inventoryStage = new Stage();
 //        inventoryStage.initOwner(this.gridPaneRoot.getScene().getWindow());
 //        if (this.inventoryPane.getScene() == null){

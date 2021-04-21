@@ -7,7 +7,7 @@
 <VBox prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.DialogBoxController">
 
     <children>
-        <TextArea fx:id="textArea" editable="true" prefHeight="255.0" prefWidth="100.0" wrapText="true" VBox.vgrow="ALWAYS" />
+        <TextArea fx:id="textArea" editable="false" prefHeight="255.0" prefWidth="100.0" wrapText="true" VBox.vgrow="ALWAYS" />
         <TextFlow fx:id="textFlow" managed="false" prefHeight="100.0" prefWidth="293.0" visible="false" />
     </children>
 </VBox>

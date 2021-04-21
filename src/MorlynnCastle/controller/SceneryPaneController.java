@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class SceneryPaneController {
@@ -45,7 +46,7 @@ public class SceneryPaneController {
     }
 
     @FXML
-    public void handleClick(MouseEvent event){
+    public void handleClick(MouseEvent event) throws IOException {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
             this.morlynnCastleController.launchCommand((InteractionView) eventTarget);
@@ -65,10 +66,12 @@ public class SceneryPaneController {
             }
         }*/
         for (Map.Entry<String, Interaction> objects : interactions.entrySet()) {
-            InteractionView inte = new InteractionView(objects.getValue());
-            inte.setStyle(inte.getStyle()+"-fx-background-image:url(\"/res/armor.png\")");
-            this.sceneryPane.add(inte,objects.getValue().getPosx(),objects.getValue().getPosy());
-            System.out.println(""+objects.getValue().getPosx()+";"+objects.getValue().getPosy());
+            if (!(objects.getValue() instanceof Hero)) {
+                InteractionView inte = new InteractionView(objects.getValue());
+                inte.setStyle(inte.getStyle() + "-fx-background-image:url(\"/res/armor.png\")");
+                this.sceneryPane.add(inte, objects.getValue().getPosx(), objects.getValue().getPosy());
+                System.out.println("" + objects.getValue().getPosx() + ";" + objects.getValue().getPosy());
+            }
         }
     }
 
