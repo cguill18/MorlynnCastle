@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <VBox fx:id="characterPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0" xmlns="http://javafx.com/javafx/15.0.1"
+      minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.CharacterPaneController">
     <children>
         <Label fx:id="name" style="-fx-font-size:1.5em;" text="Name">

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import MorlynnCastle.controller.MorlynnCastleController;
+import MorlynnCastle.model.commands.InvalidArgumentNumberException;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.space.*;
 import java.util.HashMap;
@@ -46,24 +47,22 @@ public class DirectionPaneController {
     @FXML
     public void initialize() {
         this.roomUrl = new HashMap<>();
-      //  this.roomUrl = this.addHashMapRoom();
-        upButton.setOnAction(this::upAction);
+        //this.upButton.setOnAction(this::upAction);
+    }
+    
+    public void initMapImg() {
+        this.roomUrl = this.addHashMapRoom();
     }
     
     public void setGame(Game game) { 
         this.game = game; 
     }
     
-    //retourne le nom de la pièce actuelle
-    public String getNameRoom(){
-        return this.game.getHero().getPlace().getName();
-    }
-    
     //ajout, si il n'existe pas déjà, de la pièce actuelle en clé et de l'image associée
     public Map<String, String> addHashMapRoom() {
-        String name = this.getNameRoom();
+        String name = this.game.getHero().getPlace().getName();
         this.roomUrl.put(name, name+".png");
-        return roomUrl;
+        return this.roomUrl;
     }
     
     public void setSceneryPaneController(SceneryPaneController sceneryPaneController) {
@@ -81,8 +80,10 @@ public class DirectionPaneController {
         
         if (door != null) {
             this.game.getHero().go(door);
-            String name = this.getNameRoom();
-            moveRoomImg(name);
+            this.roomUrl = this.addHashMapRoom();
+            String name = this.game.getHero().getPlace().getName();
+            String img = this.roomUrl.get(name);
+            this.moveRoomImg(img);
         }
         else {
            this.dialogBoxController.addText(this.noDoorMessage());

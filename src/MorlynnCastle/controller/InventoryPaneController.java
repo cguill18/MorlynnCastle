@@ -24,7 +24,7 @@ public class InventoryPaneController {
         inventory.forEach((name,item)->{
             InteractionView interactionView = new InteractionView(item);
             interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/armor.png\")");
-            gridPane.add(interactionView, i[0]%this.gridPane.getColumnCount(), i[0]/this.gridPane.getColumnCount());
+            gridPane.add(interactionView, i[0]%this.gridPane.getRowConstraints().size(), i[0]/this.gridPane.getRowConstraints().size());
             i[0]++;
         });
      }
