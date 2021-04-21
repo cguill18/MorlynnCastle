@@ -83,6 +83,7 @@ public class DirectionPaneController {
         
         if (door != null) {
             this.game.getHero().go(door);
+            this.sceneryPaneController.generateRoomItems();
             
             this.roomUrl = this.addHashMapRoom();
             String name = this.game.getHero().getPlace().getName();
