@@ -56,6 +56,7 @@ public class SceneryPaneController {
 
     //methodes pour les objets dans la piece
     public void generateRoomItems() {
+        this.sceneryPane.getChildren().clear();
         Map<String, Interaction> interactions = game.getHero().getPlace().getInteractions();
         int col = 11;
         int raw = 11;

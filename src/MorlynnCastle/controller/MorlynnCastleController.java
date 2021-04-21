@@ -5,6 +5,8 @@ import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.model.game.Game;
+import MorlynnCastle.model.item.Container;
+import MorlynnCastle.model.item.ContainerWithLock;
 import MorlynnCastle.model.item.Item;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
@@ -17,8 +19,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
+import javafx.scene.text.Font;
+import javafx.stage.Popup;
 
 
 public class MorlynnCastleController {
@@ -97,6 +107,12 @@ public class MorlynnCastleController {
                 }
                 break;
             case LOOK:
+                Interaction interaction01 = interactionView.getInteraction();
+                //this.dialogBoxController.addText(interaction01.getDescription());
+                this.lookTooltip(interactionView);
+                if (interaction01 instanceof Container) {
+                  //  this.lookContainer(interaction01);
+                }
                 break;
             case USE:
                 break;
@@ -167,4 +183,26 @@ public class MorlynnCastleController {
 //        inventoryStage.setTitle("Inventory");
 //        inventoryStage.show();
 //    }
+    
+    public void lookTooltip(InteractionView interactionView) {
+        Tooltip tooltip = new Tooltip();
+        tooltip.styleProperty().bind(gridPaneRoot.styleProperty());
+        tooltip.setText(interactionView.getInteraction().getDescription());   
+        Tooltip.install(interactionView, tooltip);
+    }
+    
+    public void lookContainer(Interaction container){        
+    /*    stage.setTitle("Contents of the chest");
+        container.s(this);
+*/
+    }
+  /*  
+    public void handle(Event event) {
+        Popup popup = new Popup();
+        popup.setAutoHide(true);
+        GridPane gridPane = new GridPane();
+        popup.getContent().add(gridPane);
+        if (!popup.isShowing())
+                    popup.show(stage); 
+    }*/
 }
