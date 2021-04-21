@@ -62,6 +62,7 @@ public class MorlynnCastleController {
         this.directionPaneController.setGame(this.game);
         this.sceneryPaneController.initScenery();
         this.directionPaneController.setSceneryPaneController(sceneryPaneController);
+        this.directionPaneController.setDialogBoxController(dialogBoxController);
         gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
     }
 

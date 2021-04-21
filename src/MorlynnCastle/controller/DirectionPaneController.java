@@ -47,7 +47,6 @@ public class DirectionPaneController {
     @FXML
     public void initialize() {
         this.roomUrl = new HashMap<>();
-        //this.upButton.setOnAction(this::upAction);
     }
     
     public void initMapImg() {
@@ -69,6 +68,10 @@ public class DirectionPaneController {
         this.sceneryPaneController = sceneryPaneController;
     }
     
+    public void setDialogBoxController(DialogBoxController dialogBoxController) {
+        this.dialogBoxController = dialogBoxController;
+    }
+    
     //change le background du sceneryPane
     public void moveRoomImg(String img) {
         this.sceneryPaneController.setBackground(img);
@@ -80,10 +83,14 @@ public class DirectionPaneController {
         
         if (door != null) {
             this.game.getHero().go(door);
+            
             this.roomUrl = this.addHashMapRoom();
             String name = this.game.getHero().getPlace().getName();
             String img = this.roomUrl.get(name);
             this.moveRoomImg(img);
+            
+            String description = this.game.getHero().getPlace().getDescription();
+            this.dialogBoxController.addText(description);
         }
         else {
            this.dialogBoxController.addText(this.noDoorMessage());
