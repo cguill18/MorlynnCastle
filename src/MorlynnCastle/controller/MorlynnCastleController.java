@@ -64,8 +64,6 @@ public class MorlynnCastleController {
 
     private Hero hero;
 
-    private Usable launchCommandArg1;
-
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
@@ -186,6 +184,63 @@ public class MorlynnCastleController {
             return false;
         }
     }
+
+    public void attack(Attackable attackable) throws IOException {
+        if (attackable instanceof NonPlayerCharacter) {
+            this.attackNonPlayerCharacter((NonPlayerCharacter) attackable);
+        } else this.hero.attack(attackable);
+    }
+
+    public void attackNonPlayerCharacter(NonPlayerCharacter npc) throws IOException {
+        if (npc.isAlive()) {
+            if (this.hero.getOngoingCombat() == null) {
+                this.startCombat(npc);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
+                Parent root = loader.load();
+                CombatPaneController combatPaneController = loader.getController();
+                combatPaneController.setMorlynnCastleController(this);
+                combatPaneController.initCombat(this.hero);
+                this.gridPaneRoot.getScene().setRoot(root);
+            }
+        }
+    }
+
+
+    public void startCombat(NonPlayerCharacter npc) {
+        if (!npc.isHostile()) {
+            npc.setHostile(true);
+        }
+        Combat c = new Combat(this.hero, this.hero.getPlace().getEnemiesInPlace());
+        this.hero.setOngoingCombat(c);
+    }
+
+    private void talk(Talkable interaction) {
+        this.commandPane.setDisable(true);
+        this.directionPane.setDisable(true);
+        this.sceneryPane.setDisable(true);
+        this.characterPane.setDisable(true);
+        Dialog dialog = interaction.getDialog();
+        for (int i = 0 ; i < dialog.getPlayerChoices().size() ; i++){
+            String answer = dialog.getDialogs().get(i);
+            EventHandler eventHandler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    dialogBoxController.addText(answer);
+                }
+            };
+            this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i),eventHandler);
+        }
+        this.dialogBoxController.addDialog("Goodbye.", event -> {
+            this.dialogBoxController.endDialog();
+            this.commandPane.setDisable(false);
+            this.directionPane.setDisable(false);
+            this.sceneryPane.setDisable(false);
+            this.characterPane.setDisable(false);
+        });
+        this.dialogBoxController.startDialog();
+    }
+
+
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.hero.getInventory());
