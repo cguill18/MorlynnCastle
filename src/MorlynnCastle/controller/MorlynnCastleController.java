@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -67,6 +68,8 @@ public class MorlynnCastleController {
     private Usable launchCommandArg1;
     
     private Stage containerstage;
+    
+    private ContainerPaneController containerPaneController;
 
     @FXML
     public void initialize() throws IOException {
@@ -75,6 +78,7 @@ public class MorlynnCastleController {
         this.hero = this.game.getHero();
         this.game.initGame();
         this.containerstage = this.setStageContainer();
+        this.containerPaneController = new ContainerPaneController();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setMorlynnCastleController(this);
@@ -111,7 +115,9 @@ public class MorlynnCastleController {
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
                 if (interaction instanceof Container) {
-                    this.ContainerStage();
+                    this.containerPaneController.displayContainer(((Container) interaction).getContent());
+                    this.containerstage.setTitle("Containts of the chest");
+                    this.containerstage.show();
                 }
                 break;
             case USE: //affiche popup pour dire que c'est pas possible
@@ -253,11 +259,6 @@ public Stage setStageContainer() throws IOException{
         stage.setScene(scene);
         return stage;
     }
-
-public void ContainerStage() {
-    this.containerstage.setTitle("Containts of the chest");
-    this.containerstage.show();
-}
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.hero.getInventory());
