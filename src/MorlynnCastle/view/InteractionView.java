@@ -1,7 +1,9 @@
 package MorlynnCastle.view;
 
 import MorlynnCastle.model.space.Interaction;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 
 
 public class InteractionView extends FlowPane {
@@ -28,4 +30,17 @@ public class InteractionView extends FlowPane {
     public void setInteraction(Interaction interaction) { this.interaction = interaction; }
 
     public void setImage(String url) { this.setStyle(url);}
+    
+     public void lookTooltip(InteractionView interactionView, GridPane gridPane) {
+        Tooltip tooltip = new Tooltip();
+        tooltip.styleProperty().bind(gridPane.styleProperty());
+        tooltip.setText(interactionView.getInteraction().getDescription());   
+        Tooltip.install(interactionView, tooltip);
+    }
+    
+    public void lookContainer(Interaction container){        
+    /*    stage.setTitle("Contents of the chest");
+        container.s(this);
+*/
+    }
 }

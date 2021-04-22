@@ -97,7 +97,7 @@ public class MorlynnCastleController {
             case LOOK:
                 Interaction interaction01 = interactionView.getInteraction();
                 //this.dialogBoxController.addText(interaction01.getDescription());
-                this.lookTooltip(interactionView);
+                interactionView.lookTooltip(interactionView, gridPaneRoot);
                 if (interaction01 instanceof Container) {
                   //  this.lookContainer(interaction01);
                 }
@@ -137,26 +137,5 @@ public class MorlynnCastleController {
 //        inventoryStage.setTitle("Inventory");
 //        inventoryStage.show();
 //    }
-    
-    public void lookTooltip(InteractionView interactionView) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.styleProperty().bind(gridPaneRoot.styleProperty());
-        tooltip.setText(interactionView.getInteraction().getDescription());   
-        Tooltip.install(interactionView, tooltip);
-    }
-    
-    public void lookContainer(Interaction container){        
-    /*    stage.setTitle("Contents of the chest");
-        container.s(this);
-*/
-    }
-  /*  
-    public void handle(Event event) {
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
-        GridPane gridPane = new GridPane();
-        popup.getContent().add(gridPane);
-        if (!popup.isShowing())
-                    popup.show(stage); 
-    }*/
+  
 }
