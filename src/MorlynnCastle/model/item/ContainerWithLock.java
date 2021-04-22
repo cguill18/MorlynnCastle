@@ -4,7 +4,8 @@ package MorlynnCastle.model.item;
 import MorlynnCastle.model.space.Lockable;
 
 public class ContainerWithLock extends Container implements Lockable {
-	
+
+	private static final String IMG_CONTAINER_LOCK = "locked_chest.png";
 	private boolean isLocked;
     private final Key key;
 
@@ -12,12 +13,14 @@ public class ContainerWithLock extends Container implements Lockable {
 		super(name, description);
 		this.key = key;
         this.isLocked = true;
+        this.setImage(IMG_CONTAINER_LOCK);
 	}
 
 	public ContainerWithLock(String name, String description, Key key, int posx, int posy) {
 		super(name,description, posx, posy);
 		this.isLocked = true;
 		this.key = key;
+		this.setImage(IMG_CONTAINER_LOCK);
 	}
 
 	public boolean getIsLocked() {

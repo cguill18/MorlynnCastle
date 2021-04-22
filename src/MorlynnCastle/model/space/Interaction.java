@@ -7,6 +7,7 @@ public abstract class Interaction implements Serializable {
     private final String description;
     private int posx = 0;
     private int posy = 0;
+    private String image;
 
     public Interaction(String description) {
         this.description = description;
@@ -35,5 +36,7 @@ public abstract class Interaction implements Serializable {
         return posy;
     }
 
+    public String getImage() { return this.image; }
 
+    public void setImage(String url) {this.image = url;}
 }

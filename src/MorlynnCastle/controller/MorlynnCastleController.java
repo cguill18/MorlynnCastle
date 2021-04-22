@@ -1,9 +1,7 @@
 package MorlynnCastle.controller;
 
 import MorlynnCastle.model.game.Game;
-import MorlynnCastle.model.item.Container;
-import MorlynnCastle.model.item.ContainerWithLock;
-import MorlynnCastle.model.item.Item;
+import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
@@ -62,17 +60,21 @@ public class MorlynnCastleController {
 
     private Game game;
 
+    private Usable launchCommandArg1;
+
     @FXML
     public void initialize() throws IOException {
+        this.launchCommandArg1 = null;
         this.game = new Game();
         this.game.initGame();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
+        this.characterPaneController.setMorlynnCastleController(this);
         this.directionPaneController.setGame(this.game);
         this.sceneryPaneController.initScenery();
         this.directionPaneController.setSceneryPaneController(sceneryPaneController);
         this.directionPaneController.setDialogBoxController(dialogBoxController);
-        gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
+        this.gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
     }
 
     public Game getGame() {
@@ -102,7 +104,7 @@ public class MorlynnCastleController {
                   //  this.lookContainer(interaction01);
                 }
                 break;
-            case USE:
+            case USE: //affiche popup pour dire que c'est pas possible
                 break;
             case EQUIP:
                 break;
@@ -113,7 +115,54 @@ public class MorlynnCastleController {
         }
     }
 
-    public boolean take(Item item) {
+    public void launchCommandForInventory(InteractionView interactionView){
+        switch (this.commandPaneController.getCommand()) {
+            case USE -> {
+                Interaction interaction = interactionView.getInteraction();
+                if (interaction instanceof Usable){
+                    this.use((Usable)interaction);
+                }
+            }
+        }
+    }
+
+    public void launchDrop(InteractionView interactionView){
+        Interaction inte = interactionView.getInteraction();
+        if (inte instanceof Receiver) {
+            this.use(this.launchCommandArg1, (Receiver)inte);
+            this.launchCommandArg1 = null;
+        }
+    }
+
+    public void launchDrag(InteractionView interactionView){
+        Interaction inte = interactionView.getInteraction();
+        if (inte instanceof Usable)
+            this.launchCommandArg1 = (Usable)inte;
+    }
+
+    /*public void launchCommandForInventory(InteractionView interactionView1, InteractionView interactionView2){
+        if (this.commandPaneController.getCommand() == Command.USE) {
+            Interaction inte1 = interactionView1.getInteraction();
+            Interaction inte2 = interactionView2.getInteraction();
+            if (inte1 instanceof Usable && inte2 instanceof Receiver){}
+        }
+    }*/
+
+
+
+    private boolean use(Usable usable) {
+        this.game.getHero().use(usable);
+        this.dialogBoxController.addText("You use an item.\n");
+        return true;
+    }
+
+    private boolean use(Usable usable, Receiver receiver){
+        this.game.getHero().use(usable,receiver);
+        this.dialogBoxController.addText("You use an item on an another.\n");
+        return true;
+    }
+
+    private boolean take(Item item) {
         if (item.isTakable()) {
             this.game.getHero().take(item);
             this.dialogBoxController.addText("You add this" + item.getName() + " to your inventory.\n");
@@ -124,6 +173,7 @@ public class MorlynnCastleController {
             return false;
         }
     }
+
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());

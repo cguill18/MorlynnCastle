@@ -4,15 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Container extends Item {
-	
+
+	private static final String IMG_CONTAINER = "unlocked_chest.png";
 	private final Map<String, Item> content = new HashMap<>();
 	
 	public Container(String name, String description) {
 		super(name, false, description);
+		this.setImage(IMG_CONTAINER);
 	}
 
 	public Container(String name, String description, int posx, int posy) {
 		super(name, false, description, posx, posy);
+		this.setImage(IMG_CONTAINER);
 	}
 
 	public Map<String, Item> getContent() {

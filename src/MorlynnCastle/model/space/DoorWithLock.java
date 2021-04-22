@@ -6,6 +6,7 @@ import MorlynnCastle.model.item.Usable;
 
 public class DoorWithLock extends Door implements Lockable {
 
+    private static final String IMG_DOOR_LOCK = "locked_door.png";
     private boolean isLocked;
     private final Key key;
 
@@ -13,11 +14,13 @@ public class DoorWithLock extends Door implements Lockable {
         super(description);
         this.key = key;
         this.isLocked = true;
+        this.setImage(IMG_DOOR_LOCK);
     }
     public DoorWithLock(Key key, String description, int posx, int posy) {
         super(description, posx, posy);
         this.key = key;
         this.isLocked = true;
+        this.setImage(IMG_DOOR_LOCK);
     }
 
     @Override

@@ -2,6 +2,7 @@ package MorlynnCastle.model.space;
 
 public class Door extends Interaction {
 
+    private static final String IMG_DOOR = "unlocked_door.png";
     private Place entrance;
     private Place exit;
     private Door mirrorDoor;
@@ -11,12 +12,14 @@ public class Door extends Interaction {
         this.entrance = null;
         this.exit = null;
         this.mirrorDoor = null;
+        this.setImage(IMG_DOOR);
     }
     public Door(String description, int posx, int posy) {
         super(description, posx, posy);
         this.entrance = null;
         this.exit = null;
         this.mirrorDoor = null;
+        this.setImage(IMG_DOOR);
     }
 
     public void setMirrorDoor(Door mirrorDoor) {

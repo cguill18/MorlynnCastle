@@ -2,7 +2,9 @@ package MorlynnCastle.controller;
 
 import MorlynnCastle.model.item.Item;
 import MorlynnCastle.view.InteractionView;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.util.Map;
@@ -12,6 +14,7 @@ public class InventoryPaneController {
     @FXML
     private GridPane gridPane;
 
+    private CharacterPaneController characterPaneController;
 
 
     @FXML
