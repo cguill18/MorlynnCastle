@@ -43,13 +43,4 @@ public class InteractionView extends FlowPane {
 
     public void setImage(String url) { this.setStyle(url);}
     
-    public void lookContainer() throws IOException{        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContainerPane.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Containts of the chest");
-        stage.show();
-    }
 }

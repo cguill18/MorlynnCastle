@@ -65,6 +65,8 @@ public class MorlynnCastleController {
     private Hero hero;
 
     private Usable launchCommandArg1;
+    
+    private Stage containerstage;
 
     @FXML
     public void initialize() throws IOException {
@@ -72,6 +74,7 @@ public class MorlynnCastleController {
         this.game = new Game();
         this.hero = this.game.getHero();
         this.game.initGame();
+        this.containerstage = this.setStageContainer();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setMorlynnCastleController(this);
@@ -108,7 +111,7 @@ public class MorlynnCastleController {
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
                 if (interaction instanceof Container) {
-                    interactionView.lookContainer();
+                    this.ContainerStage();
                 }
                 break;
             case USE: //affiche popup pour dire que c'est pas possible
@@ -242,7 +245,19 @@ public class MorlynnCastleController {
         this.dialogBoxController.startDialog();
     }
 
+public Stage setStageContainer() throws IOException{        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        return stage;
+    }
 
+public void ContainerStage() {
+    this.containerstage.setTitle("Containts of the chest");
+    this.containerstage.show();
+}
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.hero.getInventory());
