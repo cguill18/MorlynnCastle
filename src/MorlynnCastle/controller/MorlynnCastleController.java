@@ -105,7 +105,6 @@ public class MorlynnCastleController {
                 break;
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
-                interactionView.lookTooltip(interactionView, gridPaneRoot);
                 if (interaction instanceof Container) {
                   //  this.lookContainer(interaction);
                 }

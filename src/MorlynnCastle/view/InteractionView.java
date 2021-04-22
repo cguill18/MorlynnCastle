@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 public class InteractionView extends FlowPane {
 
     private Interaction interaction;
+    
+    private Tooltip tooltip;
 
 
     //deux constructeurs
@@ -16,6 +18,9 @@ public class InteractionView extends FlowPane {
         super();
         this.interaction = interaction;
         this.setStyle("-fx-background-position: center; -fx-background-size: contain ; -fx-background-repeat: no-repeat;");
+        this.tooltip = new Tooltip();
+        tooltip.setText(this.getInteraction().getDescription());
+        Tooltip.install(this, tooltip);
     }
 
     public InteractionView(String url, Interaction interaction) {
@@ -30,13 +35,6 @@ public class InteractionView extends FlowPane {
     public void setInteraction(Interaction interaction) { this.interaction = interaction; }
 
     public void setImage(String url) { this.setStyle(url);}
-    
-     public void lookTooltip(InteractionView interactionView, GridPane gridPane) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.styleProperty().bind(gridPane.styleProperty());
-        tooltip.setText(interactionView.getInteraction().getDescription());   
-        Tooltip.install(interactionView, tooltip);
-    }
     
     public void lookContainer(Interaction container){        
     /*    stage.setTitle("Contents of the chest");
