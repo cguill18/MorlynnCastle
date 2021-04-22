@@ -26,7 +26,7 @@ public class SceneryPaneController {
 
     @FXML
     public void initialize() {
-        this.sceneryPane.setStyle("-fx-background-image:url(\"/res/background.png\")");
+        this.sceneryPane.setStyle("-fx-background-image:url(\"/res/pieces/hall.png\")");
     }
 
     public void setGame(Game game){ this.game = game; }
@@ -60,18 +60,11 @@ public class SceneryPaneController {
         Map<String, Interaction> interactions = game.getHero().getPlace().getInteractions();
         int col = 11;
         int raw = 11;
-        /*for (int i = 0 ; i < col ; i++){
-            for (int j = 0 ; j < raw ; j++){
-                InteractionView n = new InteractionView("-fx-background-color : red",new Key("","",i,j));
-                this.sceneryPane.add(n,i,j);
-            }
-        }*/
         for (Map.Entry<String, Interaction> objects : interactions.entrySet()) {
             if (!(objects.getValue() instanceof Hero)) {
                 InteractionView inte = new InteractionView(objects.getValue());
                 inte.setStyle(inte.getStyle() + "-fx-background-image:url(\"/res/armor.png\")");
                 this.sceneryPane.add(inte, objects.getValue().getPosx(), objects.getValue().getPosy());
-                System.out.println("" + objects.getValue().getPosx() + ";" + objects.getValue().getPosy());
             }
         }
     }

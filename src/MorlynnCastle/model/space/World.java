@@ -73,7 +73,7 @@ public class World implements Serializable {
 
         //creation des portes
         Door dhg = new Door(woodenDoorDesc,0,2);
-        Door dgh = new Door(woodenDoorDesc,3,2);
+        Door dgh = new Door(woodenDoorDesc,3,4);
         
         DoorWithLock dhw = new DoorWithLock(key1, ironDoorDesc,6,2);
         DoorWithLock dwh = new DoorWithLock(key1, ironDoorDesc,0,2);

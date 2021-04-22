@@ -63,7 +63,7 @@ public class MorlynnCastleController {
     private DialogBoxController dialogBoxController;
 
     private Game game;
-    
+
     private Hero hero;
 
     @FXML
@@ -105,7 +105,7 @@ public class MorlynnCastleController {
                 break;
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
-                this.lookTooltip(interactionView);
+                interactionView.lookTooltip(interactionView, gridPaneRoot);
                 if (interaction instanceof Container) {
                   //  this.lookContainer(interaction);
                 }
@@ -208,26 +208,5 @@ public class MorlynnCastleController {
 //        inventoryStage.setTitle("Inventory");
 //        inventoryStage.show();
 //    }
-    
-    public void lookTooltip(InteractionView interactionView) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.styleProperty().bind(gridPaneRoot.styleProperty());
-        tooltip.setText(interactionView.getInteraction().getDescription());   
-        Tooltip.install(interactionView, tooltip);
-    }
-    
-    public void lookContainer(Interaction container){        
-    /*    stage.setTitle("Contents of the chest");
-        container.s(this);
-*/
-    }
-  /*  
-    public void handle(Event event) {
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
-        GridPane gridPane = new GridPane();
-        popup.getContent().add(gridPane);
-        if (!popup.isShowing())
-                    popup.show(stage); 
-    }*/
+
 }
