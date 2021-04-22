@@ -64,6 +64,8 @@ public class MorlynnCastleController {
 
     private Hero hero;
 
+    private Usable launchCommandArg1;
+
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
