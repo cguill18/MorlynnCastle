@@ -25,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import javafx.stage.StageStyle;
 
 
 public class MorlynnCastleController {
@@ -78,7 +79,8 @@ public class MorlynnCastleController {
         this.hero = this.game.getHero();
         this.game.initGame();
         this.containerstage = this.setStageContainer();
-        //this.containerPaneController = new ContainerPaneController();
+        this.containerPaneController.setMorlynnCastleController(this);
+        this.containerPaneController.setGame(this.game);
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setMorlynnCastleController(this);
@@ -187,7 +189,7 @@ public class MorlynnCastleController {
     private boolean take(Item item) {
         if (item.isTakable()) {
             this.hero.take(item);
-            this.dialogBoxController.addText("You add this" + item.getName() + " to your inventory.\n");
+            this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
             return true;
         }
         else{
@@ -258,6 +260,7 @@ public Stage setStageContainer() throws IOException{
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setAlwaysOnTop(true);
         return stage;
     }
 
