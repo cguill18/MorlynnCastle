@@ -1,28 +1,29 @@
 TODOLISTE:
-1.déplacement du personnage avec changement du background du sceneryPane
-2.Ajouter les interactions
-3.Commande Take
-4.Inventaire
-5.Commande Use
-6.Equipement et commande equip
-7.Commande Look
-8.Interface de combat et commande Attack (et commande Attack et Flee en combat)
-9.Commande Talk (et dialogues dans le texflow)
-10."Réglages" -> commande save, load et quit
-11.Map de proximité
-12.Points de vie
-13.Map agrandie
-ajou14.Réaction quand mouse over interaction (éléments cliquables)
+1.déplacement du personnage avec changement du background du sceneryPane FINI
+2.Ajouter les interactions QUASI FINI
+3.Commande Take FINI
+4.Inventaire QUASI FINI, PB DE DIMENSIONS
+5.Commande Use EN COURS
+6.Equipement et commande equip A FAIRE
+7.Commande Look EN COURS
+8.Interface de combat et commande Attack (et commande Attack et Flee en combat) FINI
+9.Commande Talk (et dialogues dans le texflow) FINI
+10."Réglages" -> commande save, load, help et quit A FAIRE
+11.Map de proximité A FAIRE
+12.Points de vie avec la progressbar A FAIRE
+13.Map agrandie A FAIRE
+14.Réaction quand mouse over interaction (éléments cliquables) A FAIRE
 
 
 Ce qu'il faudra faire pour la vue :
-- le commandpane de combat
-- popup ou menubar pour réglages
-- inventaire : gridpane dans un scrollpane, truc dans le genre
-- equipement
+- le commandpane de combat FINI
+- popup ou menubar pour réglages A FAIRE
+- inventaire : gridpane dans un scrollpane, truc dans le genre QUASI FINI
+- equipement A FAIRE
+- mettre le label name et la progressbar pour les hps directement dans l'onglet Character
 
-Si jamais inventaire et equipement trop compliqué en mode popup, utiliser les onglets
+Si jamais inventaire et equipement trop compliqué en mode popup, utiliser les onglets FINI
 
 
 Pour le modèle :
-- position x,y 
+- position x,y  FINI
