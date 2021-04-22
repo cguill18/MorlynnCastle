@@ -129,14 +129,14 @@ public class MorlynnCastleController {
     }
 
     public void launchCommandForInventory(InteractionView interactionView){
-        switch (this.commandPaneController.getCommand()) {
+    /*    switch (this.commandPaneController.getCommand()) {
             case USE -> {
                 Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Usable){
                     this.use((Usable)interaction);
                 }
             }
-        }
+        }*/
     }
 
     public void launchDrop(InteractionView interactionView){
