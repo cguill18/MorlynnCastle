@@ -1,9 +1,6 @@
 package MorlynnCastle.controller;
 
-import MorlynnCastle.model.characters.Attackable;
-import MorlynnCastle.model.characters.Combat;
-import MorlynnCastle.model.characters.Hero;
-import MorlynnCastle.model.characters.NonPlayerCharacter;
+import MorlynnCastle.model.characters.*;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.Container;
 import MorlynnCastle.model.item.ContainerWithLock;
@@ -107,11 +104,10 @@ public class MorlynnCastleController {
                 }
                 break;
             case LOOK:
-                Interaction interaction01 = interactionView.getInteraction();
-                //this.dialogBoxController.addText(interaction01.getDescription());
+                //this.dialogBoxController.addText(interaction.getDescription());
                 this.lookTooltip(interactionView);
-                if (interaction01 instanceof Container) {
-                  //  this.lookContainer(interaction01);
+                if (interaction instanceof Container) {
+                  //  this.lookContainer(interaction);
                 }
                 break;
             case USE:
@@ -124,6 +120,9 @@ public class MorlynnCastleController {
                 }
                 break;
             case TALK:
+                if (interaction instanceof Talkable){
+                    this.talk((Talkable) interaction);
+                }
                 break;
         }
     }
@@ -157,7 +156,7 @@ public class MorlynnCastleController {
                 combatPaneController.initCombat(this.hero);
                 this.gridPaneRoot.getScene().setRoot(root);
             }
-        } 
+        }
     }
 
 
@@ -167,6 +166,32 @@ public class MorlynnCastleController {
         }
         Combat c = new Combat(this.hero, this.hero.getPlace().getEnemiesInPlace());
         this.hero.setOngoingCombat(c);
+    }
+
+    private void talk(Talkable interaction) {
+        this.commandPane.setDisable(true);
+        this.directionPane.setDisable(true);
+        this.sceneryPane.setDisable(true);
+        this.characterPane.setDisable(true);
+        Dialog dialog = interaction.getDialog();
+        for (int i = 0 ; i < dialog.getPlayerChoices().size() ; i++){
+            String answer = dialog.getDialogs().get(i);
+            EventHandler eventHandler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    dialogBoxController.addText(answer);
+                }
+            };
+            this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i),eventHandler);
+        }
+        this.dialogBoxController.addDialog("Goodbye.", event -> {
+            this.dialogBoxController.endDialog();
+            this.commandPane.setDisable(false);
+            this.directionPane.setDisable(false);
+            this.sceneryPane.setDisable(false);
+            this.characterPane.setDisable(false);
+        });
+        this.dialogBoxController.startDialog();
     }
 
 

@@ -1,7 +1,10 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.characters.Dialog;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class DialogBoxController {
@@ -17,6 +20,23 @@ public class DialogBoxController {
     }
     
     public void addText(String text) {
-        this.textArea.setText(this.textArea.getText() + text + "\n");
+        this.textArea.appendText( text + "\n");
+    }
+
+    public void startDialog(){
+        this.textFlow.setVisible(true);
+        this.textFlow.setManaged(true);
+    }
+
+    public void endDialog(){
+        this.textFlow.setVisible(false);
+        this.textFlow.setManaged(false);
+        this.textFlow.getChildren().clear();
+    }
+
+    public void addDialog(String text, EventHandler answer){
+        Text line = new Text(text+"\n");
+        this.textFlow.getChildren().add(line);
+        line.setOnMouseClicked(answer);
     }
 }

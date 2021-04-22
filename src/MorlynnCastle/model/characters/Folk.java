@@ -17,6 +17,11 @@ public class Folk extends NonPlayerCharacter implements Talkable {
     }
 
     @Override
+    public Dialog getDialog() {
+        return dialog;
+    }
+
+    @Override
     public void talk(Scanner input) {
         if (this.isAlive()) {
             if (!this.isHostile())
