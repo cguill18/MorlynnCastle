@@ -78,7 +78,7 @@ public class MorlynnCastleController {
         this.hero = this.game.getHero();
         this.game.initGame();
         this.containerstage = this.setStageContainer();
-        this.containerPaneController = new ContainerPaneController();
+        //this.containerPaneController = new ContainerPaneController();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setMorlynnCastleController(this);
@@ -254,6 +254,7 @@ public class MorlynnCastleController {
 public Stage setStageContainer() throws IOException{        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = (Parent) loader.load();
+        this.containerPaneController = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
