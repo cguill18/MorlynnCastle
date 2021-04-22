@@ -1,5 +1,6 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.characters.*;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Interaction;
@@ -7,6 +8,7 @@ import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
@@ -60,12 +62,15 @@ public class MorlynnCastleController {
 
     private Game game;
 
+    private Hero hero;
+
     private Usable launchCommandArg1;
 
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
         this.game = new Game();
+        this.hero = this.game.getHero();
         this.game.initGame();
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
@@ -85,23 +90,25 @@ public class MorlynnCastleController {
         this.game = game;
     }
 
-    public void launchCommand(InteractionView interactionView) {
+    public GridPane getGridPaneRoot() {
+        return gridPaneRoot;
+    }
+
+    public void launchCommand(InteractionView interactionView) throws IOException {
+        Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
             case TAKE:
-                Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Item) {
                     if (this.take((Item) interaction)){
                         this.sceneryPaneController.removeInteractionView(interactionView);
-                        this.characterPaneController.displayInventory(this.game.getHero().getInventory());
+                        this.characterPaneController.displayInventory(this.hero.getInventory());
                     }
                 }
                 break;
             case LOOK:
-                Interaction interaction01 = interactionView.getInteraction();
-                //this.dialogBoxController.addText(interaction01.getDescription());
-                this.lookTooltip(interactionView);
-                if (interaction01 instanceof Container) {
-                  //  this.lookContainer(interaction01);
+                //this.dialogBoxController.addText(interaction.getDescription());
+                if (interaction instanceof Container) {
+                    interactionView.lookContainer();
                 }
                 break;
             case USE: //affiche popup pour dire que c'est pas possible
@@ -109,8 +116,14 @@ public class MorlynnCastleController {
             case EQUIP:
                 break;
             case ATTACK:
+                if (interaction instanceof Attackable){
+                    this.attack((Attackable) interaction);
+                }
                 break;
             case TALK:
+                if (interaction instanceof Talkable){
+                    this.talk((Talkable) interaction);
+                }
                 break;
         }
     }
@@ -164,7 +177,7 @@ public class MorlynnCastleController {
 
     private boolean take(Item item) {
         if (item.isTakable()) {
-            this.game.getHero().take(item);
+            this.hero.take(item);
             this.dialogBoxController.addText("You add this" + item.getName() + " to your inventory.\n");
             return true;
         }
@@ -174,9 +187,8 @@ public class MorlynnCastleController {
         }
     }
 
-
 //    public void openInventory(){
-//        this.inventoryPaneController.displayInventory(this.game.getHero().getInventory());
+//        this.inventoryPaneController.displayInventory(this.hero.getInventory());
 //        Stage inventoryStage = new Stage();
 //        inventoryStage.initOwner(this.gridPaneRoot.getScene().getWindow());
 //        if (this.inventoryPane.getScene() == null){
@@ -187,26 +199,5 @@ public class MorlynnCastleController {
 //        inventoryStage.setTitle("Inventory");
 //        inventoryStage.show();
 //    }
-    
-    public void lookTooltip(InteractionView interactionView) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.styleProperty().bind(gridPaneRoot.styleProperty());
-        tooltip.setText(interactionView.getInteraction().getDescription());   
-        Tooltip.install(interactionView, tooltip);
-    }
-    
-    public void lookContainer(Interaction container){        
-    /*    stage.setTitle("Contents of the chest");
-        container.s(this);
-*/
-    }
-  /*  
-    public void handle(Event event) {
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
-        GridPane gridPane = new GridPane();
-        popup.getContent().add(gridPane);
-        if (!popup.isShowing())
-                    popup.show(stage); 
-    }*/
+
 }

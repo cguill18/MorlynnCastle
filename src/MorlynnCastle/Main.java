@@ -15,7 +15,7 @@ public class Main extends Application {
         Parent root = loader.load();
         MorlynnCastleController controller = loader.getController();
         stage.setScene(new Scene(root,750,500));
-        stage.setTitle("Morlyn Castle");
+        stage.setTitle("Morlynn Castle");
         stage.show();
     }
 

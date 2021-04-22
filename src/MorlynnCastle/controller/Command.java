@@ -6,5 +6,6 @@ public enum Command {
     USE,
     EQUIP,
     ATTACK,
-    TALK
+    TALK,
+    FLEE
 }

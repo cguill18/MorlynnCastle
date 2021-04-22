@@ -16,6 +16,14 @@ public class Dialog implements Serializable {
         this.Dialogs.addAll(Dialogs);
     }
 
+    public List<String> getPlayerChoices() {
+        return playerChoices;
+    }
+
+    public List<String> getDialogs() {
+        return Dialogs;
+    }
+
     public void addPlayerDialog(String dialog) {
         this.playerChoices.add(dialog);
     }

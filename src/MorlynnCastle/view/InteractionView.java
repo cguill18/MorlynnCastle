@@ -1,12 +1,23 @@
 package MorlynnCastle.view;
 
+import MorlynnCastle.controller.ContainerPaneController;
 import MorlynnCastle.model.space.Interaction;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 
 public class InteractionView extends FlowPane {
 
     private Interaction interaction;
+    
+    private Tooltip tooltip;
 
 
     //deux constructeurs
@@ -14,6 +25,9 @@ public class InteractionView extends FlowPane {
         super();
         this.interaction = interaction;
         this.setStyle("-fx-background-position: center; -fx-background-size: contain ; -fx-background-repeat: no-repeat;");
+        this.tooltip = new Tooltip();
+        tooltip.setText(this.getInteraction().getDescription());
+        Tooltip.install(this, tooltip);
     }
 
     public InteractionView(String url, Interaction interaction) {
@@ -28,4 +42,14 @@ public class InteractionView extends FlowPane {
     public void setInteraction(Interaction interaction) { this.interaction = interaction; }
 
     public void setImage(String url) { this.setStyle(url);}
+    
+    public void lookContainer() throws IOException{        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContainerPane.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Containts of the chest");
+        stage.show();
+    }
 }

@@ -13,6 +13,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class SceneryPaneController {
@@ -45,7 +46,7 @@ public class SceneryPaneController {
     }
 
     @FXML
-    public void handleClick(MouseEvent event){
+    public void handleClick(MouseEvent event) throws IOException {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
             this.morlynnCastleController.launchCommand((InteractionView) eventTarget);
