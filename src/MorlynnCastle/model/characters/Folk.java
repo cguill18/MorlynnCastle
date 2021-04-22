@@ -4,16 +4,19 @@ import java.util.Scanner;
 
 public class Folk extends NonPlayerCharacter implements Talkable {
 
+    private static final String IMG_FOLK = "non_hostile_charactere.png";
     private final Dialog dialog;
 
     public Folk(String name, String description, boolean isHostile, Dialog dialog, int maxHealthPoints, int attackBonus, int damageBonus) {
         super(name, description, isHostile, maxHealthPoints, attackBonus, damageBonus);
         this.dialog = dialog;
+        this.setImage(IMG_FOLK);
     }
 
     public Folk(String name, String description, boolean isHostile, Dialog dialog, int maxHealthPoints, int attackBonus, int damageBonus, int posx, int posy) {
         super(name, description, isHostile, maxHealthPoints, attackBonus, damageBonus, posx, posy);
         this.dialog = dialog;
+        this.setImage(IMG_FOLK);
     }
 
     @Override
