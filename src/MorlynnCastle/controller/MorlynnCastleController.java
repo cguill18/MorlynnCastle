@@ -106,7 +106,7 @@ public class MorlynnCastleController {
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
                 if (interaction instanceof Container) {
-                  //  this.lookContainer(interaction);
+                    interactionView.lookContainer();
                 }
                 break;
             case USE:
