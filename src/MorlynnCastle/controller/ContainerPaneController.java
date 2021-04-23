@@ -6,7 +6,9 @@
 package MorlynnCastle.controller;
 
 import MorlynnCastle.model.game.Game;
+import MorlynnCastle.model.item.Container;
 import MorlynnCastle.model.item.Item;
+import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import java.net.URL;
 import java.util.Map;
@@ -34,23 +36,32 @@ public class ContainerPaneController implements Initializable {
     
     private CharacterPaneController characterPaneController;
     
+    private Container container;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }  
     
     @FXML public void handleTake(MouseEvent event) {
-      /*  EventTarget eventTarget = event.getTarget();
-        (Interaction) eventTarget;
-        for (int i = 0; i < this.gridPane.getColumnConstraints().size(); i++) {
-            for (int j = 0; j < this.gridPane.getRowConstraints().size(); j++) {
-               Item item = (Item) gridPane.getChildren();
-               this.game.getHero().take((Item) item);
-            this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
-            }
+     EventTarget eventTarget = event.getTarget();
+        InteractionView interactionView = (InteractionView) eventTarget;
+        Interaction interaction = interactionView.getInteraction();
+        if (interaction instanceof Item){
+            this.game.getHero().takeFromContainer(this.container, (Item) interaction);
+            this.dialogBoxController.addText("You add this " + ((Item)interaction).getName() + " to your inventory.\n");
+            this.removeInteractionView(interactionView); 
+            
+            this.characterPaneController.displayInventory(this.game.getHero().getInventory());
         }
-        this.gridPane.getChildren().clear();
-        this.characterPaneController.displayInventory(this.game.getHero().getInventory());*/
+    }
+    
+    public void setContainerLooking(Container container){
+        this.container = container;
+    }
+    
+    public void removeInteractionView(InteractionView interactionView){
+        this.gridPane.getChildren().remove(interactionView);
     }
     
     public void setGame(Game game) {

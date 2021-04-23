@@ -87,6 +87,8 @@ public class MorlynnCastleController {
         this.game.initGame();
         this.containerstage = this.setStageContainer();
         this.containerPaneController.setMorlynnCastleController(this);
+        this.containerPaneController.setCharacterPaneController(characterPaneController);
+        this.containerPaneController.setDialogBoxController(dialogBoxController);
         this.containerPaneController.setGame(this.game);
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
@@ -127,6 +129,7 @@ public class MorlynnCastleController {
             case LOOK:
                 //this.dialogBoxController.addText(interaction.getDescription());
                 if (interaction instanceof Container) {
+                    this.containerPaneController.setContainerLooking((Container) interaction);
                     this.containerPaneController.displayContainer(((Container) interaction).getContent());
                     this.containerstage.setTitle("Containts of the chest");
                     this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
@@ -153,7 +156,7 @@ public class MorlynnCastleController {
 
     public void launchCommandForInventory(InteractionView interactionView){
         switch (this.commandPaneController.getCommand()) {
-            case USE -> {
+            case USE : {
                 Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Usable){
                     this.use((Usable)interaction);
