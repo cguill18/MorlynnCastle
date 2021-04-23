@@ -83,11 +83,13 @@ public class ContainerPaneController implements Initializable {
     public void displayContainer(Map<String, Item> container){
         gridPane.getChildren().clear();
         final int[] i = {0};
+        final int[] j = {0};
         container.forEach((name,item)->{
             InteractionView interactionView = new InteractionView(item);
             interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+item.getImage()+"\")");
-            gridPane.add(interactionView, i[0]%this.gridPane.getColumnConstraints().size(), i[0]/this.gridPane.getRowConstraints().size());
+            gridPane.add(interactionView, i[0]%this.gridPane.getColumnConstraints().size(), j[0]/(this.gridPane.getRowConstraints().size()-1));
             i[0]++;
+            j[0]++;
         }); 
     }
     
