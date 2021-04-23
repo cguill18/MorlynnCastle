@@ -18,5 +18,6 @@ public class Dagger extends Weapon{
 
     public Dagger(String name, String description, int posx, int posy) {
         super(name, description, Dagger.DEFAULT_ATTACK_POWER, posx, posy);
+        this.setImage(IMG_DAGGER);
     }
 }
