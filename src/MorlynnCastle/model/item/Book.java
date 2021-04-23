@@ -18,13 +18,15 @@ public class Book extends Item implements Usable {
 	}
 
 	@Override
-	public void use() {
-		System.out.println(this.content);	
+	public boolean use() {
+		System.out.println(this.content);
+		return true;
 	}
 
 	@Override
-	public void use(Receiver obj) {
+	public boolean use(Receiver obj) {
 		System.out.println("You cannot use this item on another.");
+		return false;
 	}
 	
 }

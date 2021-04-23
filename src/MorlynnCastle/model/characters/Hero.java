@@ -59,12 +59,12 @@ public class Hero extends Character {
         c.removeItem(i.getName());
     }
 
-    public void use(Usable object) throws NullPointerException {
-        object.use();
+    public boolean use(Usable object) throws NullPointerException {
+        return object.use();
     }
 
-    public void use(Usable obj1, Receiver obj2) throws ClassCastException, NullPointerException {
-        obj1.use(obj2);
+    public boolean use(Usable obj1, Receiver obj2) throws ClassCastException, NullPointerException {
+        return obj1.use(obj2);
     }
 
     public void talk(Talkable t, Scanner input) {

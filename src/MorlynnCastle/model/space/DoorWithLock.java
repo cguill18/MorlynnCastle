@@ -91,23 +91,24 @@ public class DoorWithLock extends Door implements Lockable {
     }
 
     @Override
-    public void receive(Usable u) throws ClassCastException{
+    public boolean receive(Usable u) throws ClassCastException{
     	if(u instanceof Key) {
-    		this.receiveForKey((Key) u);
+    		return this.receiveForKey((Key) u);
     	} else {
-    		this.receiveForScroll((Scroll) u);
+    		return this.receiveForScroll((Scroll) u);
     	}
     }
 
-	public void receiveForScroll(Scroll b) {
+	public boolean receiveForScroll(Scroll b) {
     	this.printKeyForThisDoor();
+    	return true;
 	}
     
-	public void receiveForKey(Key k) {
+	public boolean receiveForKey(Key k) {
     	if (this.isLocked) {
-    		this.unlock(k);
+    		return !(this.unlock(k));
     	} else {
-    		this.lock(k);
+    		return !(this.lock(k));
     	}
 	}
 

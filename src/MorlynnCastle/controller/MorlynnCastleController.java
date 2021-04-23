@@ -124,7 +124,8 @@ public class MorlynnCastleController {
                     this.containerstage.show();
                 }
                 break;
-            case USE: //affiche popup pour dire que c'est pas possible
+            case USE:
+                this.dialogBoxController.addText("Please use an item in your inventory.\n");
                 break;
             case EQUIP:
                 break;
@@ -173,15 +174,25 @@ public class MorlynnCastleController {
 
 
     private boolean use(Usable usable) {
-        this.game.getHero().use(usable);
-        this.dialogBoxController.addText("You use an item.\n");
-        return true;
+        if (this.game.getHero().use(usable)) {
+            this.dialogBoxController.addText("You have used this object successfully.\n");
+            return true;
+        } else {
+            this.dialogBoxController.addText("You can't use this alone.\n");
+            return false;
+        }
     }
 
     private boolean use(Usable usable, Receiver receiver){
-        this.game.getHero().use(usable,receiver);
-        this.dialogBoxController.addText("You use an item on an another.\n");
-        return true;
+        if (this.game.getHero().use(usable,receiver)){
+            this.dialogBoxController.addText("You have used this object successfully.\n");
+            return true;
+        } else {
+            if (usable instanceof Key)
+                this.dialogBoxController.addText("Wrong key.\n");
+            this.dialogBoxController.addText("You can't use this item on an another.\n");
+            return false;
+        }
     }
 
     private boolean take(Item item) {

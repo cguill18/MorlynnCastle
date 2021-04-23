@@ -15,12 +15,13 @@ public class Key extends Item implements Usable {
     }
 
     @Override
-    public void use() {
+    public boolean use() {
         System.out.println("You can't use this alone.");
+        return false;
     }
 
     @Override
-    public void use(Receiver obj) throws ClassCastException, NullPointerException {
-        obj.receive(this);
+    public boolean use(Receiver obj) throws ClassCastException, NullPointerException {
+        return obj.receive(this);
     }
 }

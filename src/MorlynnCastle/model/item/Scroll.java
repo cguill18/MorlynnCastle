@@ -16,11 +16,12 @@ public class Scroll extends Book{
 	}
 
 	@Override
-	public void use(Receiver obj) {
+	public boolean use(Receiver obj) {
 		if (obj instanceof Lockable) {
-            obj.receive(this);
+            return obj.receive(this);
         } else {
             System.out.println("You can't use this with this object.");
+            return false;
         }
 	}
 }
