@@ -127,34 +127,34 @@ public class MorlynnCastleController {
                             this.characterPaneController.displayInventory(this.hero.getInventory());
                         }
                     }
-                }
-                break;
-            case LOOK:
-                //this.dialogBoxController.addText(interaction.getDescription());
-                if (interaction instanceof Container) {
-                    this.containerPaneController.setContainerLooking((Container) interaction);
-                    this.containerPaneController.displayContainer(((Container) interaction).getContent());
-                    this.containerstage.setTitle("Containts of the chest");
-                    
-                    this.containerstage.show();
-                }
-                break;
-            case USE:
-                this.dialogBoxController.addText("Please use an item in your inventory.\n");
-                break;
-            case EQUIP:
-                break;
-            case ATTACK:
-                if (interaction instanceof Attackable){
-                    this.attack((Attackable) interaction);
-                }
-                break;
-            case TALK:
-                if (interaction instanceof Talkable){
-                    this.talk((Talkable) interaction);
-                }
-                break;
-        }
+                    break;
+                case LOOK:
+                    //this.dialogBoxController.addText(interaction.getDescription());
+                    if (interaction instanceof Container) {
+                        this.containerPaneController.setContainerLooking((Container) interaction);
+                        this.containerPaneController.displayContainer(((Container) interaction).getContent());
+                        this.containerstage.setTitle("Containts of the chest");
+
+                        this.containerstage.show();
+                    }
+                    break;
+                case USE:
+                    this.dialogBoxController.addText("Please use an item in your inventory.\n");
+                    break;
+                case EQUIP:
+                    break;
+                case ATTACK:
+                    if (interaction instanceof Attackable) {
+                        this.attack((Attackable) interaction);
+                    }
+                    break;
+                case TALK:
+                    if (interaction instanceof Talkable) {
+                        this.talk((Talkable) interaction);
+                    }
+                    break;
+            }
+        } else {this.dialogBoxController.addText("Please click a command before.\n");}
     }
 
     public void launchCommandForInventory(InteractionView interactionView){
