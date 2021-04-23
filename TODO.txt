@@ -3,7 +3,7 @@ TODOLISTE:
 2.Ajouter les interactions QUASI FINI
 3.Commande Take FINI
 4.Inventaire QUASI FINI, PB DE DIMENSIONS
-5.Commande Use EN COURS
+5.Commande Use EN FINI
 6.Equipement et commande equip A FAIRE
 7.Commande Look EN COURS
 8.Interface de combat et commande Attack (et commande Attack et Flee en combat) FINI

@@ -62,6 +62,12 @@ public class MorlynnCastleController {
     @FXML
     private DialogBoxController dialogBoxController;
 
+    @FXML
+    private GridPane mapPane;
+
+    @FXML
+    private MapPaneController mapPaneController;
+
     private Game game;
 
     private Hero hero;
