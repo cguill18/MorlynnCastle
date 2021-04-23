@@ -140,10 +140,7 @@ public class MorlynnCastleController {
                         if ((interaction instanceof ContainerWithLock) && (((ContainerWithLock) interaction).getIsLocked())) {
                             this.dialogBoxController.addText("This chest is locked. Maybe a key could help.");
                         } else {
-                            this.containerPaneController.setContainerLooking((Container) interaction);
-                            this.containerPaneController.displayContainer(((Container) interaction).getContent());
-                            this.containerstage.setTitle("Containts of the chest");
-                            this.containerstage.show();
+                            look((Container) interaction);
                         }
                     }
                     break;
@@ -166,6 +163,15 @@ public class MorlynnCastleController {
         } else {
             this.dialogBoxController.addText("Please click a command before.\n");
         }
+    }
+
+    private void look(Container interaction) {
+        if (this.containerstage.getOwner() == null)
+            this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
+        this.containerPaneController.setContainerLooking(interaction);
+        this.containerPaneController.displayContainer(interaction.getContent());
+        this.containerstage.setTitle("Containts of the chest");
+        this.containerstage.show();
     }
 
     public void launchCommandForInventory(InteractionView interactionView) {
