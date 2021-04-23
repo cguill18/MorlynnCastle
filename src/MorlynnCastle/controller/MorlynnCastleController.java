@@ -150,14 +150,24 @@ public class MorlynnCastleController {
     }
 
     public void launchCommandForInventory(InteractionView interactionView){
+        Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
             case USE -> {
-                Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Usable){
                     this.use((Usable)interaction);
                 }
             }
+            case EQUIP -> {
+                if (interaction instanceof Equipable)
+                    this.equip((Equipable) interaction);
+            }
         }
+    }
+
+    private void equip(Equipable equipable) {
+        this.hero.equip(equipable);
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+        this.characterPaneController.updateEquipment(this.hero);
     }
 
     public void launchDrop(InteractionView interactionView){

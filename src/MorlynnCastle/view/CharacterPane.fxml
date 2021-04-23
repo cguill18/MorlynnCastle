@@ -3,33 +3,34 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
 <VBox fx:id="characterPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0" xmlns="http://javafx.com/javafx"
+      minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0" xmlns="http://javafx.com/javafx/15.0.1"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.CharacterPaneController">
     <children>
-        <TabPane fx:id="tabPane" style="-fx-font-size:0.7em;-fx-padding: 5 -15 0 -5;" VBox.vgrow="ALWAYS"
-        tabMinWidth="${(tabPane.width/3)}"
-        tabMaxWidth="${(tabPane.width/3)}"
-        tabMinHeight="${(characterPane.height * 0.1)}"
-        tabMaxHeight="${(characterPane.height * 0.1)}"
-        >
+        <TabPane fx:id="tabPane" style="-fx-font-size:0.7em;-fx-padding: 5 -15 0 -5;"
+                 tabMaxHeight="${(characterPane.height * 0.1)}" tabMaxWidth="${(tabPane.width/3)}"
+                 tabMinHeight="${(characterPane.height * 0.1)}" tabMinWidth="${(tabPane.width/3)}" VBox.vgrow="ALWAYS">
             <tabs>
-                <Tab text="Character" style="-fx-padding: 0; ">
+                <Tab style="-fx-padding: 0; " text="Character">
                     <content>
                         <VBox alignment="CENTER" spacing="20">
+                            <padding>
+                                <Insets right="15"/>
+                            </padding>
                             <Label fx:id="name" style="-fx-font-size:1.5em;" text="Name">
                             </Label>
-                            <ProgressBar prefHeight="${(characterPane.height * 0.05)}" prefWidth="${(characterPane.width * 0.8)}"
-                                         progress="1.0"/>
+                            <ProgressBar prefHeight="${(characterPane.height * 0.05)}"
+                                         prefWidth="${(characterPane.width * 0.8)}" progress="1.0"/>
                             <HBox fx:id="avatar" maxHeight="${(characterPane.height * 0.4)}"
                                   maxWidth="${(characterPane.width * 0.5)}" prefHeight="110.0" prefWidth="54.0"
                                   style="-fx-background-image: url('/res/stickman.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
@@ -38,31 +39,78 @@
                         </VBox>
                     </content>
                 </Tab>
-                <Tab text="Inventory" style="-fx-padding: 0;">
+                <Tab style="-fx-padding: 0;" text="Inventory">
                     <content>
-                        <ScrollPane fx:id="scrollPane" fitToWidth="true" vbarPolicy="ALWAYS" >
+                        <ScrollPane fx:id="scrollPane" fitToWidth="true" vbarPolicy="ALWAYS">
                             <content>
-                                <GridPane fx:id="inventoryPane" gridLinesVisible="true" onMouseClicked="#handleClick" onDragDetected="#MyStartDragAndDrop" >
+                                <GridPane fx:id="inventoryPane" gridLinesVisible="true"
+                                          onDragDetected="#MyStartDragAndDrop" onMouseClicked="#handleClick">
                                     <columnConstraints>
-                                        <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>
-                                        <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>
-                                        <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>
-                                        <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints  vgrow="NEVER" prefHeight="${(scrollPane.height/4)}"/>
-                                        <RowConstraints  vgrow="NEVER" prefHeight="${(scrollPane.height/4)}"/>
-                                        <RowConstraints  vgrow="NEVER" prefHeight="${(scrollPane.height/4)}"/>
-                                        <RowConstraints  vgrow="NEVER" prefHeight="${(scrollPane.height/4)}"/>
+                                        <RowConstraints prefHeight="${(scrollPane.height/4)}" vgrow="NEVER"/>
+                                        <RowConstraints prefHeight="${(scrollPane.height/4)}" vgrow="NEVER"/>
+                                        <RowConstraints prefHeight="${(scrollPane.height/4)}" vgrow="NEVER"/>
+                                        <RowConstraints prefHeight="${(scrollPane.height/4)}" vgrow="NEVER"/>
                                     </rowConstraints>
                                 </GridPane>
                             </content>
                         </ScrollPane>
                     </content>
                 </Tab>
-                <Tab text="Equipment" style="-fx-padding: 0; ">
+                <Tab style="-fx-padding: 0; " text="Equipment">
                     <content>
-
+                        <HBox>
+                            <padding>
+                                <Insets right="15"/>
+                            </padding>
+                            <children>
+                                <VBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                    </HBox.margin>
+                                    <children>
+                                        <Label text="Weapon"></Label>
+                                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <BorderPane fx:id="weaponPane" style="-fx-border-color:black" HBox.hgrow="ALWAYS">
+                                                </BorderPane>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label fx:id="weaponLabel" HBox.hgrow="ALWAYS">
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                    </HBox.margin>
+                                    <children>
+                                        <Label text="Armor"></Label>
+                                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <BorderPane fx:id="armorPane" style="-fx-border-color:black" HBox.hgrow="ALWAYS">
+                                                </BorderPane>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label fx:id="armorLabel" HBox.hgrow="ALWAYS">
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
                     </content>
                 </Tab>
             </tabs>

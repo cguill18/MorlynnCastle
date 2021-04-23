@@ -1,6 +1,9 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.item.Armor;
 import MorlynnCastle.model.item.Item;
+import MorlynnCastle.model.item.Weapon;
 import MorlynnCastle.view.InteractionView;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
@@ -8,10 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 
 import java.util.Map;
 
@@ -32,10 +32,22 @@ public class CharacterPaneController {
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private BorderPane weaponPane;
+
+    @FXML
+    private Label weaponLabel;
+
+    @FXML
+    private BorderPane armorPane;
+
+    @FXML
+    private Label armorLabel;
+
     private MorlynnCastleController morlynnCastleController;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
@@ -43,23 +55,23 @@ public class CharacterPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
-    public void displayInventory(Map<String, Item> inventory){
+    public void displayInventory(Map<String, Item> inventory) {
         this.inventoryPane.getChildren().clear();
         final int[] i = {0};
-        inventory.forEach((name,item)->{
+        inventory.forEach((name, item) -> {
             InteractionView interactionView = new InteractionView(item);
-            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+ item.getImage()+"\")");
-            inventoryPane.add(interactionView, i[0]%this.inventoryPane.getRowConstraints().size(), i[0]/this.inventoryPane.getRowConstraints().size());
+            interactionView.setStyle(interactionView.getStyle() + "-fx-background-image:url(\"/res/" + item.getImage() + "\")");
+            inventoryPane.add(interactionView, i[0] % this.inventoryPane.getRowConstraints().size(), i[0] / this.inventoryPane.getRowConstraints().size());
             i[0]++;
         });
         this.addInventoryRow();
     }
 
-    public void removeInteractionView(InteractionView interactionView){
+    public void removeInteractionView(InteractionView interactionView) {
         this.inventoryPane.getChildren().remove(interactionView);
     }
 
-    public void addInventoryRow(){
+    public void addInventoryRow() {
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setVgrow(Priority.SOMETIMES);
         rowConstraints.prefHeightProperty().bind(this.scrollPane.heightProperty().divide(4));
@@ -68,11 +80,11 @@ public class CharacterPaneController {
 
 
     @FXML
-    public void handleClick(MouseEvent event){
+    public void handleClick(MouseEvent event) {
         EventTarget eventTarget = event.getTarget();
         System.out.println(eventTarget);
-        if (eventTarget instanceof InteractionView){
-            this.morlynnCastleController.launchCommandForInventory((InteractionView)eventTarget);
+        if (eventTarget instanceof InteractionView) {
+            this.morlynnCastleController.launchCommandForInventory((InteractionView) eventTarget);
             System.out.println("bon le click marche");
         }
     }
@@ -81,14 +93,36 @@ public class CharacterPaneController {
     @FXML
     public void MyStartDragAndDrop(MouseEvent event) {
         EventTarget eventTarget = event.getTarget();
-        if (eventTarget instanceof InteractionView){
+        if (eventTarget instanceof InteractionView) {
             System.out.println("la souris est pressée");
             Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
             ClipboardContent content = new ClipboardContent();
             content.putString("le drag and drop est capricieux");
             db.setContent(content);
             event.consume();
-            this.morlynnCastleController.launchDrag((InteractionView)eventTarget);
+            this.morlynnCastleController.launchDrag((InteractionView) eventTarget);
         }
+    }
+
+    public void updateEquipment(Hero hero) {
+        if (hero.getArmor() != null)
+            this.addArmor(hero.getArmor());
+        if (hero.getWeapon() != null)
+            this.addWeapon(hero.getWeapon());
+    }
+
+
+    public void addArmor(Armor armor) {
+        InteractionView armorView = new InteractionView(armor);
+        armorView.setStyle(armorView.getStyle() + "-fx-background-image:url(\"/res/" + armor.getImage() + "\")");
+        this.armorPane.setCenter(armorView);
+        this.armorLabel.setText(armor.getName() + "\n" + "Armor class: " + armor.getArmorClass());
+    }
+
+    public void addWeapon(Weapon weapon) {
+        InteractionView weaponView = new InteractionView(weapon);
+        weaponView.setStyle(weaponView.getStyle() + "-fx-background-image:url(\"/res/" + weapon.getImage() + "\")");
+        this.weaponPane.setCenter(weaponView);
+        this.weaponLabel.setText(weapon.getName() + "\n" + "Attack Power: " + weapon.getAttackPower());
     }
 }
