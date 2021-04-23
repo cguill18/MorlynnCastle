@@ -6,12 +6,23 @@ import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.model.space.Place;
 import MorlynnCastle.view.InteractionView;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MapPaneController {
+
+    @FXML
+    private GridPane mapPane;
 
     @FXML
     private FlowPane center;
@@ -32,9 +43,17 @@ public class MapPaneController {
 
     private HashMap<String,String> imgPieces = new HashMap<>();
 
+    private Popup popup;
+
     //fonctions d'initialisation
     @FXML
-    public void initialize(){}
+    public void initialize(){
+        this.popup = new Popup();
+        ImageView img = new ImageView();
+        img.setImage(new Image("res/pieces/hall.png"));
+        popup.getContent().add(img);
+        popup.setAutoHide(true);
+    }
 
     public void setGame(Game game) { this.game = game; }
 
@@ -91,4 +110,9 @@ public class MapPaneController {
         this.imgPieces.put("exit","exit.png");
     }
 
+    @FXML
+    public void showMap(MouseEvent event) {
+        if (!this.popup.isShowing())
+            this.popup.show(this.mapPane,this.mapPane.getLayoutX(),this.mapPane.getLayoutY());
+    }
 }
