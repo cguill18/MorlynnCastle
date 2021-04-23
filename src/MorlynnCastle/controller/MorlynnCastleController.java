@@ -202,7 +202,8 @@ public class MorlynnCastleController {
         } else {
             if (usable instanceof Key)
                 this.dialogBoxController.addText("Wrong key.\n");
-            this.dialogBoxController.addText("You can't use this item on an another.\n");
+            else
+                this.dialogBoxController.addText("You can't use this item on an another.\n");
             return false;
         }
     }
