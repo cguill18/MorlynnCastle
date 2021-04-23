@@ -127,6 +127,7 @@ public class MorlynnCastleController {
                 if (interaction instanceof Container) {
                     this.containerPaneController.displayContainer(((Container) interaction).getContent());
                     this.containerstage.setTitle("Containts of the chest");
+                    this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
                     this.containerstage.show();
                 }
                 break;
@@ -276,6 +277,7 @@ public Stage setStageContainer() throws IOException{
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
+        
         return stage;
     }
 
