@@ -48,11 +48,7 @@ public class MapPaneController {
     //fonctions d'initialisation
     @FXML
     public void initialize(){
-        this.popup = new Popup();
-        ImageView img = new ImageView();
-        img.setImage(new Image("res/pieces/hall.png"));
-        popup.getContent().add(img);
-        popup.setAutoHide(true);
+        this.initPopup();
     }
 
     public void setGame(Game game) { this.game = game; }
@@ -60,6 +56,14 @@ public class MapPaneController {
     public void initMap(){
         this.initImage();
         this.generateMap();
+    }
+
+    private void initPopup() {
+        this.popup = new Popup();
+        ImageView img = new ImageView();
+        img.setImage(new Image("res/map/fullMap.png"));
+        popup.getContent().add(img);
+        popup.setAutoHide(true);
     }
 
     //fonctions de generation des pieces
