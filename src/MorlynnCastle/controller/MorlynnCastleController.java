@@ -300,15 +300,18 @@ public class MorlynnCastleController {
 
     public void moveHero(String direction) {
         Door door = (Door) this.game.getHero().getPlace().getInteractions().get(direction);
-
         if (door != null) {
-            this.game.getHero().go(door);
-            this.sceneryPaneController.generateRoomItems();
-            this.mapPaneController.generateMap();
-            this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
-
-            String description = this.game.getHero().getPlace().getDescription();
-            this.dialogBoxController.addText(description);
+            if ((door instanceof DoorWithLock) && (((DoorWithLock)door).getIsLocked())) {
+                this.dialogBoxController.addText("A locked door ? How surprising.");
+            }
+            else {
+                this.game.getHero().go(door);
+                this.sceneryPaneController.generateRoomItems();
+                this.mapPaneController.generateMap();
+                this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
+                String description = this.game.getHero().getPlace().getDescription();
+                this.dialogBoxController.addText(description);
+            } 
         }
         else {
             this.dialogBoxController.addText("Are you sure that a door exists there ?");
