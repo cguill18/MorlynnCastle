@@ -4,6 +4,7 @@ import MorlynnCastle.model.characters.*;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
+import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
@@ -132,13 +133,17 @@ public class MorlynnCastleController {
                     }
                     break;
                 case LOOK:
-                    //this.dialogBoxController.addText(interaction.getDescription());
+                    this.dialogBoxController.addText(interaction.getDescription());
                     if (interaction instanceof Container) {
-                        this.containerPaneController.setContainerLooking((Container) interaction);
-                        this.containerPaneController.displayContainer(((Container) interaction).getContent());
-                        this.containerstage.setTitle("Containts of the chest");
-
-                        this.containerstage.show();
+                        if ((interaction instanceof ContainerWithLock) && (((ContainerWithLock) interaction).getIsLocked())){
+                            this.dialogBoxController.addText("This chest is locked. Maybe a key could help.");
+                        }
+                        else {
+                            this.containerPaneController.setContainerLooking((Container) interaction);
+                            this.containerPaneController.displayContainer(((Container) interaction).getContent());
+                            this.containerstage.setTitle("Containts of the chest");
+                            this.containerstage.show();
+                        }
                     }
                     break;
                 case USE:
