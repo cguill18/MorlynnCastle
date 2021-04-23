@@ -44,10 +44,11 @@ public class CharacterPaneController {
     }
 
     public void displayInventory(Map<String, Item> inventory){
+        this.inventoryPane.getChildren().clear();
         final int[] i = {0};
         inventory.forEach((name,item)->{
             InteractionView interactionView = new InteractionView(item);
-            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/armor.png\")");
+            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+ item.getImage()+"\")");
             inventoryPane.add(interactionView, i[0]%this.inventoryPane.getRowConstraints().size(), i[0]/this.inventoryPane.getRowConstraints().size());
             i[0]++;
         });

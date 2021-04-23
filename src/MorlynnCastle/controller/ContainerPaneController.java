@@ -11,10 +11,12 @@ import MorlynnCastle.view.InteractionView;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 public class ContainerPaneController implements Initializable {
     
@@ -37,8 +39,9 @@ public class ContainerPaneController implements Initializable {
         // TODO
     }  
     
-    @FXML public void handleTake() {
-        //ajout dans l'inventaire
+    @FXML public void handleTake(MouseEvent event) {
+      /*  EventTarget eventTarget = event.getTarget();
+        (Interaction) eventTarget;
         for (int i = 0; i < this.gridPane.getColumnConstraints().size(); i++) {
             for (int j = 0; j < this.gridPane.getRowConstraints().size(); j++) {
                Item item = (Item) gridPane.getChildren();
@@ -47,7 +50,7 @@ public class ContainerPaneController implements Initializable {
             }
         }
         this.gridPane.getChildren().clear();
-        this.characterPaneController.displayInventory(this.game.getHero().getInventory());
+        this.characterPaneController.displayInventory(this.game.getHero().getInventory());*/
     }
     
     public void setGame(Game game) {
