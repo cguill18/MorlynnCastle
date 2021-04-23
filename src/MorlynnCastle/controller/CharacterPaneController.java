@@ -7,9 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -78,15 +76,18 @@ public class CharacterPaneController {
         }
     }
 
+
     @FXML
-    public void myStartDragAndDrop(MouseEvent event) {
+    public void MyStartDragAndDrop(MouseEvent event) {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
+            System.out.println("la souris est pressée");
             Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putString("le drag and drop est capricieux");
+            db.setContent(content);
+            event.consume();
             this.morlynnCastleController.launchDrag((InteractionView)eventTarget);
-            System.out.println("debut drag and drop");
         }
-        event.consume();
     }
-
 }

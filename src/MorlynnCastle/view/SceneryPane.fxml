@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane fx:id="sceneryPane"
-          onDragDropped="#endDragAndDrop"
+          onDragOver="#MyDragAndDrop"
+          onDragDropped="#MyEndDragAndDrop"
           onMouseClicked="#handleClick"
           xmlns="http://javafx.com/javafx/"
           xmlns:fx="http://javafx.com/fxml/1"

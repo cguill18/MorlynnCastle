@@ -44,7 +44,7 @@
                     <content>
                         <ScrollPane fx:id="scrollPane" fitToWidth="true" vbarPolicy="ALWAYS" >
                             <content>
-                                <GridPane fx:id="inventoryPane" gridLinesVisible="true" onMouseClicked="#handleClick" onDragDetected="#myStartDragAndDrop">
+                                <GridPane fx:id="inventoryPane" gridLinesVisible="true" onMouseClicked="#handleClick" onDragDetected="#MyStartDragAndDrop" >
                                     <columnConstraints>
                                         <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>
                                         <ColumnConstraints  hgrow="NEVER" percentWidth="25.0"/>

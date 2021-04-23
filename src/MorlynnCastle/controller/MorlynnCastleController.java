@@ -103,6 +103,8 @@ public class MorlynnCastleController {
         return gridPaneRoot;
     }
 
+    public Usable getLaunchCommandArg1() {return this.launchCommandArg1;}
+
     public void launchCommand(InteractionView interactionView) throws IOException {
         Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
@@ -140,37 +142,33 @@ public class MorlynnCastleController {
     }
 
     public void launchCommandForInventory(InteractionView interactionView){
-    /*    switch (this.commandPaneController.getCommand()) {
+        switch (this.commandPaneController.getCommand()) {
             case USE -> {
                 Interaction interaction = interactionView.getInteraction();
                 if (interaction instanceof Usable){
                     this.use((Usable)interaction);
                 }
             }
-        }*/
+        }
     }
 
     public void launchDrop(InteractionView interactionView){
         Interaction inte = interactionView.getInteraction();
         if (inte instanceof Receiver) {
-            this.use(this.launchCommandArg1, (Receiver)inte);
-            this.launchCommandArg1 = null;
+            if (this.launchCommandArg1 != null) {
+                this.use(this.launchCommandArg1, (Receiver) inte);
+                this.launchCommandArg1 = null;
+            }
         }
     }
 
     public void launchDrag(InteractionView interactionView){
-        Interaction inte = interactionView.getInteraction();
-        if (inte instanceof Usable)
-            this.launchCommandArg1 = (Usable)inte;
-    }
-
-    /*public void launchCommandForInventory(InteractionView interactionView1, InteractionView interactionView2){
         if (this.commandPaneController.getCommand() == Command.USE) {
-            Interaction inte1 = interactionView1.getInteraction();
-            Interaction inte2 = interactionView2.getInteraction();
-            if (inte1 instanceof Usable && inte2 instanceof Receiver){}
+            Interaction inte = interactionView.getInteraction();
+            if (inte instanceof Usable)
+                this.launchCommandArg1 = (Usable) inte;
         }
-    }*/
+    }
 
 
 

@@ -53,17 +53,34 @@ public class SceneryPaneController {
         }
     }
 
+
     @FXML
-    public void endDragAndDrop(DragEvent event) {
+    public void MyEndDragAndDrop(DragEvent event) {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
+            System.out.println("la souris est relachée");
             Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()){
+                System.out.println("dropped: "+db.getString());
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
             this.morlynnCastleController.launchDrop((InteractionView)eventTarget);
         }
-        System.out.println("fin drag and drop");
-        event.setDropCompleted(true);
-        event.consume();
     }
+
+    @FXML
+    public void MyDragAndDrop(DragEvent dragEvent) {
+        Dragboard db = dragEvent.getDragboard();
+        if (db.hasString()){
+            dragEvent.acceptTransferModes(TransferMode.ANY);
+        }
+        dragEvent.consume();
+    }
+
+
 
     //methodes pour les objets dans la piece
     public void generateRoomItems() {
@@ -84,23 +101,4 @@ public class SceneryPaneController {
 
 
 
-/*    private InteractionView createKey(int id){
-        return new ImageWithId(new Image("/res/key.png"),id);
-    }
-
-    private ImageWithId createUnlockChest(int id){
-        return new ImageWithId(new Image("/res/unlocked_chest.png"),id);
-    }
-
-    private ImageWithId createArmor(int id){
-        return new ImageWithId(new Image("/res/armor.png"),id);
-    }
-
-    private ImageWithId createNonHostileCharacter(int id){
-        return new ImageWithId(new Image("/res/non_hostile_character.png"),id);
-    }
-
-    private ImageWithId createWeapon(int id){
-        return new ImageWithId(new Image("/res/weapon.png"),id);
-    }*/
 }
