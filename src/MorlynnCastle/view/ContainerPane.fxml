@@ -18,7 +18,7 @@
       xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="MorlynnCastle.controller.ContainerPaneController">
    <children>
-      <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS" gridLinesVisible="true">
+      <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS" gridLinesVisible="true" onMouseClicked="#handleTake">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,7 +31,7 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="take" mnemonicParsing="false" onMouseClicked="#handleTake" text="TAKE">
+            <Button fx:id="take" mnemonicParsing="false"  text="TAKE">
                <HBox.margin>
                   <Insets left="15.0" right="15.0" />
                </HBox.margin>

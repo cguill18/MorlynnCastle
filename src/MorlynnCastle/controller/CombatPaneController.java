@@ -3,7 +3,6 @@ package MorlynnCastle.controller;
 import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
-import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -92,7 +91,7 @@ public class CombatPaneController {
         Alert alert = new Alert(AlertType.NONE, "Fin du combat", ButtonType.OK);
         alert.showAndWait();
         this.hero.setOngoingCombat(null);
-        this.combatCommandPane.getScene().setRoot(this.morlynnCastleController.getGridPaneRoot());
+        this.combatCommandPane.getScene().setRoot(this.morlynnCastleController.getBorderPaneRoot());
     }
 
 }

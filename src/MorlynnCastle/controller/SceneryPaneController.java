@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SceneryPaneController {
@@ -24,9 +25,13 @@ public class SceneryPaneController {
 
     private MorlynnCastleController morlynnCastleController;
 
+    private HashMap<String,String> imagePlaces;
+
     @FXML
     public void initialize() {
-        this.sceneryPane.setStyle("-fx-background-image:url(\"/res/pieces/hall.png\")");
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/hall.png\")");
+        this.imagePlaces = new HashMap<>();
     }
 
     public void setGame(Game game){ this.game = game; }
@@ -37,12 +42,20 @@ public class SceneryPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
-    public void setBackground(String img){
-        this.sceneryPane.setStyle("-fx-background-image:url(\"/res/pieces/" + img +"\")");
+    public void setBackground(Place place){
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/" + this.imagePlaces.get(place.getName()) +"\")");
     }
 
     public void initScenery() {
         this.generateRoomItems();
+        this.imagePlaces.put("hall","hall.png");
+        this.imagePlaces.put("weapon_room","weapon.png");
+        this.imagePlaces.put("gallery", "gallery.png");
+        this.imagePlaces.put("guard_room", "guard.png");
+        this.imagePlaces.put("cellar", "cellar.png");
+        this.imagePlaces.put("throne_room","throne.png");
+        this.imagePlaces.put("exit","exit.png");
     }
 
     @FXML
@@ -78,7 +91,6 @@ public class SceneryPaneController {
         }
         dragEvent.consume();
     }
-
 
 
     //methodes pour les objets dans la piece
