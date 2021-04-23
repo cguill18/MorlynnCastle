@@ -40,7 +40,8 @@ public class ContainerPaneController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        this.gridPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/wood.jpg\")");
     }  
     
     @FXML public void handleTake(MouseEvent event) {
@@ -50,8 +51,7 @@ public class ContainerPaneController implements Initializable {
         if (interaction instanceof Item){
             this.game.getHero().takeFromContainer(this.container, (Item) interaction);
             this.dialogBoxController.addText("You add this " + ((Item)interaction).getName() + " to your inventory.\n");
-            this.removeInteractionView(interactionView); 
-            
+            this.removeInteractionView(interactionView);
             this.characterPaneController.displayInventory(this.game.getHero().getInventory());
         }
     }
