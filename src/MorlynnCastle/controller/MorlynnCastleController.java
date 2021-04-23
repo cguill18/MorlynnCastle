@@ -49,7 +49,8 @@ public class MorlynnCastleController {
     @FXML
     private VBox characterPane;
 
-    @FXML CharacterPaneController characterPaneController;
+    @FXML
+    CharacterPaneController characterPaneController;
 
     @FXML
     private GridPane directionPane;
@@ -74,9 +75,9 @@ public class MorlynnCastleController {
     private Hero hero;
 
     private Usable launchCommandArg1;
-    
+
     private Stage containerstage;
-    
+
     private ContainerPaneController containerPaneController;
 
     @FXML
@@ -99,7 +100,6 @@ public class MorlynnCastleController {
         this.directionPaneController.setGame(this.game);
         this.directionPaneController.setMorlynnCastleController(this);
         this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
-        //this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
     }
 
     public Game getGame() {
@@ -118,7 +118,9 @@ public class MorlynnCastleController {
         return borderPaneRoot;
     }
 
-    public Usable getLaunchCommandArg1() {return this.launchCommandArg1;}
+    public Usable getLaunchCommandArg1() {
+        return this.launchCommandArg1;
+    }
 
     public void launchCommand(InteractionView interactionView) throws IOException {
         Interaction interaction = interactionView.getInteraction();
@@ -135,10 +137,9 @@ public class MorlynnCastleController {
                 case LOOK:
                     this.dialogBoxController.addText(interaction.getDescription());
                     if (interaction instanceof Container) {
-                        if ((interaction instanceof ContainerWithLock) && (((ContainerWithLock) interaction).getIsLocked())){
+                        if ((interaction instanceof ContainerWithLock) && (((ContainerWithLock) interaction).getIsLocked())) {
                             this.dialogBoxController.addText("This chest is locked. Maybe a key could help.");
-                        }
-                        else {
+                        } else {
                             this.containerPaneController.setContainerLooking((Container) interaction);
                             this.containerPaneController.displayContainer(((Container) interaction).getContent());
                             this.containerstage.setTitle("Containts of the chest");
@@ -162,21 +163,23 @@ public class MorlynnCastleController {
                     }
                     break;
             }
-        } else {this.dialogBoxController.addText("Please click a command before.\n");}
+        } else {
+            this.dialogBoxController.addText("Please click a command before.\n");
+        }
     }
 
-    public void launchCommandForInventory(InteractionView interactionView){
+    public void launchCommandForInventory(InteractionView interactionView) {
         Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
-            case USE -> {
-                if (interaction instanceof Usable){
-                    this.use((Usable)interaction);
+            case USE:
+                if (interaction instanceof Usable) {
+                    this.use((Usable) interaction);
                 }
-            }
-            case EQUIP -> {
+                break;
+            case EQUIP:
                 if (interaction instanceof Equipable)
                     this.equip((Equipable) interaction);
-            }
+                break;
         }
     }
 
@@ -186,7 +189,7 @@ public class MorlynnCastleController {
         this.characterPaneController.updateEquipment(this.hero);
     }
 
-    public void launchDrop(InteractionView interactionView){
+    public void launchDrop(InteractionView interactionView) {
         Interaction inte = interactionView.getInteraction();
         if (inte instanceof Receiver) {
             if (this.launchCommandArg1 != null) {
@@ -196,14 +199,13 @@ public class MorlynnCastleController {
         }
     }
 
-    public void launchDrag(InteractionView interactionView){
+    public void launchDrag(InteractionView interactionView) {
         if (this.commandPaneController.getCommand() == Command.USE) {
             Interaction inte = interactionView.getInteraction();
             if (inte instanceof Usable)
                 this.launchCommandArg1 = (Usable) inte;
         }
     }
-
 
 
     private boolean use(Usable usable) {
@@ -216,8 +218,8 @@ public class MorlynnCastleController {
         }
     }
 
-    private boolean use(Usable usable, Receiver receiver){
-        if (this.game.getHero().use(usable,receiver)){
+    private boolean use(Usable usable, Receiver receiver) {
+        if (this.game.getHero().use(usable, receiver)) {
             this.dialogBoxController.addText("You have used this object successfully.\n");
             return true;
         } else {
@@ -234,8 +236,7 @@ public class MorlynnCastleController {
             this.hero.take(item);
             this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
             return true;
-        }
-        else{
+        } else {
             this.dialogBoxController.addText("You can't take this item.\n");
             return false;
         }
@@ -276,7 +277,7 @@ public class MorlynnCastleController {
         this.sceneryPane.setDisable(true);
         this.characterPane.setDisable(true);
         Dialog dialog = interaction.getDialog();
-        for (int i = 0 ; i < dialog.getPlayerChoices().size() ; i++){
+        for (int i = 0; i < dialog.getPlayerChoices().size(); i++) {
             String answer = dialog.getDialogs().get(i);
             EventHandler eventHandler = new EventHandler() {
                 @Override
@@ -284,7 +285,7 @@ public class MorlynnCastleController {
                     dialogBoxController.addText(answer);
                 }
             };
-            this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i),eventHandler);
+            this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i), eventHandler);
         }
         this.dialogBoxController.addDialog("Goodbye.", event -> {
             this.dialogBoxController.endDialog();
@@ -296,7 +297,7 @@ public class MorlynnCastleController {
         this.dialogBoxController.startDialog();
     }
 
-    public Stage setStageContainer() throws IOException{
+    public Stage setStageContainer() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = (Parent) loader.load();
         this.containerPaneController = loader.getController();
@@ -304,26 +305,24 @@ public class MorlynnCastleController {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
-        
+
         return stage;
     }
 
     public void moveHero(String direction) {
         Door door = (Door) this.game.getHero().getPlace().getInteractions().get(direction);
         if (door != null) {
-            if ((door instanceof DoorWithLock) && (((DoorWithLock)door).getIsLocked())) {
+            if ((door instanceof DoorWithLock) && (((DoorWithLock) door).getIsLocked())) {
                 this.dialogBoxController.addText("A locked door ? How surprising.");
-            }
-            else {
+            } else {
                 this.game.getHero().go(door);
                 this.sceneryPaneController.generateRoomItems();
                 this.mapPaneController.generateMap();
                 this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
                 String description = this.game.getHero().getPlace().getDescription();
                 this.dialogBoxController.addText(description);
-            } 
-        }
-        else {
+            }
+        } else {
             this.dialogBoxController.addText("Are you sure that a door exists there ?");
         }
     }
