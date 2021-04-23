@@ -7,32 +7,31 @@ import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.Map;
-import javafx.event.ActionEvent;
+
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Tooltip;
-import javafx.scene.text.Font;
-import javafx.stage.Popup;
-import javafx.stage.StageStyle;
 
 
 public class MorlynnCastleController {
 
     @FXML
-    private GridPane gridPaneRoot;
+    private BorderPane borderPaneRoot;
+
+    @FXML
+    private GridPane gridPaneGame;
 
     @FXML
     private GridPane sceneryPane;
@@ -98,7 +97,7 @@ public class MorlynnCastleController {
         this.mapPaneController.initMap();
         this.directionPaneController.setGame(this.game);
         this.directionPaneController.setMorlynnCastleController(this);
-        this.gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
+        this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
         //this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
     }
 
@@ -110,8 +109,12 @@ public class MorlynnCastleController {
         this.game = game;
     }
 
-    public GridPane getGridPaneRoot() {
-        return gridPaneRoot;
+    public GridPane getGridPaneGame() {
+        return gridPaneGame;
+    }
+
+    public BorderPane getBorderPaneRoot() {
+        return borderPaneRoot;
     }
 
     public Usable getLaunchCommandArg1() {return this.launchCommandArg1;}
@@ -238,7 +241,7 @@ public class MorlynnCastleController {
                 CombatPaneController combatPaneController = loader.getController();
                 combatPaneController.setMorlynnCastleController(this);
                 combatPaneController.initCombat(this.hero);
-                this.gridPaneRoot.getScene().setRoot(root);
+                this.gridPaneGame.getScene().setRoot(root);
             }
         }
     }
@@ -307,6 +310,24 @@ public class MorlynnCastleController {
         }
     }
 
+    @FXML
+    public void functionQuit(ActionEvent actionEvent) {
+        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Do you really want to quit the game ?");
+        alert.showAndWait();*/
+    }
+
+    @FXML
+    public void functionHelp(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void functionSave(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void functionLoad(ActionEvent actionEvent) {
+    }
 
 
 //    public void openInventory(){
