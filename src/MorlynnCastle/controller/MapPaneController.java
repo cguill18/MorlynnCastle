@@ -1,6 +1,7 @@
 package MorlynnCastle.controller;
 
 import MorlynnCastle.model.game.Game;
+import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.model.space.Place;
 import MorlynnCastle.view.InteractionView;
@@ -50,14 +51,26 @@ public class MapPaneController {
         String HeroPlaceString = HeroPlace.getName();
         this.center.setStyle(styleGeneral+"-fx-background-image:url(\"/res/map/"+this.imgPieces.get(HeroPlaceString)+"\")");
 
-        if (HeroPlace.getInteractions().containsKey("north"))
-            this.north.setStyle("-fx-background-color: grey");
-        if (HeroPlace.getInteractions().containsKey("east"))
-            this.east.setStyle("-fx-background-color: grey");
-        if (HeroPlace.getInteractions().containsKey("south"))
-            this.south.setStyle("-fx-background-color: grey");
-        if (HeroPlace.getInteractions().containsKey("west"))
-            this.west.setStyle("-fx-background-color: grey");
+        if (HeroPlace.getInteractions().containsKey("north")) {
+            Door d = (Door) HeroPlace.getInteractions().get("north");
+            String place = d.getExit().getName();
+            this.north.setStyle(styleGeneral + "-fx-background-image:url(\"/res/map/" + this.imgPieces.get(place) + "\")");
+        }
+        if (HeroPlace.getInteractions().containsKey("east")) {
+            Door d = (Door) HeroPlace.getInteractions().get("east");
+            String place = d.getExit().getName();
+            this.east.setStyle(styleGeneral + "-fx-background-image:url(\"/res/map/" + this.imgPieces.get(place) + "\")");
+        }
+        if (HeroPlace.getInteractions().containsKey("south")) {
+            Door d = (Door) HeroPlace.getInteractions().get("south");
+            String place = d.getExit().getName();
+            this.south.setStyle(styleGeneral + "-fx-background-image:url(\"/res/map/" + this.imgPieces.get(place) + "\")");
+        }
+        if (HeroPlace.getInteractions().containsKey("west")) {
+            Door d = (Door) HeroPlace.getInteractions().get("west");
+            String place = d.getExit().getName();
+            this.west.setStyle(styleGeneral + "-fx-background-image:url(\"/res/map/" + this.imgPieces.get(place) + "\")");
+        }
     }
 
     private void clearMap() {
