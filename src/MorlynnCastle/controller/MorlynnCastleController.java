@@ -99,6 +99,7 @@ public class MorlynnCastleController {
         this.directionPaneController.setGame(this.game);
         this.directionPaneController.setMorlynnCastleController(this);
         this.gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
+        //this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
     }
 
     public Game getGame() {
@@ -132,7 +133,7 @@ public class MorlynnCastleController {
                     this.containerPaneController.setContainerLooking((Container) interaction);
                     this.containerPaneController.displayContainer(((Container) interaction).getContent());
                     this.containerstage.setTitle("Containts of the chest");
-                    this.containerstage.initOwner(this.gridPaneRoot.getScene().getWindow());
+                    
                     this.containerstage.show();
                 }
                 break;
