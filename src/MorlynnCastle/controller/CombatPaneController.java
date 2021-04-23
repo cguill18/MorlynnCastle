@@ -4,6 +4,7 @@ import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.view.InteractionView;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,6 +13,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
 public class CombatPaneController {
+
+    @FXML
+    private GridPane gridPaneRoot;
 
     @FXML
     private GridPane combatCommandPane;
@@ -33,6 +37,12 @@ public class CombatPaneController {
     public Combat combat;
 
     public Hero hero;
+
+    @FXML
+    public void initialize(){
+        gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
+
+    }
 
     public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {
         this.morlynnCastleController = morlynnCastleController;
