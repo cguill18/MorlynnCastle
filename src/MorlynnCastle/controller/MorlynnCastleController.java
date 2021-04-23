@@ -140,7 +140,7 @@ public class MorlynnCastleController {
                         if ((interaction instanceof ContainerWithLock) && (((ContainerWithLock) interaction).getIsLocked())) {
                             this.dialogBoxController.addText("This chest is locked. Maybe a key could help.");
                         } else {
-                            look((Container) interaction);
+                            this.look((Container) interaction);
                         }
                     }
                     break;
