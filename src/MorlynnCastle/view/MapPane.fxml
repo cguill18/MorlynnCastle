@@ -28,6 +28,5 @@
       <FlowPane fx:id="east" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <FlowPane fx:id="south" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button mnemonicParsing="false" text="Loupe" />
-      <Button mnemonicParsing="false" text="Réglages" GridPane.columnIndex="2" />
    </children>
 </GridPane>

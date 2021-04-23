@@ -3,6 +3,7 @@ package MorlynnCastle.controller;
 import MorlynnCastle.model.characters.*;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.*;
+import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
@@ -89,11 +90,12 @@ public class MorlynnCastleController {
         this.containerPaneController.setGame(this.game);
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
-        this.characterPaneController.setMorlynnCastleController(this);
-        this.directionPaneController.setGame(this.game);
         this.sceneryPaneController.initScenery();
-        this.directionPaneController.setSceneryPaneController(sceneryPaneController);
-        this.directionPaneController.setDialogBoxController(dialogBoxController);
+        this.characterPaneController.setMorlynnCastleController(this);
+        this.mapPaneController.setGame(this.game);
+        this.mapPaneController.initMap();
+        this.directionPaneController.setGame(this.game);
+        this.directionPaneController.setMorlynnCastleController(this);
         this.gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
     }
 
@@ -268,7 +270,7 @@ public class MorlynnCastleController {
         this.dialogBoxController.startDialog();
     }
 
-public Stage setStageContainer() throws IOException{        
+    public Stage setStageContainer() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = (Parent) loader.load();
         this.containerPaneController = loader.getController();
@@ -278,6 +280,25 @@ public Stage setStageContainer() throws IOException{
         stage.setAlwaysOnTop(true);
         return stage;
     }
+
+    public void moveHero(String direction) {
+        Door door = (Door) this.game.getHero().getPlace().getInteractions().get(direction);
+
+        if (door != null) {
+            this.game.getHero().go(door);
+            this.sceneryPaneController.generateRoomItems();
+            this.mapPaneController.generateMap();
+            this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
+
+            String description = this.game.getHero().getPlace().getDescription();
+            this.dialogBoxController.addText(description);
+        }
+        else {
+            this.dialogBoxController.addText("Are you sure that a door exists there ?");
+        }
+    }
+
+
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.hero.getInventory());
