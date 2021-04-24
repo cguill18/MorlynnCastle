@@ -314,29 +314,33 @@ public class MorlynnCastleController {
     }
 
     private void talk(Talkable interaction) {
-        this.commandPane.setDisable(true);
-        this.directionPane.setDisable(true);
-        this.sceneryPane.setDisable(true);
-        this.characterPane.setDisable(true);
-        Dialog dialog = interaction.getDialog();
-        for (int i = 0; i < dialog.getPlayerChoices().size(); i++) {
-            String answer = dialog.getDialogs().get(i);
-            EventHandler eventHandler = new EventHandler() {
-                @Override
-                public void handle(Event event) {
-                    dialogBoxController.addText(answer);
-                }
-            };
-            this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i), eventHandler);
+        Dialog dialog = interaction.talk();
+        if (dialog == null)
+            this.dialogBoxController.addText("This character is dead.");
+        else {
+            this.commandPane.setDisable(true);
+            this.directionPane.setDisable(true);
+            this.sceneryPane.setDisable(true);
+            this.characterPane.setDisable(true);
+            for (int i = 0; i < dialog.getPlayerChoices().size(); i++) {
+                String answer = dialog.getDialogs().get(i);
+                EventHandler eventHandler = new EventHandler() {
+                    @Override
+                    public void handle(Event event) {
+                        dialogBoxController.addText(answer);
+                    }
+                };
+                this.dialogBoxController.addDialog(dialog.getPlayerChoices().get(i), eventHandler);
+            }
+            this.dialogBoxController.addDialog("Goodbye.", event -> {
+                this.dialogBoxController.endDialog();
+                this.commandPane.setDisable(false);
+                this.directionPane.setDisable(false);
+                this.sceneryPane.setDisable(false);
+                this.characterPane.setDisable(false);
+            });
+            this.dialogBoxController.startDialog();
         }
-        this.dialogBoxController.addDialog("Goodbye.", event -> {
-            this.dialogBoxController.endDialog();
-            this.commandPane.setDisable(false);
-            this.directionPane.setDisable(false);
-            this.sceneryPane.setDisable(false);
-            this.characterPane.setDisable(false);
-        });
-        this.dialogBoxController.startDialog();
     }
 
     public Stage setStageContainer() throws IOException {
