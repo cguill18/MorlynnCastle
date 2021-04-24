@@ -6,10 +6,13 @@ import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
-import MorlynnCastle.model.space.Lockable;
 import MorlynnCastle.view.InteractionView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,11 +90,18 @@ public class MorlynnCastleController {
 
     private ContainerPaneController containerPaneController;
 
+    private DoubleProperty currentHp = new SimpleDoubleProperty();
+    private DoubleProperty maxHp = new SimpleDoubleProperty();
+    private DoubleProperty ratioHp = new SimpleDoubleProperty();
+
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
         this.game = new Game();
         this.hero = this.game.getHero();
+        this.currentHp.set(this.game.getHero().getCurrentHealthPoints());
+        this.maxHp.set(this.game.getHero().getMaxHealthPoints());
+        this.ratioHp.bind(Bindings.divide(this.currentHp,this.maxHp));
         this.game.initGame();
         this.containerstage = this.setStageContainer();
         this.containerPaneController.setMorlynnCastleController(this);
@@ -102,6 +112,7 @@ public class MorlynnCastleController {
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.sceneryPaneController.initScenery(this.hero.getPlace());
         this.characterPaneController.setMorlynnCastleController(this);
+        this.characterPaneController.setProgress(this.ratioHp);
         this.mapPaneController.setGame(this.game);
         this.mapPaneController.generateMap();
         this.directionPaneController.setGame(this.game);
@@ -127,6 +138,14 @@ public class MorlynnCastleController {
 
     public Usable getLaunchCommandArg1() {
         return this.launchCommandArg1;
+    }
+
+    public void updateHp(){
+        this.currentHp.set(this.hero.getCurrentHealthPoints());
+        this.maxHp.set(this.hero.getMaxHealthPoints());
+        System.out.println(this.currentHp.get());
+        System.out.println(this.maxHp.get());
+        System.out.println(this.ratioHp.get());
     }
 
     public void launchCommand(InteractionView interactionView) throws IOException {

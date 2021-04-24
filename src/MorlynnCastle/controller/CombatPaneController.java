@@ -68,7 +68,7 @@ public class CombatPaneController {
                 if (!npc.isAlive())
                     text = text + "You killed him.";
             }
-            this.textArea.setText(this.textArea.getText() + text);
+            this.textArea.appendText(text);
             if (!(this.combat.enemiesStillAlive() && this.hero.isAlive())) {
                 this.endCombat();
             } else {
@@ -78,7 +78,7 @@ public class CombatPaneController {
     }
 
     public void flee() {
-        this.textArea.setText(this.textArea.getText() + "You flee the fight.\n");
+        this.textArea.appendText("You flee the fight.\n");
         this.endCombat();
     }
 
@@ -93,7 +93,7 @@ public class CombatPaneController {
                 if (!this.hero.isAlive())
                     text = text + "You died.";
             }
-            this.textArea.setText(this.textArea.getText() + text);
+            this.textArea.appendText(text);
         });
     }
 
@@ -101,6 +101,9 @@ public class CombatPaneController {
         Alert alert = new Alert(AlertType.NONE, "Fin du combat", ButtonType.OK);
         alert.showAndWait();
         this.hero.setOngoingCombat(null);
+        System.out.println(this.morlynnCastleController.getGame().getHero().getCurrentHealthPoints());
+        System.out.println(this.morlynnCastleController.getGame().getHero().getMaxHealthPoints());
+        this.morlynnCastleController.updateHp();
         this.combatCommandPane.getScene().setRoot(this.morlynnCastleController.getBorderPaneRoot());
     }
 

@@ -29,7 +29,7 @@
                             </padding>
                             <Label fx:id="name" style="-fx-font-size:1.5em;" text="Name">
                             </Label>
-                            <ProgressBar prefHeight="${(characterPane.height * 0.05)}"
+                            <ProgressBar fx:id="hpBar" prefHeight="${(characterPane.height * 0.05)}"
                                          prefWidth="${(characterPane.width * 0.8)}" progress="1.0"/>
                             <HBox fx:id="avatar" maxHeight="${(characterPane.height * 0.4)}"
                                   maxWidth="${(characterPane.width * 0.5)}" prefHeight="110.0" prefWidth="54.0"

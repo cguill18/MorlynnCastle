@@ -5,9 +5,11 @@ import MorlynnCastle.model.item.Armor;
 import MorlynnCastle.model.item.Item;
 import MorlynnCastle.model.item.Weapon;
 import MorlynnCastle.view.InteractionView;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -20,6 +22,9 @@ public class CharacterPaneController {
 
     @FXML
     private Label name;
+
+    @FXML
+    private ProgressBar hpBar;
 
     @FXML
     private GridPane inventoryPane;
@@ -54,6 +59,10 @@ public class CharacterPaneController {
 
     public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {
         this.morlynnCastleController = morlynnCastleController;
+    }
+
+    public void setProgress(DoubleProperty doubleProperty){
+        this.hpBar.progressProperty().bind(doubleProperty);
     }
 
     public void displayInventory(Map<String, Item> inventory) {
