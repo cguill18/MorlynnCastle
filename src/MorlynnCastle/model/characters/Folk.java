@@ -1,5 +1,7 @@
 package MorlynnCastle.model.characters;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Folk extends NonPlayerCharacter implements Talkable {
@@ -32,5 +34,20 @@ public class Folk extends NonPlayerCharacter implements Talkable {
         }
     }
 
-
+    @Override
+    public Dialog talk() {
+        if (this.isAlive()){
+            if (!this.isHostile()){
+                return getDialog();
+            } else {
+                List<String> playerChoices = new ArrayList<>();
+                List<String> dialogs = new ArrayList<>();
+                dialogs.add("This one doesn't want to talk to you.");
+                Dialog hostileDialog = new Dialog(playerChoices,dialogs);
+                return hostileDialog;
+            }
+        } else {
+            return null;
+        }
+    }
 }

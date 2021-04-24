@@ -33,7 +33,7 @@
                                          prefWidth="${(characterPane.width * 0.8)}" progress="1.0"/>
                             <HBox fx:id="avatar" maxHeight="${(characterPane.height * 0.4)}"
                                   maxWidth="${(characterPane.width * 0.5)}" prefHeight="110.0" prefWidth="54.0"
-                                  style="-fx-background-image: url('/res/stickman.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+                                  style="-fx-background-image: url('/res/hero.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                                   VBox.vgrow="ALWAYS">
                             </HBox>
                         </VBox>
