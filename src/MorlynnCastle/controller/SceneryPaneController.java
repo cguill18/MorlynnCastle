@@ -39,7 +39,7 @@ public class SceneryPaneController {
 
     @FXML
     public void initialize() {
-        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ; -fx-background-repeat: no-repeat;";
         this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/hall.png\")");
     }
 
@@ -52,7 +52,7 @@ public class SceneryPaneController {
     }
 
     public void setBackground(Place place){
-        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100%; -fx-background-repeat: no-repeat;";
         this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/" + this.imagePlaces.get(place.getName()) +"\")");
     }
 
