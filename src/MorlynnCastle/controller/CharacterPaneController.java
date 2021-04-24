@@ -62,10 +62,11 @@ public class CharacterPaneController {
         inventory.forEach((name, item) -> {
             InteractionView interactionView = new InteractionView(item);
             interactionView.setStyle(interactionView.getStyle() + "-fx-background-image:url(\"/res/" + item.getImage() + "\")");
-            inventoryPane.add(interactionView, i[0] % this.inventoryPane.getRowConstraints().size(), i[0] / this.inventoryPane.getRowConstraints().size());
+            inventoryPane.add(interactionView, i[0] % this.inventoryPane.getColumnConstraints().size(), i[0] / this.inventoryPane.getColumnConstraints().size());
             i[0]++;
+            if (i[0]/this.inventoryPane.getColumnConstraints().size() > (this.inventoryPane.getRowConstraints().size() -1))
+                this.addInventoryRow();
         });
-        this.addInventoryRow();
     }
 
     public void removeInteractionView(InteractionView interactionView) {
