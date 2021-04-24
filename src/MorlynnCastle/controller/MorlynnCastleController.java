@@ -6,6 +6,7 @@ import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
+import MorlynnCastle.model.space.Lockable;
 import MorlynnCastle.view.InteractionView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -221,8 +222,12 @@ public class MorlynnCastleController {
 
 
     private boolean use(Usable usable) {
-        if (this.game.getHero().use(usable)) {
-            this.dialogBoxController.addText("You have used this object successfully.\n");
+        boolean success = this.game.getHero().use(usable);
+        if (success) {
+            if (usable instanceof Book)
+                this.dialogBoxController.addText(((Scroll) usable).getContent()+".\n");
+            else
+                this.dialogBoxController.addText("You have used this object successfully.\n");
             return true;
         } else {
             this.dialogBoxController.addText("You can't use this alone.\n");
@@ -231,8 +236,14 @@ public class MorlynnCastleController {
     }
 
     private boolean use(Usable usable, Receiver receiver) {
-        if (this.game.getHero().use(usable, receiver)) {
-            this.dialogBoxController.addText("You have used this object successfully.\n");
+        boolean success = this.game.getHero().use(usable, receiver);
+        if (success) {
+            if (usable instanceof Key && receiver instanceof DoorWithLock) {
+                ((DoorWithLock) receiver).setImage("unlocked_door.png");
+                ((DoorWithLock)receiver).getMirrorDoorForDoorWithLock().setImage("unlocked_door.png");
+                this.sceneryPaneController.generateRoomItems();
+            }
+            else this.dialogBoxController.addText("You have used this object successfully.\n");
             return true;
         } else {
             if (usable instanceof Key)

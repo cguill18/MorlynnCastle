@@ -28,5 +28,8 @@ public class Book extends Item implements Usable {
 		System.out.println("You cannot use this item on another.");
 		return false;
 	}
-	
+
+	public String getContent() {
+		return this.content;
+	}
 }
