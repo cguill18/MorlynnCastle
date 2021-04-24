@@ -33,12 +33,12 @@ public class CombatSceneryPaneController {
     public void displayCharacters(Hero hero, Map<String, Character> enemies){
         final int[] i = {0};
         InteractionView heroView = new InteractionView(hero);
-        heroView.setStyle(heroView.getStyle()+"-fx-background-image:url(\"/res/stickman.png\")");
+        heroView.setStyle(heroView.getStyle()+"-fx-background-image:url(\"/res/hero.png\")");
         combatSceneryPane.add(heroView, 1, 2);
 
         enemies.forEach((name,enemy)->{
             InteractionView interactionView = new InteractionView(enemy);
-            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/hostile_character.png\")");
+            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+ enemy.getImage() +"\")");
             combatSceneryPane.add(interactionView, 3+i[0]%3, 1+i[0]/3);
             i[0]++;
         });
