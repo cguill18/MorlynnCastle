@@ -2,7 +2,7 @@ package MorlynnCastle.model.item;
 
 public class LeatherArmor extends Armor {
 
-    private static final String IMG_LARMOR = "armor.png";
+    private static final String IMG_LARMOR = "leather_armor.png";
     private final static int DEFAULT_ARMOR_CLASS = 13;
 
 

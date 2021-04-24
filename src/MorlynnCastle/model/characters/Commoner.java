@@ -2,7 +2,7 @@ package MorlynnCastle.model.characters;
 
 public class Commoner extends Folk{
 
-    private static final String IMG_COMMONER = "non_hostile_character.png";
+    private static final String IMG_COMMONER = "commoner.png";
     private static final boolean DEFAULT_HOSTILE = false;
     private static final int DEFAULT_HP = 4;
     private static final int DEFAULT_ATTACK_BONUS = 2;

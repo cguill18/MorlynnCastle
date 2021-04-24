@@ -91,6 +91,7 @@ public class World implements Serializable {
         Door dcgr = new Door(woodenDoorDesc,6,2);
         
         DoorWithLock de = new DoorWithLock(key3, heavyDoorDesc,6,2);
+        DoorWithLock ed = new DoorWithLock(key3, heavyDoorDesc, 0, 2);
         
 
         //creation de listes pour l'interaction talk
@@ -241,6 +242,10 @@ public class World implements Serializable {
         
         de.setEntrance(throneroom);
         de.setExit(exit);
+        de.setMirrorDoor(ed);
+        ed.setEntrance(exit);
+        ed.setExit(throneroom);
+        ed.setMirrorDoor(de);
 
         //ajout des portes dans chaque piece
         hall.getInteractions().put("west", dhg);
