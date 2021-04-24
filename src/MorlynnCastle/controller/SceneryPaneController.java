@@ -25,13 +25,22 @@ public class SceneryPaneController {
 
     private MorlynnCastleController morlynnCastleController;
 
-    private HashMap<String,String> imagePlaces;
+    private HashMap<String,String> imagePlaces = new HashMap<>();
+
+    public SceneryPaneController() {
+        this.imagePlaces.put("hall","hall.png");
+        this.imagePlaces.put("weapon_room","weapon.png");
+        this.imagePlaces.put("gallery", "gallery.png");
+        this.imagePlaces.put("guard_room", "guard.png");
+        this.imagePlaces.put("cellar", "cellar.png");
+        this.imagePlaces.put("throne_room","throne.png");
+        this.imagePlaces.put("exit","exit.png");
+    }
 
     @FXML
     public void initialize() {
         String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
         this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/hall.png\")");
-        this.imagePlaces = new HashMap<>();
     }
 
     public void setGame(Game game){ this.game = game; }
@@ -47,15 +56,9 @@ public class SceneryPaneController {
         this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/" + this.imagePlaces.get(place.getName()) +"\")");
     }
 
-    public void initScenery() {
+    public void initScenery(Place place) {
+        this.setBackground(place);
         this.generateRoomItems();
-        this.imagePlaces.put("hall","hall.png");
-        this.imagePlaces.put("weapon_room","weapon.png");
-        this.imagePlaces.put("gallery", "gallery.png");
-        this.imagePlaces.put("guard_room", "guard.png");
-        this.imagePlaces.put("cellar", "cellar.png");
-        this.imagePlaces.put("throne_room","throne.png");
-        this.imagePlaces.put("exit","exit.png");
     }
 
     @FXML

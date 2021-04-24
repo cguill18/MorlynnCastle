@@ -7,6 +7,7 @@ import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.view.InteractionView;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +15,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -93,10 +99,10 @@ public class MorlynnCastleController {
         this.containerPaneController.setGame(this.game);
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
-        this.sceneryPaneController.initScenery();
+        this.sceneryPaneController.initScenery(this.hero.getPlace());
         this.characterPaneController.setMorlynnCastleController(this);
         this.mapPaneController.setGame(this.game);
-        this.mapPaneController.initMap();
+        this.mapPaneController.generateMap();
         this.directionPaneController.setGame(this.game);
         this.directionPaneController.setMorlynnCastleController(this);
         this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
@@ -335,21 +341,89 @@ public class MorlynnCastleController {
 
     @FXML
     public void functionQuit(ActionEvent actionEvent) {
-        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Do you really want to quit the game ?");
-        alert.showAndWait();*/
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK)
+            Platform.exit();
     }
 
     @FXML
     public void functionHelp(ActionEvent actionEvent) {
+        Alert alert = new Alert(AlertType.NONE);
+        alert.getButtonTypes().add(ButtonType.OK);
+        alert.setTitle("Help");
+        alert.setContentText(this.game.helpText());
+        alert.showAndWait();
     }
 
     @FXML
     public void functionSave(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SavePane.fxml"));
+            Parent root = loader.load();
+            SavePaneController savePaneController = loader.getController();
+            savePaneController.fillList(this.game.getSaveFiles());
+            savePaneController.getBottomButton().setText("Overwrite");
+            Button newSaveButton = new Button("New save");
+            newSaveButton.setOnAction(event -> {
+                TextInputDialog textInputDialog = new TextInputDialog("");
+                textInputDialog.setTitle("New save");
+                textInputDialog.setHeaderText("Type the name of the save file you wish to create, without extension.");
+                ((Stage)textInputDialog.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
+                Optional<String> result = textInputDialog.showAndWait();
+                result.ifPresent(name -> this.game.save(name));
+            });
+            savePaneController.getBorderPane().setTop(newSaveButton);
+            savePaneController.getBottomButton().setOnAction(event -> {
+                this.game.save(savePaneController.getSelection());
+            });
+            Stage saveStage = new Stage();
+            saveStage.setTitle("Save");
+            saveStage.initOwner(this.borderPaneRoot.getScene().getWindow());
+            saveStage.setAlwaysOnTop(true);
+            saveStage.initModality(Modality.WINDOW_MODAL);
+            saveStage.setScene(new Scene(root));
+            saveStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void functionLoad(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SavePane.fxml"));
+            Parent root = loader.load();
+            SavePaneController savePaneController = loader.getController();
+            savePaneController.fillList(this.game.getSaveFiles());
+            savePaneController.getBottomButton().setText("Load");
+            savePaneController.getBottomButton().setOnAction(event -> {
+                this.load(savePaneController.getSelection());
+            });
+            Stage saveStage = new Stage();
+            saveStage.setTitle("Load");
+            saveStage.initOwner(this.borderPaneRoot.getScene().getWindow());
+            saveStage.setAlwaysOnTop(true);
+            saveStage.initModality(Modality.WINDOW_MODAL);
+            saveStage.setScene(new Scene(root));
+            saveStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load(String filename){
+        this.game.load(filename);
+        this.hero = this.game.getHero();
+        System.out.println(this.game.getHero().getArmor());
+        System.out.println(this.hero.getArmor());
+        this.sceneryPaneController.initScenery(this.hero.getPlace());
+        this.mapPaneController.generateMap();
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+        this.characterPaneController.clearEquipment();
+        this.characterPaneController.updateEquipment(this.hero);
+
     }
 
 

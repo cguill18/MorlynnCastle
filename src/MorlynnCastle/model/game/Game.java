@@ -85,6 +85,11 @@ public class Game {
         System.out.println();
     }
 
+    public String helpText(){
+        String text = "A remplir";
+        return text;
+    }
+
     public void quit() {
         System.out.println("Do you really want to quit the game ?");
         System.out.println("Answer with yes or no.");
@@ -145,6 +150,13 @@ public class Game {
             System.out.println(fileName);
         }
         return filesNames;
+    }
+
+    public File[] getSaveFiles(){
+        String pathname = System.getProperty("user.dir");
+        File file = new File(pathname);
+        FilenameFilter filter = (f, name) -> name.endsWith(".sav");
+        return file.listFiles(filter);
     }
 
 

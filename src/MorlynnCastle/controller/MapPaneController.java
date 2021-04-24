@@ -45,6 +45,16 @@ public class MapPaneController {
 
     private Popup popup;
 
+    public MapPaneController() {
+        this.imgPieces.put("hall","hall.png");
+        this.imgPieces.put("weapon_room","weapon.png");
+        this.imgPieces.put("gallery", "gallery.png");
+        this.imgPieces.put("guard_room", "guard.png");
+        this.imgPieces.put("cellar", "cellar.png");
+        this.imgPieces.put("throne_room","throne.png");
+        this.imgPieces.put("exit","exit.png");
+    }
+
     //fonctions d'initialisation
     @FXML
     public void initialize(){
@@ -52,11 +62,6 @@ public class MapPaneController {
     }
 
     public void setGame(Game game) { this.game = game; }
-
-    public void initMap(){
-        this.initImage();
-        this.generateMap();
-    }
 
     private void initPopup() {
         this.popup = new Popup();
@@ -104,15 +109,6 @@ public class MapPaneController {
         this.center.setStyle("");
     }
 
-    private void initImage() {
-        this.imgPieces.put("hall","hall.png");
-        this.imgPieces.put("weapon_room","weapon.png");
-        this.imgPieces.put("gallery", "gallery.png");
-        this.imgPieces.put("guard_room", "guard.png");
-        this.imgPieces.put("cellar", "cellar.png");
-        this.imgPieces.put("throne_room","throne.png");
-        this.imgPieces.put("exit","exit.png");
-    }
 
     @FXML
     public void showMap(MouseEvent event) {

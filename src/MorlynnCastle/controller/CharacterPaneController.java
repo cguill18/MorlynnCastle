@@ -104,6 +104,14 @@ public class CharacterPaneController {
         }
     }
 
+
+    public void clearEquipment(){
+        this.weaponPane.setCenter(null);
+        this.armorPane.setCenter(null);
+        this.armorLabel.setText(null);
+        this.weaponLabel.setText(null);
+    }
+
     public void updateEquipment(Hero hero) {
         if (hero.getArmor() != null)
             this.addArmor(hero.getArmor());
