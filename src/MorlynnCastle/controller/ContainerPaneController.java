@@ -40,7 +40,8 @@ public class ContainerPaneController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ;";
+        this.gridPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/wood.jpg\")");
     }  
     
     @FXML public void handleTake(MouseEvent event) {
@@ -50,8 +51,7 @@ public class ContainerPaneController implements Initializable {
         if (interaction instanceof Item){
             this.game.getHero().takeFromContainer(this.container, (Item) interaction);
             this.dialogBoxController.addText("You add this " + ((Item)interaction).getName() + " to your inventory.\n");
-            this.removeInteractionView(interactionView); 
-            
+            this.removeInteractionView(interactionView);
             this.characterPaneController.displayInventory(this.game.getHero().getInventory());
         }
     }
@@ -83,11 +83,13 @@ public class ContainerPaneController implements Initializable {
     public void displayContainer(Map<String, Item> container){
         gridPane.getChildren().clear();
         final int[] i = {0};
+        final int[] j = {0};
         container.forEach((name,item)->{
             InteractionView interactionView = new InteractionView(item);
             interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+item.getImage()+"\")");
-            gridPane.add(interactionView, i[0]%this.gridPane.getColumnConstraints().size(), i[0]/this.gridPane.getRowConstraints().size());
+            gridPane.add(interactionView, i[0]%this.gridPane.getColumnConstraints().size(), j[0]/(this.gridPane.getRowConstraints().size()-1));
             i[0]++;
+            j[0]++;
         }); 
     }
     
