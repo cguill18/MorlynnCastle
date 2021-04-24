@@ -2,7 +2,7 @@ package MorlynnCastle.model.item;
 
 public class ScaleMail extends Armor {
 
-    private static final String IMG_SCALEMAIL = "armor.png";
+    private static final String IMG_SCALEMAIL = "scale_mail.png";
     private final static int DEFAULT_ARMOR_CLASS = 15;
 
     public ScaleMail(String name,String description) {

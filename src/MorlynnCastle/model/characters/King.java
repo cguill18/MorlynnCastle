@@ -2,7 +2,7 @@ package MorlynnCastle.model.characters;
 
 public class King extends Folk {
 
-	private static final String IMG_KING = "non_hostile_character.png";
+	private static final String IMG_KING = "king.png";
 	private static final boolean DEFAULT_HOSTILE = false;
 	private static final int DEFAULT_HP = 12;
 	private static final int DEFAULT_ATTACK_BONUS = 3;
