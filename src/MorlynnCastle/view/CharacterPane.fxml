@@ -83,7 +83,7 @@
                                         </HBox>
                                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Label fx:id="weaponLabel" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="weaponLabel" HBox.hgrow="ALWAYS" wrapText="true">
                                                 </Label>
                                             </children>
                                         </HBox>
@@ -103,7 +103,7 @@
                                         </HBox>
                                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Label fx:id="armorLabel" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="armorLabel" HBox.hgrow="ALWAYS" wrapText="true">
                                                 </Label>
                                             </children>
                                         </HBox>

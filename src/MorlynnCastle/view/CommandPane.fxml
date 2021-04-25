@@ -20,17 +20,17 @@
     </rowConstraints>
     <children>
         <Button fx:id="takeButtonCommand" onAction="#take" mnemonicParsing="false" text="Take"
-                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                maxHeight="Infinity" maxWidth="Infinity"/>
         <Button fx:id="lookButtonCommand" onAction="#look" mnemonicParsing="false" text="Look" GridPane.rowIndex="1"
-                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                maxHeight="Infinity" maxWidth="Infinity"/>
         <Button fx:id="useButtonCommand" onAction="#use" mnemonicParsing="false" text="Use" GridPane.columnIndex="1"
-                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                maxHeight="Infinity" maxWidth="Infinity"/>
         <Button fx:id="equipButtonCommand" onAction="#equip" mnemonicParsing="false" text="Equip"
-                GridPane.columnIndex="1" GridPane.rowIndex="1" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308"/>
+                GridPane.columnIndex="1" GridPane.rowIndex="1" maxHeight="Infinity"
+                maxWidth="Infinity"/>
         <Button fx:id="attackButtonCommand" onAction="#attack" mnemonicParsing="false" text="Attack"
-                GridPane.columnIndex="2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                GridPane.columnIndex="2" maxHeight="Infinity" maxWidth="Infinity"/>
         <Button fx:id="talkButtonCommand" onAction="#talk" mnemonicParsing="false" text="Talk" GridPane.columnIndex="2"
-                GridPane.rowIndex="1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                GridPane.rowIndex="1" maxHeight="Infinity" maxWidth="Infinity"/>
     </children>
 </GridPane>
