@@ -2,7 +2,7 @@ package MorlynnCastle.model.item;
 
 public class Dagger extends Weapon{
 
-    private static final String IMG_DAGGER = "weapon.png";
+    private static final String IMG_DAGGER = "dagger.png";
     private final static int DEFAULT_ATTACK_POWER = 4;
 
     public Dagger(String name, String description) {
