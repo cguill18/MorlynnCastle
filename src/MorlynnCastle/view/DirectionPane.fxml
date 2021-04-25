@@ -1,59 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="directionPane" prefHeight="100.0" prefWidth="125.0"
-          xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="MorlynnCastle.controller.DirectionPaneController"
->
+<GridPane fx:id="directionPane" prefHeight="100.0" prefWidth="125.0" xmlns="http://javafx.com/javafx/"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.DirectionPaneController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" fillWidth="true"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" fillWidth="true"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" fillWidth="true"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints  fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Button fx:id="upButton" 
-                mnemonicParsing="false" 
-                text="up" 
-                GridPane.columnIndex="1" 
-                maxHeight="1.7976931348623157E308" 
-                maxWidth="1.7976931348623157E308"
-                onAction="#upAction"
-        />
-        <Button fx:id="leftButton" 
-                mnemonicParsing="false" 
-                text="left" 
-                GridPane.rowIndex="1" 
-                maxHeight="1.7976931348623157E308" 
-                maxWidth="1.7976931348623157E308"
-                onAction="#leftAction"
-        />
-        <Button fx:id="rightButton" 
-                mnemonicParsing="false" 
-                text="right" 
-                GridPane.columnIndex="2"
-                GridPane.rowIndex="1" 
-                maxHeight="1.7976931348623157E308" 
-                maxWidth="1.7976931348623157E308"
-                onAction="#rightAction"
-        />
-        <Button fx:id="bottomButton" 
-                mnemonicParsing="false" 
-                text="bottom" 
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="2" 
-                maxHeight="1.7976931348623157E308" 
-                maxWidth="1.7976931348623157E308"
-                onAction="#bottomAction"
-        />
+        <Button fx:id="upButton" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#upAction"
+                style="-fx-background-image: url('/res/north_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+                GridPane.columnIndex="1"/>
+        <Button fx:id="leftButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                style="-fx-background-image: url('/res/west_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+                mnemonicParsing="false" onAction="#leftAction" GridPane.rowIndex="1"/>
+        <Button fx:id="rightButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                mnemonicParsing="false" onAction="#rightAction" GridPane.columnIndex="2"
+                style="-fx-background-image: url('/res/east_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+                GridPane.rowIndex="1"/>
+        <Button fx:id="bottomButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                mnemonicParsing="false" onAction="#bottomAction" GridPane.columnIndex="1"
+                style="-fx-background-image: url('/res/south_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+                GridPane.rowIndex="2"/>
     </children>
 </GridPane>
