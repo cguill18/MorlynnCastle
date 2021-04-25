@@ -1,6 +1,7 @@
 package MorlynnCastle.model.space;
 
 import MorlynnCastle.model.characters.Character;
+import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.model.item.Item;
 
@@ -56,7 +57,7 @@ public class Place extends Interaction {
         this.getInteractions().forEach((k, v) -> {
             if (v instanceof Door) {
                 System.out.println("a door leading to the " + k);
-            } else if (!(k.equals("hero")))
+            } else if (!(v instanceof Hero))
                 System.out.println("a " + k);
         });
     }
