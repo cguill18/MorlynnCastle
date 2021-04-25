@@ -96,7 +96,6 @@ public class CharacterPaneController {
         System.out.println(eventTarget);
         if (eventTarget instanceof InteractionView) {
             this.morlynnCastleController.launchCommandForInventory((InteractionView) eventTarget);
-            System.out.println("bon le click marche");
         }
     }
 
@@ -105,7 +104,6 @@ public class CharacterPaneController {
     public void MyStartDragAndDrop(MouseEvent event) {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView) {
-            System.out.println("la souris est pressée");
             Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
             ClipboardContent content = new ClipboardContent();
             content.putString("le drag and drop est capricieux");

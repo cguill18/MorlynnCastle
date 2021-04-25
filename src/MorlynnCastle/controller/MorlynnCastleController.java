@@ -6,6 +6,7 @@ import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
+import MorlynnCastle.model.space.Lockable;
 import MorlynnCastle.view.InteractionView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -241,36 +242,54 @@ public class MorlynnCastleController {
     }
 
 
-    private boolean use(Usable usable) {
+    private void use(Usable usable) {
         boolean success = this.game.getHero().use(usable);
         if (success) {
             if (usable instanceof Book)
                 this.dialogBoxController.addText(((Scroll) usable).getContent()+".\n");
             else
                 this.dialogBoxController.addText("You have used this object successfully.\n");
-            return true;
         } else {
             this.dialogBoxController.addText("You can't use this alone.\n");
-            return false;
         }
     }
 
-    private boolean use(Usable usable, Receiver receiver) {
+    private void use(Usable usable, Receiver receiver) {
         boolean success = this.game.getHero().use(usable, receiver);
         if (success) {
-            if (usable instanceof Key && receiver instanceof DoorWithLock) {
-                ((DoorWithLock) receiver).setImage("unlocked_door.png");
-                ((DoorWithLock)receiver).getMirrorDoorForDoorWithLock().setImage("unlocked_door.png");
+            if (usable instanceof Key) {
+                if (receiver instanceof DoorWithLock) {
+
+                } else {
+
+                }
                 this.sceneryPaneController.generateRoomItems();
             }
+            if (usable instanceof Scroll) {
+                this.dialogBoxController.addText(((Scroll) usable).getEffect());
+            }
             else this.dialogBoxController.addText("You have used this object successfully.\n");
-            return true;
         } else {
             if (usable instanceof Key)
                 this.dialogBoxController.addText("Wrong key.\n");
             else
                 this.dialogBoxController.addText("You can't use this item on an another.\n");
-            return false;
+        }
+    }
+
+    private void useKey(Usable usable, Receiver receiver) {
+        if (receiver instanceof DoorWithLock) {
+            if (((DoorWithLock) receiver).getIsLocked()){
+                ((DoorWithLock) receiver).setImage("locked_door.png");
+                ((DoorWithLock) receiver).getMirrorDoorForDoorWithLock().setImage("locked_door.png");
+            } else {
+                ((DoorWithLock) receiver).setImage("unlocked_door.png");
+                ((DoorWithLock) receiver).getMirrorDoorForDoorWithLock().setImage("unlocked_door.png");
+            }
+        } else if (receiver instanceof ContainerWithLock) {
+            if (((ContainerWithLock) receiver).getIsLocked()) {
+                ((ContainerWithLock)receiver).setImage("unlocked_chest.png");
+            }
         }
     }
 

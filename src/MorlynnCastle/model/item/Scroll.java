@@ -5,6 +5,7 @@ import MorlynnCastle.model.space.Lockable;
 public class Scroll extends Book{
 
 	private static final String IMG_SCROLL = "scroll.png";
+	private String effect;
 
 	public Scroll(String name, String description, String content) {
 		super(name, description, content);
@@ -24,4 +25,8 @@ public class Scroll extends Book{
             return false;
         }
 	}
+
+	public String getEffect() { return this.effect; }
+
+	public void setEffect(String effect) { this.effect = effect; }
 }

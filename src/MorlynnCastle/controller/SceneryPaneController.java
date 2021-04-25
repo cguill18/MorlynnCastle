@@ -74,7 +74,6 @@ public class SceneryPaneController {
     public void MyEndDragAndDrop(DragEvent event) {
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
-            System.out.println("la souris est relachée");
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()){

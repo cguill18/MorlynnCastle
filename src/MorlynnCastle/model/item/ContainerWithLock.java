@@ -36,8 +36,9 @@ public class ContainerWithLock extends Container implements Lockable {
     	} 
     }
 
-	public boolean receiveForScroll(Scroll b) {
+	public boolean receiveForScroll(Scroll scroll) {
     	this.printKeyForThisChest();
+    	scroll.setEffect("This chest can be unlocked with a " + this.key.getName() + ".");
     	return true;
 	}
     
