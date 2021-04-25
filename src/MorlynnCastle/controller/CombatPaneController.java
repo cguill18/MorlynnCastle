@@ -79,11 +79,9 @@ public class CombatPaneController {
                 text = text + "You killed him.";
         }
         this.textArea.appendText(text);
-        if (!(this.combat.enemiesStillAlive() && this.hero.isAlive())) {
+        this.combatTurn();
+        if (!(this.combat.enemiesStillAlive() && this.hero.isAlive()))
             this.endCombat();
-        } else {
-            this.combatTurn();
-        }
     }
 
     public void flee() {
@@ -114,6 +112,7 @@ public class CombatPaneController {
         this.hero = null;
         this.morlynnCastleController.updateHp();
         this.combatCommandPane.getScene().setRoot(this.morlynnCastleController.getBorderPaneRoot());
+        this.morlynnCastleController.checkEnd();
     }
 
 }

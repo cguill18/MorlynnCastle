@@ -39,7 +39,7 @@ public class CombatSceneryPaneController {
         enemies.forEach((name,enemy)->{
             InteractionView interactionView = new InteractionView(enemy);
             interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+ enemy.getImage() +"\")");
-            combatSceneryPane.add(interactionView, 3+i[0]%3, 1+i[0]/3);
+            combatSceneryPane.add(interactionView, 3+i[0]/3, 1+i[0]%3);
             i[0]++;
         });
 

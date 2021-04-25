@@ -238,6 +238,17 @@ public class Game {
         }
     }
 
+    public GameState checkEnd(){
+        if (this.hero.isAlive()){
+            if (this.hero.isGoalAchieved())
+                return GameState.END;
+            else
+                return GameState.ALIVE;
+        }
+        else
+            return GameState.DEAD;
+    }
+
     public void ending() {
         if (this.hero.isAlive()) {
             if (this.hero.isGoalAchieved()) {

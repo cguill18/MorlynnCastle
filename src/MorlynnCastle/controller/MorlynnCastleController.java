@@ -103,7 +103,7 @@ public class MorlynnCastleController {
         this.hero = this.game.getHero();
         this.currentHp.set(this.game.getHero().getCurrentHealthPoints());
         this.maxHp.set(this.game.getHero().getMaxHealthPoints());
-        this.ratioHp.bind(Bindings.divide(this.currentHp,this.maxHp));
+        this.ratioHp.bind(Bindings.divide(this.currentHp, this.maxHp));
         this.game.initGame();
         this.characterPaneController.setName(this.hero.getName());
         this.containerstage = this.setStageContainer();
@@ -143,7 +143,7 @@ public class MorlynnCastleController {
         return this.launchCommandArg1;
     }
 
-    public void updateHp(){
+    public void updateHp() {
         this.currentHp.set(this.hero.getCurrentHealthPoints());
         this.maxHp.set(this.hero.getMaxHealthPoints());
         System.out.println(this.currentHp.get());
@@ -176,8 +176,6 @@ public class MorlynnCastleController {
                 case USE:
                     this.dialogBoxController.addText("Please use an item in your inventory.\n");
                     break;
-                case EQUIP:
-                    break;
                 case ATTACK:
                     if (interaction instanceof Attackable) {
                         this.attack((Attackable) interaction);
@@ -192,6 +190,7 @@ public class MorlynnCastleController {
         } else {
             this.dialogBoxController.addText("Please click a command before.\n");
         }
+        this.checkEnd();
     }
 
     private void look(Container interaction) {
@@ -247,7 +246,7 @@ public class MorlynnCastleController {
         boolean success = this.game.getHero().use(usable);
         if (success) {
             if (usable instanceof Book)
-                this.dialogBoxController.addText(((Scroll) usable).getContent()+".\n");
+                this.dialogBoxController.addText(((Scroll) usable).getContent() + ".\n");
             else
                 this.dialogBoxController.addText("You have used this object successfully.\n");
         } else {
@@ -257,7 +256,7 @@ public class MorlynnCastleController {
 
     private void use(Usable usable, Receiver receiver) {
         if (usable instanceof Key) {
-            this.useKey(usable,receiver);
+            this.useKey(usable, receiver);
         } else {
             boolean success = this.game.getHero().use(usable, receiver);
             if (success) {
@@ -273,7 +272,7 @@ public class MorlynnCastleController {
     private void useKey(Usable usable, Receiver receiver) {
         this.game.getHero().use(usable, receiver);
         if (receiver instanceof DoorWithLock) {
-            if (((DoorWithLock) receiver).getIsLocked()){
+            if (((DoorWithLock) receiver).getIsLocked()) {
                 ((DoorWithLock) receiver).setImage("locked_door.png");
                 ((DoorWithLock) receiver).getMirrorDoorForDoorWithLock().setImage("locked_door.png");
             } else {
@@ -282,9 +281,9 @@ public class MorlynnCastleController {
             }
         } else {
             if (((ContainerWithLock) receiver).getIsLocked()) {
-                ((ContainerWithLock)receiver).setImage("locked_chest.png");
+                ((ContainerWithLock) receiver).setImage("locked_chest.png");
             } else {
-                ((ContainerWithLock)receiver).setImage("unlocked_chest.png");
+                ((ContainerWithLock) receiver).setImage("unlocked_chest.png");
             }
         }
         this.sceneryPaneController.generateRoomItems();
@@ -379,15 +378,16 @@ public class MorlynnCastleController {
                 this.dialogBoxController.addText("A locked door ? How surprising.");
             } else {
                 this.game.getHero().go(door);
-                this.sceneryPaneController.generateRoomItems();
                 this.mapPaneController.generateMap();
                 this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
+                this.sceneryPaneController.generateRoomItems();
                 String description = this.game.getHero().getPlace().getDescription();
                 this.dialogBoxController.addText(description);
             }
         } else {
             this.dialogBoxController.addText("Are you sure that a door exists there ?");
         }
+        this.checkEnd();
     }
 
     @FXML
@@ -395,7 +395,7 @@ public class MorlynnCastleController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Do you really want to quit the game ?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK)
+        if (result.isPresent() && result.get() == ButtonType.OK)
             Platform.exit();
     }
 
@@ -422,7 +422,7 @@ public class MorlynnCastleController {
                 TextInputDialog textInputDialog = new TextInputDialog("");
                 textInputDialog.setTitle("New save");
                 textInputDialog.setHeaderText("Type the name of the save file you wish to create, without extension.");
-                ((Stage)textInputDialog.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
+                ((Stage) textInputDialog.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
                 Optional<String> result = textInputDialog.showAndWait();
                 result.ifPresent(name -> {
                     this.game.save(name);
@@ -475,7 +475,7 @@ public class MorlynnCastleController {
         }
     }
 
-    public void load(String filename){
+    public void load(String filename) {
         this.game.load(filename);
         this.hero = this.game.getHero();
         this.sceneryPaneController.initScenery(this.hero.getPlace());
@@ -486,6 +486,31 @@ public class MorlynnCastleController {
 
     }
 
+    public void checkEnd() {
+        switch (this.game.checkEnd()) {
+            case DEAD:
+                this.gameOver();
+                break;
+            case END:
+                this.end();
+        }
+    }
+
+    public void end() {
+        Alert alert = new Alert(AlertType.NONE);
+        alert.setContentText("Congratulations ! You reached the end of the game !");
+        alert.getButtonTypes().add(ButtonType.OK);
+        alert.showAndWait();
+        Platform.exit();
+    }
+
+    public void gameOver() {
+        Alert alert = new Alert(AlertType.NONE);
+        alert.setContentText("You died.\nGame Over.");
+        alert.getButtonTypes().add(ButtonType.OK);
+        alert.showAndWait();
+        Platform.exit();
+    }
 
 //    public void openInventory(){
 //        this.inventoryPaneController.displayInventory(this.hero.getInventory());

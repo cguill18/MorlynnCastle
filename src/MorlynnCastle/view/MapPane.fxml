@@ -27,6 +27,9 @@
       <FlowPane fx:id="north" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
       <FlowPane fx:id="east" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <FlowPane fx:id="south" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" text="Loupe" onMouseClicked="#showMap"/>
+      <Button mnemonicParsing="false" onMouseClicked="#showMap" GridPane.columnIndex="2" alignment="CENTER_RIGHT" GridPane.halignment="RIGHT"
+              style="-fx-background-image: url('/res/magnifier.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+
+      />
    </children>
 </GridPane>
