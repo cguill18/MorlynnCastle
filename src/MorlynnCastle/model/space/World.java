@@ -126,13 +126,13 @@ public class World implements Serializable {
         Dialog dialog3 = new Dialog(playerChoice3, dialogs3);
 
         //creation d'un pnj
-        Commoner oldman = new Commoner("old_man", "Just an old man",dialog1,5,4);
+        Commoner oldman = new Commoner("old_man", "Just an old man",dialog1,4,3);
         interactionsH.put(oldman.getName(), oldman);
         
         Commoner servant = new Commoner("servant", "A big servant, with red noze", dialog2,5,3);
         interactionsC.put(servant.getName(), servant);
         
-        King king = new King("king", "He looks much richer than you, your deduction talents tell you he's the king.", dialog3,3,0);
+        King king = new King("king", "He looks much richer than you, your deduction talents tell you he's the king.", dialog3,3,1);
         interactionsT.put(king.getName(), king);
 
         Guard guard1 = new Guard("guard1", "A dangerous guard, armed with a spike",2,3);

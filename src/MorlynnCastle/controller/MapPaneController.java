@@ -74,7 +74,7 @@ public class MapPaneController {
     //fonctions de generation des pieces
     public void generateMap() {
         this.clearMap();
-        String styleGeneral = "-fx-background-position: center; -fx-background-size: contain ; -fx-background-repeat: no-repeat;";
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ; -fx-background-repeat: no-repeat;";
         Place HeroPlace = this.game.getHero().getPlace();
         String HeroPlaceString = HeroPlace.getName();
         this.center.setStyle(styleGeneral+"-fx-background-image:url(\"/res/map/"+this.imgPieces.get(HeroPlaceString)+"\")");

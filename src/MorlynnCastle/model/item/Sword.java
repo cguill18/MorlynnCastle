@@ -2,7 +2,7 @@ package MorlynnCastle.model.item;
 
 public class Sword extends Weapon{
 
-    private static final String IMG_SWORD = "weapon.png";
+    private static final String IMG_SWORD = "sword.png";
     private final static int DEFAULT_ATTACK_POWER = 8;
 
     public Sword(String name, String description) {
