@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Hero extends Character {
 
     private static final String IMG_HERO = "hero.png";
-    private static final String NAME = "hero";
+    private static final String NAME = "Otter Pendragon";
     private static final String DESCRIPTION = "You never watched a mirror before ?";
     private static final int STARTING_HP = 30;
     private static final int STARTING_ATT_BONUS = 5;

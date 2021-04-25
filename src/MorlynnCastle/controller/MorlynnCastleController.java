@@ -105,6 +105,7 @@ public class MorlynnCastleController {
         this.maxHp.set(this.game.getHero().getMaxHealthPoints());
         this.ratioHp.bind(Bindings.divide(this.currentHp,this.maxHp));
         this.game.initGame();
+        this.characterPaneController.setName(this.hero.getName());
         this.containerstage = this.setStageContainer();
         this.containerPaneController.setMorlynnCastleController(this);
         this.containerPaneController.setCharacterPaneController(characterPaneController);

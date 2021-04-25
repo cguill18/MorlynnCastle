@@ -61,6 +61,10 @@ public class CharacterPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
+    public void setName(String name){
+        this.name.setText(name);
+    }
+
     public void setProgress(DoubleProperty doubleProperty){
         this.hpBar.progressProperty().bind(doubleProperty);
     }
