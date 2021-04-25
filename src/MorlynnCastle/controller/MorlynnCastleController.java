@@ -264,10 +264,7 @@ public class MorlynnCastleController {
                     this.dialogBoxController.addText(((Scroll) usable).getEffect());
                 } else this.dialogBoxController.addText("You have used this object successfully.\n");
             } else {
-                if (usable instanceof Key)
-                    this.dialogBoxController.addText("Wrong key.\n");
-                else
-                    this.dialogBoxController.addText("You can't use this item on an another.\n");
+                this.dialogBoxController.addText("You can't use this item on an another.\n");
             }
         }
     }
