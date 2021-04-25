@@ -33,24 +33,24 @@ public class SavePaneController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         tableView.setPlaceholder(new Label("No save detected."));
-        TableColumn<File,String> fileNameCol = new TableColumn<>("File name");
-        TableColumn<File,Long> fileLastModCol = new TableColumn<>("Date");
-        tableView.getColumns().addAll(fileNameCol,fileLastModCol);
+        TableColumn<File, String> fileNameCol = new TableColumn<>("File name");
+        TableColumn<File, Long> fileLastModCol = new TableColumn<>("Date");
+        tableView.getColumns().addAll(fileNameCol, fileLastModCol);
         fileNameCol.setCellValueFactory(file -> {
             SimpleStringProperty property = new SimpleStringProperty(file.getValue().getName().replaceFirst("[.][^.]+$", ""));
             return property;
         });
         fileLastModCol.setCellFactory(column -> {
-            TableCell<File, Long> cell = new TableCell<>(){
+            TableCell<File, Long> cell = new TableCell<>() {
 
                 @Override
-                protected void updateItem(Long item, boolean empty){
-                    super.updateItem(item,empty);
+                protected void updateItem(Long item, boolean empty) {
+                    super.updateItem(item, empty);
                     if (empty)
                         setText(null);
-                    else{
+                    else {
                         Date date = new Date(item);
                         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
                         setText(format.format(date));
@@ -65,15 +65,16 @@ public class SavePaneController {
         });
     }
 
-    public void fillList(File[] files){
+    public void fillList(File[] files) {
         ObservableList<File> content = FXCollections.observableArrayList(files);
         tableView.setItems(content);
     }
 
-    public String getSelection(){
-        ObservableList<File> selectedItems = this.tableView.getSelectionModel().getSelectedItems();
-        return selectedItems.get(0).getName().replaceFirst("[.][^.]+$", "");
+    public String getSelection() {
+        File selectedItem = this.tableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null)
+            return selectedItem.getName().replaceFirst("[.][^.]+$", "");
+        else
+            return null;
     }
-
-
 }
