@@ -401,18 +401,26 @@ public class MorlynnCastleController {
             savePaneController.fillList(this.game.getSaveFiles());
             savePaneController.getBottomButton().setText("Overwrite");
             Button newSaveButton = new Button("New save");
-            newSaveButton.setAlignment(Pos.CENTER);
+            BorderPane.setAlignment(newSaveButton, Pos.CENTER);
             newSaveButton.setOnAction(event -> {
                 TextInputDialog textInputDialog = new TextInputDialog("");
                 textInputDialog.setTitle("New save");
                 textInputDialog.setHeaderText("Type the name of the save file you wish to create, without extension.");
                 ((Stage)textInputDialog.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
                 Optional<String> result = textInputDialog.showAndWait();
-                result.ifPresent(name -> this.game.save(name));
+                result.ifPresent(name -> {
+                    this.game.save(name);
+                    savePaneController.fillList(this.game.getSaveFiles());
+                });
             });
             savePaneController.getBorderPane().setTop(newSaveButton);
             savePaneController.getBottomButton().setOnAction(event -> {
-                this.game.save(savePaneController.getSelection());
+                String savename = savePaneController.getSelection();
+                if (savename != null) {
+                    this.game.save(savename);
+                    savePaneController.fillList(this.game.getSaveFiles());
+                }
+
             });
             Stage saveStage = new Stage();
             saveStage.setTitle("Save");
@@ -435,7 +443,9 @@ public class MorlynnCastleController {
             savePaneController.fillList(this.game.getSaveFiles());
             savePaneController.getBottomButton().setText("Load");
             savePaneController.getBottomButton().setOnAction(event -> {
-                this.load(savePaneController.getSelection());
+                String savename = savePaneController.getSelection();
+                if (savename != null)
+                    this.game.load(savename);
             });
             Stage saveStage = new Stage();
             saveStage.setTitle("Load");
