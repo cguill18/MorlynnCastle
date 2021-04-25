@@ -26,7 +26,7 @@ public class CombatSceneryPaneController {
     public void handleClick(MouseEvent event){
         EventTarget eventTarget = event.getTarget();
         if (eventTarget instanceof InteractionView){
-            this.combatPaneController.attackCharacter((InteractionView) eventTarget);
+            this.combatPaneController.launchCommand((InteractionView) eventTarget);
         }
     }
 
