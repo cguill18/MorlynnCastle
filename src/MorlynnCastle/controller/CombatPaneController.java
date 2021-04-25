@@ -39,7 +39,7 @@ public class CombatPaneController {
     public Hero hero;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
 
     }
@@ -53,27 +53,36 @@ public class CombatPaneController {
         this.combat = hero.getOngoingCombat();
         this.combatSceneryPaneController.setCombatPaneController(this);
         this.combatCommandPaneController.setCombatPaneController(this);
-        this.combatSceneryPaneController.displayCharacters(this.hero,this.combat.getEnemies());
+        this.combatSceneryPaneController.displayCharacters(this.hero, this.combat.getEnemies());
+    }
+
+    public void launchCommand(InteractionView interactionView) {
+        switch (this.combatCommandPaneController.getCommand()) {
+            case ATTACK:
+                this.attackCharacter(interactionView);
+                break;
+            case FLEE:
+                this.flee();
+                break;
+        }
     }
 
     public void attackCharacter(InteractionView interactionView) {
-        if (this.combatCommandPaneController.getCommand() == Command.ATTACK) {
-            NonPlayerCharacter npc = (NonPlayerCharacter) interactionView.getInteraction();
-            int damage = this.hero.attack(npc);
-            String text = "You attack "+ npc.getName() +".\n";
-            if (damage == 0)
-                text = text + "Miss !\nHe takes no damage.";
-            else {
-                text = text + "You hit him.\nHe take " + damage +" points of damage.\n";
-                if (!npc.isAlive())
-                    text = text + "You killed him.";
-            }
-            this.textArea.appendText(text);
-            if (!(this.combat.enemiesStillAlive() && this.hero.isAlive())) {
-                this.endCombat();
-            } else {
-                this.combatTurn();
-            }
+        NonPlayerCharacter npc = (NonPlayerCharacter) interactionView.getInteraction();
+        int damage = this.hero.attack(npc);
+        String text = "You attack " + npc.getName() + ".\n";
+        if (damage == 0)
+            text = text + "Miss !\nHe takes no damage.";
+        else {
+            text = text + "You hit him.\nHe take " + damage + " points of damage.\n";
+            if (!npc.isAlive())
+                text = text + "You killed him.";
+        }
+        this.textArea.appendText(text);
+        if (!(this.combat.enemiesStillAlive() && this.hero.isAlive())) {
+            this.endCombat();
+        } else {
+            this.combatTurn();
         }
     }
 
@@ -82,14 +91,14 @@ public class CombatPaneController {
         this.endCombat();
     }
 
-    public void combatTurn(){
+    public void combatTurn() {
         this.combat.getEnemies().values().stream().filter(enemy -> enemy.isAlive()).forEach(enemy -> {
             int damage = this.combat.enemyTurn(hero, enemy);
             String text = enemy.getName() + "attacks you.\n";
             if (damage == 0)
                 text = text + "Miss !\nYou take no damage.";
             else {
-                text = text + "He hits you.\nYou take " + damage +" points of damage.\n";
+                text = text + "He hits you.\nYou take " + damage + " points of damage.\n";
                 if (!this.hero.isAlive())
                     text = text + "You died.";
             }
@@ -101,8 +110,8 @@ public class CombatPaneController {
         Alert alert = new Alert(AlertType.NONE, "Fin du combat", ButtonType.OK);
         alert.showAndWait();
         this.hero.setOngoingCombat(null);
-        System.out.println(this.morlynnCastleController.getGame().getHero().getCurrentHealthPoints());
-        System.out.println(this.morlynnCastleController.getGame().getHero().getMaxHealthPoints());
+        this.combat = null;
+        this.hero = null;
         this.morlynnCastleController.updateHp();
         this.combatCommandPane.getScene().setRoot(this.morlynnCastleController.getBorderPaneRoot());
     }
