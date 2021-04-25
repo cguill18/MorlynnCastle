@@ -256,29 +256,22 @@ public class MorlynnCastleController {
     }
 
     private void use(Usable usable, Receiver receiver) {
-        boolean success = this.game.getHero().use(usable, receiver);
-        if (success) {
-            if (usable instanceof Key) {
-                if (receiver instanceof DoorWithLock) {
-
-                } else {
-
-                }
-                this.sceneryPaneController.generateRoomItems();
-            }
-            if (usable instanceof Scroll) {
-                this.dialogBoxController.addText(((Scroll) usable).getEffect());
-            }
-            else this.dialogBoxController.addText("You have used this object successfully.\n");
+        if (usable instanceof Key) {
+            this.useKey(usable,receiver);
         } else {
-            if (usable instanceof Key)
-                this.dialogBoxController.addText("Wrong key.\n");
-            else
+            boolean success = this.game.getHero().use(usable, receiver);
+            if (success) {
+                if (usable instanceof Scroll) {
+                    this.dialogBoxController.addText(((Scroll) usable).getEffect());
+                } else this.dialogBoxController.addText("You have used this object successfully.\n");
+            } else {
                 this.dialogBoxController.addText("You can't use this item on an another.\n");
+            }
         }
     }
 
     private void useKey(Usable usable, Receiver receiver) {
+        this.game.getHero().use(usable, receiver);
         if (receiver instanceof DoorWithLock) {
             if (((DoorWithLock) receiver).getIsLocked()){
                 ((DoorWithLock) receiver).setImage("locked_door.png");
@@ -287,11 +280,14 @@ public class MorlynnCastleController {
                 ((DoorWithLock) receiver).setImage("unlocked_door.png");
                 ((DoorWithLock) receiver).getMirrorDoorForDoorWithLock().setImage("unlocked_door.png");
             }
-        } else if (receiver instanceof ContainerWithLock) {
+        } else {
             if (((ContainerWithLock) receiver).getIsLocked()) {
+                ((ContainerWithLock)receiver).setImage("locked_chest.png");
+            } else {
                 ((ContainerWithLock)receiver).setImage("unlocked_chest.png");
             }
         }
+        this.sceneryPaneController.generateRoomItems();
     }
 
     private boolean take(Item item) {
