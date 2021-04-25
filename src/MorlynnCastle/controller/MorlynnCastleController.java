@@ -461,7 +461,7 @@ public class MorlynnCastleController {
             savePaneController.getBottomButton().setOnAction(event -> {
                 String savename = savePaneController.getSelection();
                 if (savename != null)
-                    this.game.load(savename);
+                    this.load(savename);
             });
             Stage saveStage = new Stage();
             saveStage.setTitle("Load");
@@ -478,8 +478,6 @@ public class MorlynnCastleController {
     public void load(String filename){
         this.game.load(filename);
         this.hero = this.game.getHero();
-        System.out.println(this.game.getHero().getArmor());
-        System.out.println(this.hero.getArmor());
         this.sceneryPaneController.initScenery(this.hero.getPlace());
         this.mapPaneController.generateMap();
         this.characterPaneController.displayInventory(this.hero.getInventory());
