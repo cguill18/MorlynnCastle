@@ -99,8 +99,9 @@ public class DoorWithLock extends Door implements Lockable {
     	}
     }
 
-	public boolean receiveForScroll(Scroll b) {
+	public boolean receiveForScroll(Scroll scroll) {
     	this.printKeyForThisDoor();
+        scroll.setEffect("This door can be unlocked with a " + this.key.getName() + ".");
     	return true;
 	}
     

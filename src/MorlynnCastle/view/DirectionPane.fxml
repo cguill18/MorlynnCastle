@@ -36,6 +36,7 @@
                 maxHeight="1.7976931348623157E308" 
                 maxWidth="1.7976931348623157E308"
                 onAction="#leftAction"
+
         />
         <Button fx:id="rightButton" 
                 mnemonicParsing="false" 
