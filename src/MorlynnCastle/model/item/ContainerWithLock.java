@@ -44,9 +44,9 @@ public class ContainerWithLock extends Container implements Lockable {
     
 	public boolean receiveForKey(Key k) {
     	if (this.isLocked) {
-    		return !(this.unlock(k));
+    		return this.unlock(k);
     	} else {
-    		return !(this.lock(k));
+    		return this.lock(k);
     	}
 	}
 
@@ -55,10 +55,11 @@ public class ContainerWithLock extends Container implements Lockable {
 		if (this.key == key) {	
 			this.isLocked = false;
 			System.out.println("You unlock the" + this.getName() + " using the " + key.getName() + ".");
+			return true;
 		} else {
 			System.out.println("Wrong key.");
+			return false;
 		}
-		return this.isLocked;
 	}
 
 	@Override
@@ -66,10 +67,11 @@ public class ContainerWithLock extends Container implements Lockable {
 		if (this.key == key) {	
 			this.isLocked = true;
 			System.out.println("You lock the" + this.getName() + " using the " + key.getName() + ".");
+			return true;
 		} else {
 			System.out.println("Wrong key.");
+			return false;
 		}
-		return this.isLocked;
 	}
 
 	@Override

@@ -252,22 +252,23 @@ public class MorlynnCastleController {
     }
 
     private void use(Usable usable, Receiver receiver) {
-        if (usable instanceof Key) {
-            this.useKey(usable, receiver);
-        } else {
-            boolean success = this.game.getHero().use(usable, receiver);
-            if (success) {
-                if (usable instanceof Scroll) {
-                    this.dialogBoxController.addText(((Scroll) usable).getEffect());
-                } else this.dialogBoxController.addText("You have used this object successfully.\n");
-            } else {
-                this.dialogBoxController.addText("You can't use this item on an another.\n");
-            }
+        boolean success = this.game.getHero().use(usable, receiver);
+        if (success) {
+            if (usable instanceof Key) {
+                this.useKey(usable, receiver);
+            } else if (usable instanceof Scroll) {
+                this.dialogBoxController.addText(((Scroll) usable).getEffect());
+            } else this.dialogBoxController.addText("You have used this object successfully.\n");
         }
+        else {
+            if (usable instanceof Key)
+                this.dialogBoxController.addText("Wrong key.\n");
+            else this.dialogBoxController.addText("You can't use this item on an another.\n");
+        }
+
     }
 
     private void useKey(Usable usable, Receiver receiver) {
-        this.game.getHero().use(usable, receiver);
         if (receiver instanceof DoorWithLock) {
             if (((DoorWithLock) receiver).getIsLocked()) {
                 ((DoorWithLock) receiver).setImage("locked_door.png");
