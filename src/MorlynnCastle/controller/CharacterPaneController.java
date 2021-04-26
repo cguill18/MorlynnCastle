@@ -74,7 +74,6 @@ public class CharacterPaneController {
         final int[] i = {0};
         inventory.forEach((name, item) -> {
             InteractionView interactionView = new InteractionView(item);
-            interactionView.setStyle(interactionView.getStyle() + "-fx-background-image:url(\"/res/" + item.getImage() + "\")");
             inventoryPane.add(interactionView, i[0] % this.inventoryPane.getColumnConstraints().size(), i[0] / this.inventoryPane.getColumnConstraints().size());
             i[0]++;
             if (i[0]/this.inventoryPane.getColumnConstraints().size() > (this.inventoryPane.getRowConstraints().size() -1))
@@ -135,14 +134,12 @@ public class CharacterPaneController {
 
     public void addArmor(Armor armor) {
         InteractionView armorView = new InteractionView(armor);
-        armorView.setStyle(armorView.getStyle() + "-fx-background-image:url(\"/res/" + armor.getImage() + "\")");
         this.armorPane.setCenter(armorView);
         this.armorLabel.setText(armor.getName() + "\n" + "Armor class: " + armor.getArmorClass());
     }
 
     public void addWeapon(Weapon weapon) {
         InteractionView weaponView = new InteractionView(weapon);
-        weaponView.setStyle(weaponView.getStyle() + "-fx-background-image:url(\"/res/" + weapon.getImage() + "\")");
         this.weaponPane.setCenter(weaponView);
         this.weaponLabel.setText(weapon.getName() + "\n" + "Attack Power: " + weapon.getAttackPower());
     }

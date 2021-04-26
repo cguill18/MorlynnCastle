@@ -3,6 +3,7 @@ package MorlynnCastle.controller;
 import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
+import MorlynnCastle.view.CharacterView;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -56,10 +57,10 @@ public class CombatPaneController {
         this.combatSceneryPaneController.displayCharacters(this.hero, this.combat.getEnemies());
     }
 
-    public void launchCommand(InteractionView interactionView) {
+    public void launchCommand(CharacterView characterView) {
         switch (this.combatCommandPaneController.getCommand()) {
             case ATTACK:
-                this.attackCharacter(interactionView);
+                this.attackCharacter(characterView);
                 break;
             case FLEE:
                 this.flee();
@@ -67,8 +68,8 @@ public class CombatPaneController {
         }
     }
 
-    public void attackCharacter(InteractionView interactionView) {
-        NonPlayerCharacter npc = (NonPlayerCharacter) interactionView.getInteraction();
+    public void attackCharacter(CharacterView characterView) {
+        NonPlayerCharacter npc = (NonPlayerCharacter) characterView.getInteractionView().getInteraction();
         int damage = this.hero.attack(npc);
         String text = "You attack " + npc.getName() + ".\n";
         if (damage == 0)
@@ -79,7 +80,9 @@ public class CombatPaneController {
                 text = text + "You killed him.";
         }
         this.textArea.appendText(text);
+        characterView.updateHp();
         this.combatTurn();
+
         if (!(this.combat.enemiesStillAlive() && this.hero.isAlive()))
             this.endCombat();
     }
@@ -101,6 +104,7 @@ public class CombatPaneController {
                     text = text + "You died.";
             }
             this.textArea.appendText(text);
+            this.combatSceneryPaneController.getHeroView().updateHp();
         });
     }
 

@@ -93,7 +93,6 @@ public class SceneryPaneController {
         for (Map.Entry<String, Interaction> objects : interactions.entrySet()) {
             if (!(objects.getValue() instanceof Hero)) {
                 InteractionView inte = new InteractionView(objects.getValue());
-                inte.setStyle(inte.getStyle() + "-fx-background-image:url(\"/res/"+objects.getValue().getImage()+"\")");
                 this.sceneryPane.add(inte, objects.getValue().getPosx(), objects.getValue().getPosy());
             }
         }

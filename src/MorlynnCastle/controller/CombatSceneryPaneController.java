@@ -3,6 +3,7 @@ package MorlynnCastle.controller;
 import MorlynnCastle.model.characters.Character;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.space.Interaction;
+import MorlynnCastle.view.CharacterView;
 import MorlynnCastle.view.InteractionView;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
@@ -18,6 +19,12 @@ public class CombatSceneryPaneController {
 
     private CombatPaneController combatPaneController;
 
+    private CharacterView heroView;
+
+    public CharacterView getHeroView() {
+        return heroView;
+    }
+
     public void setCombatPaneController(CombatPaneController combatPaneController) {
         this.combatPaneController = combatPaneController;
     }
@@ -25,21 +32,19 @@ public class CombatSceneryPaneController {
     @FXML
     public void handleClick(MouseEvent event){
         EventTarget eventTarget = event.getTarget();
-        if (eventTarget instanceof InteractionView){
-            this.combatPaneController.launchCommand((InteractionView) eventTarget);
+        if (eventTarget instanceof CharacterView){
+            this.combatPaneController.launchCommand((CharacterView) eventTarget);
         }
     }
 
     public void displayCharacters(Hero hero, Map<String, Character> enemies){
         final int[] i = {0};
-        InteractionView heroView = new InteractionView(hero);
-        heroView.setStyle(heroView.getStyle()+"-fx-background-image:url(\"/res/hero.png\")");
+        this.heroView = new CharacterView(hero);
         combatSceneryPane.add(heroView, 1, 2);
 
         enemies.forEach((name,enemy)->{
-            InteractionView interactionView = new InteractionView(enemy);
-            interactionView.setStyle(interactionView.getStyle()+"-fx-background-image:url(\"/res/"+ enemy.getImage() +"\")");
-            combatSceneryPane.add(interactionView, 3+i[0]/3, 1+i[0]%3);
+            CharacterView characterView = new CharacterView(enemy);
+            combatSceneryPane.add(characterView, 3+i[0]/3, 1+i[0]%3);
             i[0]++;
         });
 

@@ -5,33 +5,33 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 
 
-public class InteractionView extends FlowPane {
+public class InteractionView<I extends Interaction> extends FlowPane {
 
-    private Interaction interaction;
-    
+    private I interaction;
+
     private Tooltip tooltip;
 
 
     //deux constructeurs
-    public InteractionView(Interaction interaction){
+    public InteractionView(I interaction){
         super();
         this.interaction = interaction;
-        this.setStyle("-fx-background-position: center; -fx-background-size: contain ; -fx-background-repeat: no-repeat;");
+        this.setStyle("-fx-background-position: center; -fx-background-size: contain ; -fx-background-repeat: no-repeat;-fx-background-image: url(\"/res/"+ interaction.getImage() +"\");");
         this.tooltip = new Tooltip();
         tooltip.setText(this.getInteraction().getDescription());
         Tooltip.install(this, tooltip);
     }
 
-    public InteractionView(String url, Interaction interaction) {
+    public InteractionView(String url, I interaction) {
         super();
         this.interaction = interaction;
         this.setStyle(url);
     }
 
     //methodes
-    public Interaction getInteraction() { return this.interaction; }
+    public I getInteraction() { return this.interaction; }
 
-    public void setInteraction(Interaction interaction) { this.interaction = interaction; }
+    public void setInteraction(I interaction) { this.interaction = interaction; }
 
     public void setImage(String url) { this.setStyle(url);}
     

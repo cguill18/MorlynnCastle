@@ -74,7 +74,6 @@ public class ContainerPaneController implements Initializable {
         final int[] i = {0};
         container.forEach((name, item) -> {
             InteractionView interactionView = new InteractionView(item);
-            interactionView.setStyle(interactionView.getStyle() + "-fx-background-image:url(\"/res/" + item.getImage() + "\")");
             gridPane.add(interactionView, i[0] % this.gridPane.getColumnConstraints().size(), i[0] / this.gridPane.getColumnConstraints().size());
             i[0]++;
         });
