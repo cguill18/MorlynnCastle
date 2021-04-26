@@ -11,9 +11,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/MorlynnCastle.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/MenuPane.fxml"));
         Parent root = loader.load();
-        MorlynnCastleController controller = loader.getController();
         stage.setScene(new Scene(root,750,500));
         stage.setTitle("Morlynn Castle");
         stage.show();

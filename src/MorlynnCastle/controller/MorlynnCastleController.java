@@ -1,6 +1,7 @@
 package MorlynnCastle.controller;
 
 import MorlynnCastle.model.characters.*;
+import MorlynnCastle.model.characters.Dialog;
 import MorlynnCastle.model.game.Game;
 import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
@@ -17,11 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -89,29 +87,39 @@ public class MorlynnCastleController {
 
     private ContainerPaneController containerPaneController;
 
+    private MenuPaneController menuPaneController;
+
     private DoubleProperty currentHp = new SimpleDoubleProperty();
     private DoubleProperty maxHp = new SimpleDoubleProperty();
     private DoubleProperty ratioHp = new SimpleDoubleProperty();
 
+
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
-        this.game = new Game();
+        this.setStageContainer();
+        this.containerPaneController.setMorlynnCastleController(this);
+        this.sceneryPaneController.setMorlynnCastleController(this);
+        this.characterPaneController.setMorlynnCastleController(this);
+        this.directionPaneController.setMorlynnCastleController(this);
+        this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
+    }
+
+    public void initGame(Game game) {
+        this.game = game;
         this.hero = this.game.getHero();
         this.currentHp.set(this.game.getHero().getCurrentHealthPoints());
         this.maxHp.set(this.game.getHero().getMaxHealthPoints());
         this.ratioHp.bind(Bindings.divide(this.currentHp, this.maxHp));
-        this.game.initGame();
+    }
+
+    public void updateView() {
         this.characterPaneController.setName(this.hero.getName());
-        this.containerstage = this.setStageContainer();
-        this.containerPaneController.setMorlynnCastleController(this);
-        this.sceneryPaneController.setMorlynnCastleController(this);
         this.sceneryPaneController.initScenery(this.hero.getPlace());
-        this.characterPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setProgress(this.ratioHp);
         this.mapPaneController.generateMap(this.hero.getPlace());
-        this.directionPaneController.setMorlynnCastleController(this);
-        this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+        this.characterPaneController.updateEquipment(this.hero);
     }
 
     public Game getGame() {
@@ -128,6 +136,10 @@ public class MorlynnCastleController {
 
     public BorderPane getBorderPaneRoot() {
         return borderPaneRoot;
+    }
+
+    public void setMenuPaneController(MenuPaneController menuPaneController) {
+        this.menuPaneController = menuPaneController;
     }
 
     public Command getCommand() {
@@ -192,8 +204,8 @@ public class MorlynnCastleController {
             this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
         this.containerPaneController.setContainerLooking(interaction);
         this.containerPaneController.displayContainer(interaction.getContent());
-        this.containerstage.setWidth(this.gridPaneGame.getWidth()/4);
-        this.containerstage.setHeight(this.gridPaneGame.getHeight()/4);
+        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 4);
+        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 4);
         this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
         this.containerstage.setTitle("Content");
         this.containerstage.show();
@@ -259,8 +271,7 @@ public class MorlynnCastleController {
             } else if (usable instanceof Scroll) {
                 this.dialogBoxController.addText(((Scroll) usable).getEffect());
             } else this.dialogBoxController.addText("You have used this object successfully.\n");
-        }
-        else {
+        } else {
             if (usable instanceof Key)
                 this.dialogBoxController.addText("Wrong key.\n");
             else this.dialogBoxController.addText("You can't use this item on an another.\n");
@@ -305,7 +316,7 @@ public class MorlynnCastleController {
         this.characterPaneController.displayInventory(this.hero.getInventory());
     }
 
-    public void takeAllFromContainer(Container container){
+    public void takeAllFromContainer(Container container) {
         this.hero.takeAllFromContainer(container);
         this.characterPaneController.displayInventory(this.hero.getInventory());
     }
@@ -374,7 +385,7 @@ public class MorlynnCastleController {
         }
     }
 
-    public Stage setStageContainer() throws IOException {
+    public void setStageContainer() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = (Parent) loader.load();
         this.containerPaneController = loader.getController();
@@ -382,8 +393,7 @@ public class MorlynnCastleController {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
-
-        return stage;
+        this.containerstage = stage;
     }
 
     public void moveHero(String direction) {
@@ -406,16 +416,26 @@ public class MorlynnCastleController {
     }
 
     @FXML
-    public void functionQuit(ActionEvent actionEvent) {
+    public void functionQuit() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Do you really want to quit the game ?");
+        ButtonType buttonTypeMenu = new ButtonType("Main Menu");
+        ButtonType buttonTypeQuit = new ButtonType("Quit");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeMenu, buttonTypeQuit, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK)
-            Platform.exit();
+        if (result.isPresent()) {
+            if (result.get() == buttonTypeMenu)
+                this.borderPaneRoot.getScene().setRoot(this.menuPaneController.getvBoxRoot());
+            else if (result.get() == buttonTypeQuit)
+                Platform.exit();
+        }
     }
 
+
+
     @FXML
-    public void functionHelp(ActionEvent actionEvent) {
+    public void functionHelp() {
         Alert alert = new Alert(AlertType.NONE);
         alert.getButtonTypes().add(ButtonType.OK);
         alert.setTitle("Help");
@@ -424,7 +444,7 @@ public class MorlynnCastleController {
     }
 
     @FXML
-    public void functionSave(ActionEvent actionEvent) {
+    public void functionSave() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SavePane.fxml"));
             Parent root = loader.load();
@@ -466,19 +486,21 @@ public class MorlynnCastleController {
     }
 
     @FXML
-    public void functionLoad(ActionEvent actionEvent) {
+    public void functionLoad() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SavePane.fxml"));
             Parent root = loader.load();
             SavePaneController savePaneController = loader.getController();
             savePaneController.fillList(this.game.getSaveFiles());
             savePaneController.getBottomButton().setText("Load");
+            Stage saveStage = new Stage();
             savePaneController.getBottomButton().setOnAction(event -> {
                 String savename = savePaneController.getSelection();
-                if (savename != null)
+                if (savename != null){
                     this.load(savename);
+                    saveStage.close();
+                }
             });
-            Stage saveStage = new Stage();
             saveStage.setTitle("Load");
             saveStage.initOwner(this.borderPaneRoot.getScene().getWindow());
             saveStage.setAlwaysOnTop(true);

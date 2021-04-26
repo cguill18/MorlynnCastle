@@ -1,16 +1,8 @@
 package MorlynnCastle.view;
 
-import MorlynnCastle.controller.ContainerPaneController;
 import MorlynnCastle.model.space.Interaction;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 
 
 public class InteractionView extends FlowPane {
