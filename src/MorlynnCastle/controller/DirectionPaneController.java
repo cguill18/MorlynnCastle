@@ -18,11 +18,7 @@ public class DirectionPaneController {
     
     @FXML
     private GridPane directionPane;
-    
-    private Game game;
-    
-    private Map<String, String> roomUrl;
-    
+
     @FXML
     private Button upButton;
 
@@ -37,22 +33,9 @@ public class DirectionPaneController {
 
     private MorlynnCastleController morlynnCastleController;
 
-    private SceneryPaneController sceneryPaneController;
-    
-    private DialogBoxController dialogBoxController;
-    
     /****************************/
     /*********methods************/
     /****************************/
-    
-    @FXML
-    public void initialize() {
-        this.roomUrl = new HashMap<>();
-    }
-
-    public void setGame(Game game) { 
-        this.game = game; 
-    }
 
 
     public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {

@@ -39,8 +39,6 @@ public class MapPaneController {
     @FXML
     private FlowPane south;
 
-    private Game game;
-
     private HashMap<String,String> imgPieces = new HashMap<>();
 
     private Popup popup;
@@ -61,8 +59,6 @@ public class MapPaneController {
         this.initPopup();
     }
 
-    public void setGame(Game game) { this.game = game; }
-
     private void initPopup() {
         this.popup = new Popup();
         ImageView img = new ImageView();
@@ -72,10 +68,9 @@ public class MapPaneController {
     }
 
     //fonctions de generation des pieces
-    public void generateMap() {
+    public void generateMap(Place HeroPlace) {
         this.clearMap();
         String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ; -fx-background-repeat: no-repeat;";
-        Place HeroPlace = this.game.getHero().getPlace();
         String HeroPlaceString = HeroPlace.getName();
         this.center.setStyle(styleGeneral+"-fx-background-image:url(\"/res/map/"+this.imgPieces.get(HeroPlaceString)+"\")");
 

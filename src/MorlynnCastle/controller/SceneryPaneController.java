@@ -2,26 +2,22 @@ package MorlynnCastle.controller;
 
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.game.Game;
-import MorlynnCastle.model.item.Key;
 import MorlynnCastle.model.space.Interaction;
 import MorlynnCastle.model.space.Place;
 import MorlynnCastle.view.InteractionView;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SceneryPaneController {
+
     @FXML
     private GridPane sceneryPane;
-
-    private Game game;
 
     private MorlynnCastleController morlynnCastleController;
 
@@ -43,10 +39,6 @@ public class SceneryPaneController {
         this.sceneryPane.setStyle(styleGeneral+"-fx-background-image:url(\"/res/pieces/hall.png\")");
     }
 
-    public void setGame(Game game){ this.game = game; }
-
-    public Game getGame() { return this.game; }
-
     public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {
         this.morlynnCastleController = morlynnCastleController;
     }
@@ -58,7 +50,7 @@ public class SceneryPaneController {
 
     public void initScenery(Place place) {
         this.setBackground(place);
-        this.generateRoomItems();
+        this.displayRoomItems(place.getInteractions());
     }
 
     @FXML
@@ -96,9 +88,8 @@ public class SceneryPaneController {
 
 
     //methodes pour les objets dans la piece
-    public void generateRoomItems() {
+    public void displayRoomItems(Map<String, Interaction> interactions) {
         this.sceneryPane.getChildren().clear();
-        Map<String, Interaction> interactions = game.getHero().getPlace().getInteractions();
         for (Map.Entry<String, Interaction> objects : interactions.entrySet()) {
             if (!(objects.getValue() instanceof Hero)) {
                 InteractionView inte = new InteractionView(objects.getValue());

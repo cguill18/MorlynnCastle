@@ -105,14 +105,11 @@ public class MorlynnCastleController {
         this.characterPaneController.setName(this.hero.getName());
         this.containerstage = this.setStageContainer();
         this.containerPaneController.setMorlynnCastleController(this);
-        this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.sceneryPaneController.initScenery(this.hero.getPlace());
         this.characterPaneController.setMorlynnCastleController(this);
         this.characterPaneController.setProgress(this.ratioHp);
-        this.mapPaneController.setGame(this.game);
-        this.mapPaneController.generateMap();
-        this.directionPaneController.setGame(this.game);
+        this.mapPaneController.generateMap(this.hero.getPlace());
         this.directionPaneController.setMorlynnCastleController(this);
         this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
     }
@@ -197,6 +194,7 @@ public class MorlynnCastleController {
         this.containerPaneController.displayContainer(interaction.getContent());
         this.containerstage.setWidth(this.gridPaneGame.getWidth()/4);
         this.containerstage.setHeight(this.gridPaneGame.getHeight()/4);
+        this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
         this.containerstage.setTitle("Content");
         this.containerstage.show();
     }
@@ -285,7 +283,7 @@ public class MorlynnCastleController {
                 ((ContainerWithLock) receiver).setImage("unlocked_chest.png");
             }
         }
-        this.sceneryPaneController.generateRoomItems();
+        this.sceneryPaneController.displayRoomItems(this.hero.getPlace().getInteractions());
     }
 
     private boolean take(Item item) {
@@ -394,9 +392,9 @@ public class MorlynnCastleController {
                 this.dialogBoxController.addText("A locked door ? How surprising.");
             } else {
                 this.game.getHero().go(door);
-                this.mapPaneController.generateMap();
+                this.mapPaneController.generateMap(this.hero.getPlace());
                 this.sceneryPaneController.setBackground(this.game.getHero().getPlace());
-                this.sceneryPaneController.generateRoomItems();
+                this.sceneryPaneController.displayRoomItems(this.game.getHero().getPlace().getInteractions());
                 String description = this.game.getHero().getPlace().getDescription();
                 this.dialogBoxController.addText(description);
             }
@@ -495,7 +493,7 @@ public class MorlynnCastleController {
         this.game.load(filename);
         this.hero = this.game.getHero();
         this.sceneryPaneController.initScenery(this.hero.getPlace());
-        this.mapPaneController.generateMap();
+        this.mapPaneController.generateMap(this.hero.getPlace());
         this.characterPaneController.displayInventory(this.hero.getInventory());
         this.characterPaneController.clearEquipment();
         this.characterPaneController.updateEquipment(this.hero);
