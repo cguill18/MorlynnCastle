@@ -6,14 +6,11 @@ import MorlynnCastle.model.item.*;
 import MorlynnCastle.model.space.Door;
 import MorlynnCastle.model.space.DoorWithLock;
 import MorlynnCastle.model.space.Interaction;
-import MorlynnCastle.model.space.Lockable;
 import MorlynnCastle.view.InteractionView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,9 +105,6 @@ public class MorlynnCastleController {
         this.characterPaneController.setName(this.hero.getName());
         this.containerstage = this.setStageContainer();
         this.containerPaneController.setMorlynnCastleController(this);
-        this.containerPaneController.setCharacterPaneController(characterPaneController);
-        this.containerPaneController.setDialogBoxController(dialogBoxController);
-        this.containerPaneController.setGame(this.game);
         this.sceneryPaneController.setGame(this.game);
         this.sceneryPaneController.setMorlynnCastleController(this);
         this.sceneryPaneController.initScenery(this.hero.getPlace());
@@ -139,6 +133,10 @@ public class MorlynnCastleController {
         return borderPaneRoot;
     }
 
+    public Command getCommand() {
+        return this.commandPaneController.getCommand();
+    }
+
     public Usable getLaunchCommandArg1() {
         return this.launchCommandArg1;
     }
@@ -151,7 +149,7 @@ public class MorlynnCastleController {
         System.out.println(this.ratioHp.get());
     }
 
-    public void launchCommand(InteractionView interactionView) throws IOException {
+    public void launchCommand(InteractionView interactionView) {
         Interaction interaction = interactionView.getInteraction();
         if (this.commandPaneController.getCommand() != null) {
             switch (this.commandPaneController.getCommand()) {
@@ -159,7 +157,6 @@ public class MorlynnCastleController {
                     if (interaction instanceof Item) {
                         if (this.take((Item) interaction)) {
                             this.sceneryPaneController.removeInteractionView(interactionView);
-                            this.characterPaneController.displayInventory(this.hero.getInventory());
                         }
                     }
                     break;
@@ -198,7 +195,9 @@ public class MorlynnCastleController {
             this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
         this.containerPaneController.setContainerLooking(interaction);
         this.containerPaneController.displayContainer(interaction.getContent());
-        this.containerstage.setTitle("Containts of the chest");
+        this.containerstage.setWidth(this.gridPaneGame.getWidth()/4);
+        this.containerstage.setHeight(this.gridPaneGame.getHeight()/4);
+        this.containerstage.setTitle("Content");
         this.containerstage.show();
     }
 
@@ -293,6 +292,7 @@ public class MorlynnCastleController {
         if (item.isTakable()) {
             this.hero.take(item);
             this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
+            this.characterPaneController.displayInventory(this.hero.getInventory());
             return true;
         } else {
             this.dialogBoxController.addText("You can't take this item.\n");
@@ -300,23 +300,39 @@ public class MorlynnCastleController {
         }
     }
 
-    public void attack(Attackable attackable) throws IOException {
+    public void takeFromContainer(Container container, Item item) {
+        this.hero.takeFromContainer(container, item);
+        this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+    }
+
+    public void takeAllFromContainer(Container container){
+        this.hero.takeAllFromContainer(container);
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+    }
+
+
+    public void attack(Attackable attackable) {
         if (attackable instanceof NonPlayerCharacter) {
             this.attackNonPlayerCharacter((NonPlayerCharacter) attackable);
         } else this.hero.attack(attackable);
     }
 
-    public void attackNonPlayerCharacter(NonPlayerCharacter npc) throws IOException {
-        if (npc.isAlive()) {
-            if (this.hero.getOngoingCombat() == null) {
-                this.startCombat(npc);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
-                Parent root = loader.load();
-                CombatPaneController combatPaneController = loader.getController();
-                combatPaneController.setMorlynnCastleController(this);
-                combatPaneController.initCombat(this.hero);
-                this.gridPaneGame.getScene().setRoot(root);
+    public void attackNonPlayerCharacter(NonPlayerCharacter npc) {
+        try {
+            if (npc.isAlive()) {
+                if (this.hero.getOngoingCombat() == null) {
+                    this.startCombat(npc);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
+                    Parent root = loader.load();
+                    CombatPaneController combatPaneController = loader.getController();
+                    combatPaneController.setMorlynnCastleController(this);
+                    combatPaneController.initCombat(this.hero);
+                    this.gridPaneGame.getScene().setRoot(root);
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

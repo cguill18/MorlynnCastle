@@ -61,6 +61,13 @@ public class Hero extends Character {
         c.removeItem(i.getName());
     }
 
+    public void takeAllFromContainer(Container container){
+        container.getContent().forEach((name, item) -> {
+            this.getInventory().put(name,item);
+        });
+        container.getContent().clear();
+    }
+
     public boolean use(Usable object) throws NullPointerException {
         return object.use();
     }

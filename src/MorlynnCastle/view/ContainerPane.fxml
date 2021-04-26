@@ -8,38 +8,38 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" 
-      maxWidth="-Infinity" 
-      minHeight="-Infinity" 
-      minWidth="-Infinity" 
-      prefHeight="400.0" 
-      prefWidth="600.0" 
-      xmlns="http://javafx.com/javafx" 
-      xmlns:fx="http://javafx.com/fxml/1" 
+<VBox maxHeight="-Infinity"
+      maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="400.0"
+      prefWidth="600.0"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="MorlynnCastle.controller.ContainerPaneController">
-   <children>
-      <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS" gridLinesVisible="true" onMouseClicked="#handleTake">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="take" mnemonicParsing="false"  text="TAKE">
-               <HBox.margin>
-                  <Insets left="15.0" right="15.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </HBox>
-   </children>
+    <children>
+        <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS" gridLinesVisible="true" onMouseClicked="#handleClick">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
+                <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+        <HBox alignment="CENTER">
+            <padding>
+                <Insets top="5.0" bottom="5.0"/>
+            </padding>
+            <children>
+                <Button fx:id="take" mnemonicParsing="false" text="Take all" onAction="#takeAll">
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </HBox>
+    </children>
 </VBox>
