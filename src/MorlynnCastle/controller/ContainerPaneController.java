@@ -20,7 +20,6 @@ public class ContainerPaneController implements Initializable {
     @FXML
     private GridPane gridPane;
 
-
     private MorlynnCastleController morlynnCastleController;
 
     private Container container;

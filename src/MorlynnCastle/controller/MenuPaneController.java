@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -75,5 +76,11 @@ public class MenuPaneController {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    public void initialize(){
+        String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ;";
+        this.vBoxRoot.setStyle(styleGeneral + "-fx-background-image:url(\"/res/menu.png\")");
     }
 }
