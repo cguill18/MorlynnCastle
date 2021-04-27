@@ -57,7 +57,7 @@ public class MorlynnCastleController {
     private VBox characterPane;
 
     @FXML
-    CharacterPaneController characterPaneController;
+    private CharacterPaneController characterPaneController;
 
     @FXML
     private GridPane directionPane;
@@ -76,6 +76,9 @@ public class MorlynnCastleController {
 
     @FXML
     private MapPaneController mapPaneController;
+
+    @FXML
+    private MenuBar menuBar;
 
     private Game game;
 
@@ -204,8 +207,8 @@ public class MorlynnCastleController {
             this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
         this.containerPaneController.setContainerLooking(interaction);
         this.containerPaneController.displayContainer(interaction.getContent());
-        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 4);
-        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 4);
+        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 2);
+        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 2);
         this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
         this.containerstage.setTitle("Content");
         this.containerstage.show();
@@ -436,11 +439,11 @@ public class MorlynnCastleController {
 
     @FXML
     public void functionHelp() {
-        Alert alert = new Alert(AlertType.NONE);
-        alert.getButtonTypes().add(ButtonType.OK);
-        alert.setTitle("Help");
-        alert.setContentText(this.game.helpText());
-        alert.showAndWait();
+        Stage helpStage = new Stage();
+        helpStage.setTitle("Help");
+        TextArea textArea = new TextArea(this.game.helpText());
+        helpStage.setScene(new Scene(textArea,500,300));
+        helpStage.show();
     }
 
     @FXML

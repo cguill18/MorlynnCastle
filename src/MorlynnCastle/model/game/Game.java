@@ -86,7 +86,24 @@ public class Game {
     }
 
     public String helpText(){
-        String text = "A remplir";
+        String text = "To change pieces, use the arrows at the bottom right.\n" +
+                "To see the description of an object, move the mouse over it (without clicking), the description appears on the object.\n"+
+                "To see the interior of a chest click on the \"look\" button (bottom left) then on the trunk.\n" +
+                "To take an object click on the \"take\" button (bottom left) and then on the object, also works for the objects contained in the chests.\n" +
+                "You can only use items that are already in your inventory. Click on \"use\" (bottom left) then on the item.\n"+
+                "If you want to use an object on another one (ex: a key) you have to click on \"use\" and then drag and drop the object from your inventory on an object in the room.\n"+
+                "To equip your character with a weapon or armor that you have picked up. Click on \"equip\" (bottom left), then on the weapon or armor in your inventory.\n" +
+                "To see the items in your inventory click on the \"inventory\" tab (middle right).\n" +
+                "To see your equipment, click on the \"equipment\" tab (middle right).\n" +
+                "To see your character and its life points, click on the \"character\" tab (middle right).\n" +
+                "To talk to a pnj, click on \"talk\" (bottom left), then on the pnj.\n" +
+                "To attack a pnj, click on \"attack\" (bottom left) then on the pnj.\n" +
+                "To flee during a fight click on \"flee\" (command available only in the combat interface).\n"+
+                "To quit the game, click on \"Help\" in the menu bar (top) and then on \"quit\".\n"+
+                "To save a game click on \"File\" in the menu bar (top) and then on \"save\". Enter the name of your save game.\n" +
+                "To restart a game click on \"file\" in the menu bar (top), then on \"load\". Choose your game.\n"+
+                "To see the general map of the game, click on the magnifying glass at the top right.\n"
+                ;
         return text;
     }
 
