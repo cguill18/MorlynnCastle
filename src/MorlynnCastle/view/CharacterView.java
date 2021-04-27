@@ -8,9 +8,11 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
-public class CharacterView extends TilePane {
+public class CharacterView extends VBox {
 
     private InteractionView<Character> interactionView;
 
@@ -18,7 +20,6 @@ public class CharacterView extends TilePane {
 
     private DoubleProperty maxHp = new SimpleDoubleProperty();
 
-    private ProgressBar hpBar;
 
     public CharacterView(Character character) {
         super();
@@ -26,11 +27,15 @@ public class CharacterView extends TilePane {
         this.currentHp.set(character.getCurrentHealthPoints());
         this.maxHp.set(character.getMaxHealthPoints());
         this.setAlignment(Pos.CENTER);
-        this.setOrientation(Orientation.VERTICAL);
-        this.setVgap(2);
+        this.setSpacing(2);
         Label label = new Label(character.getName());
-        this.hpBar = new ProgressBar();
-        this.hpBar.progressProperty().bind(Bindings.divide(currentHp,maxHp));
+        label.setStyle("-fx-font-size: 0.7em");
+        ProgressBar hpBar = new ProgressBar();
+        hpBar.getStylesheets().add("MorlynnCastle/view/hpbar.css");
+        hpBar.progressProperty().bind(Bindings.divide(currentHp,maxHp));
+        hpBar.prefWidthProperty().bind(this.widthProperty().multiply(0.6));
+        hpBar.prefHeightProperty().bind(this.heightProperty().multiply(0.1));
+        VBox.setVgrow(this.interactionView, Priority.ALWAYS);
         this.getChildren().addAll(label,hpBar,interactionView);
     }
 

@@ -29,14 +29,6 @@ public class CombatSceneryPaneController {
         this.combatPaneController = combatPaneController;
     }
 
-    @FXML
-    public void handleClick(MouseEvent event){
-        EventTarget eventTarget = event.getTarget();
-        if (eventTarget instanceof CharacterView){
-            this.combatPaneController.launchCommand((CharacterView) eventTarget);
-        }
-    }
-
     public void displayCharacters(Hero hero, Map<String, Character> enemies){
         final int[] i = {0};
         this.heroView = new CharacterView(hero);
@@ -44,9 +36,14 @@ public class CombatSceneryPaneController {
 
         enemies.forEach((name,enemy)->{
             CharacterView characterView = new CharacterView(enemy);
+            characterView.setOnMouseClicked(event ->  this.combatPaneController.launchCommand(characterView));
             combatSceneryPane.add(characterView, 3+i[0]/3, 1+i[0]%3);
             i[0]++;
         });
-
     }
+
+    public void removeInteractionView(CharacterView characterView){
+        this.combatSceneryPane.getChildren().remove(characterView);
+    }
+
 }

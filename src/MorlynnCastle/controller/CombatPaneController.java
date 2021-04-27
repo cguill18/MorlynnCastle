@@ -4,7 +4,6 @@ import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.view.CharacterView;
-import MorlynnCastle.view.InteractionView;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -58,13 +57,15 @@ public class CombatPaneController {
     }
 
     public void launchCommand(CharacterView characterView) {
-        switch (this.combatCommandPaneController.getCommand()) {
-            case ATTACK:
-                this.attackCharacter(characterView);
-                break;
-            case FLEE:
-                this.flee();
-                break;
+        if (this.combatCommandPaneController.getCommand() != null) {
+            switch (this.combatCommandPaneController.getCommand()) {
+                case ATTACK:
+                    this.attackCharacter(characterView);
+                    break;
+                case FLEE:
+                    this.flee();
+                    break;
+            }
         }
     }
 
@@ -76,8 +77,10 @@ public class CombatPaneController {
             text = text + "Miss !\nHe takes no damage.";
         else {
             text = text + "You hit him.\nHe take " + damage + " points of damage.\n";
-            if (!npc.isAlive())
+            if (!npc.isAlive()){
                 text = text + "You killed him.";
+                this.combatSceneryPaneController.removeInteractionView(characterView);
+            }
         }
         this.textArea.appendText(text);
         characterView.updateHp();

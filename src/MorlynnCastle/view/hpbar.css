@@ -1,0 +1,9 @@
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.progress-bar {
+    -fx-accent: green;
+    -fx-border-color: black;
+}

@@ -30,7 +30,7 @@
                             <Label fx:id="name" style="-fx-font-size:1.5em;" text="Name">
                             </Label>
                             <ProgressBar fx:id="hpBar" prefHeight="${(characterPane.height * 0.05)}"
-                                         prefWidth="${(characterPane.width * 0.8)}" progress="1.0"/>
+                                         prefWidth="${(characterPane.width * 0.8)}" progress="1.0" stylesheets="@hpbar.css"/>
                             <HBox fx:id="avatar" maxHeight="${(characterPane.height * 0.4)}"
                                   maxWidth="${(characterPane.width * 0.5)}" prefHeight="110.0" prefWidth="54.0"
                                   style="-fx-background-image: url('/res/hero.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
