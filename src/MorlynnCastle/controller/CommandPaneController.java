@@ -1,27 +1,8 @@
 package MorlynnCastle.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class CommandPaneController {
-
-    @FXML
-    private Button takeButtonCommand;
-
-    @FXML
-    private Button attackButtonCommand;
-
-    @FXML
-    private Button lookButtonCommand;
-
-    @FXML
-    private Button useButtonCommand;
-
-    @FXML
-    private Button equipButtonCommand;
-
-    @FXML
-    private Button talkButtonCommand;
 
     private Command command;
 
@@ -29,33 +10,37 @@ public class CommandPaneController {
         return command;
     }
 
+    public void resetCommand() {
+        this.command = null;
+    }
+
     @FXML
-    public void take(){
+    public void take() {
         this.command = Command.TAKE;
     }
 
     @FXML
-    public void look(){
+    public void look() {
         this.command = Command.LOOK;
     }
 
     @FXML
-    public void use(){
+    public void use() {
         this.command = Command.USE;
     }
 
     @FXML
-    public void equip(){
+    public void equip() {
         this.command = Command.EQUIP;
     }
 
     @FXML
-    public void attack(){
+    public void attack() {
         this.command = Command.ATTACK;
     }
 
     @FXML
-    public void talk(){
+    public void talk() {
         this.command = Command.TALK;
     }
 }

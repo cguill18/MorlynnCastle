@@ -5,31 +5,31 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Circle?>
 
-<GridPane fx:id="mapPane" prefHeight="100.0" prefWidth="158.0"
+<GridPane fx:id="mapPane"
           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="MorlynnCastle.controller.MapPaneController">
-  <columnConstraints>
-      <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <FlowPane fx:id="center" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      </FlowPane>
-      <FlowPane fx:id="west" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-      <FlowPane fx:id="north" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-      <FlowPane fx:id="east" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <FlowPane fx:id="south" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" onMouseClicked="#showMap" GridPane.columnIndex="2" alignment="CENTER_RIGHT" GridPane.halignment="RIGHT"
-              style="-fx-background-image: url('/res/magnifier.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
-
-      />
-   </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints  vgrow="SOMETIMES" percentHeight="${100/3}"/>
+        <RowConstraints  vgrow="SOMETIMES" percentHeight="${100/3}"/>
+        <RowConstraints  vgrow="SOMETIMES" percentHeight="${100/3}"/>
+    </rowConstraints>
+    <children>
+        <FlowPane fx:id="center" alignment="CENTER" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1">
+        </FlowPane>
+        <FlowPane fx:id="west"  GridPane.rowIndex="1"/>
+        <FlowPane fx:id="north" GridPane.columnIndex="1"/>
+        <FlowPane fx:id="east"  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <FlowPane fx:id="south" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Button mnemonicParsing="false" onMouseClicked="#showMap" GridPane.columnIndex="2" alignment="CENTER_RIGHT"
+                GridPane.halignment="RIGHT"
+                style="-fx-background-image: url('/res/magnifier.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
+        />
+    </children>
 </GridPane>

@@ -1,39 +1,15 @@
 package MorlynnCastle.controller;
 
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import MorlynnCastle.controller.MorlynnCastleController;
-import MorlynnCastle.model.commands.InvalidArgumentNumberException;
-import MorlynnCastle.model.game.Game;
-import MorlynnCastle.model.space.*;
-import java.util.HashMap;
-import java.util.Map;
-import javafx.scene.layout.GridPane;
 
 
 public class DirectionPaneController {
-    
-    @FXML
-    private GridPane directionPane;
 
-    @FXML
-    private Button upButton;
-
-    @FXML
-    private Button leftButton;
-
-    @FXML
-    private Button rightButton;
-
-    @FXML
-    private Button bottomButton;
 
     private MorlynnCastleController morlynnCastleController;
 
-    /****************************/
+    /***************************/
     /*********methods************/
     /****************************/
 
@@ -42,26 +18,26 @@ public class DirectionPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
-    
+
     //actions des boutons
     @FXML
-    private void upAction(ActionEvent event) {
-       this.morlynnCastleController.moveHero("north");
+    private void upAction() {
+        this.morlynnCastleController.moveHero("north");
     }
-    
+
     @FXML
-    private void leftAction(ActionEvent event) {
+    private void leftAction() {
         this.morlynnCastleController.moveHero("west");
     }
-    
+
     @FXML
-    private void rightAction(ActionEvent event) {
+    private void rightAction() {
         this.morlynnCastleController.moveHero("east");
     }
-    
+
     @FXML
-    private void bottomAction(ActionEvent event) {
+    private void bottomAction() {
         this.morlynnCastleController.moveHero("south");
     }
-    
+
 }

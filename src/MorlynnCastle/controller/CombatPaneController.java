@@ -1,5 +1,6 @@
 package MorlynnCastle.controller;
 
+import MorlynnCastle.model.characters.Character;
 import MorlynnCastle.model.characters.Combat;
 import MorlynnCastle.model.characters.Hero;
 import MorlynnCastle.model.characters.NonPlayerCharacter;
@@ -66,6 +67,7 @@ public class CombatPaneController {
                     this.flee();
                     break;
             }
+            this.combatCommandPaneController.resetCommand();
         }
     }
 
@@ -77,7 +79,7 @@ public class CombatPaneController {
             text = text + "Miss !\nHe takes no damage.";
         else {
             text = text + "You hit him.\nHe take " + damage + " points of damage.\n";
-            if (!npc.isAlive()){
+            if (!npc.isAlive()) {
                 text = text + "You killed him.";
                 this.combatSceneryPaneController.removeInteractionView(characterView);
             }
@@ -96,7 +98,7 @@ public class CombatPaneController {
     }
 
     public void combatTurn() {
-        this.combat.getEnemies().values().stream().filter(enemy -> enemy.isAlive()).forEach(enemy -> {
+        this.combat.getEnemies().values().stream().filter(Character::isAlive).forEach(enemy -> {
             int damage = this.combat.enemyTurn(hero, enemy);
             String text = enemy.getName() + "attacks you.\n";
             if (damage == 0)

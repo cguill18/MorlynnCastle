@@ -6,15 +6,15 @@ import MorlynnCastle.model.item.Item;
 import MorlynnCastle.model.item.Weapon;
 import MorlynnCastle.view.InteractionView;
 import javafx.beans.property.DoubleProperty;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.Map;
 
@@ -28,9 +28,6 @@ public class CharacterPaneController {
 
     @FXML
     private GridPane inventoryPane;
-
-    @FXML
-    private HBox avatar;
 
     @FXML
     private TabPane tabPane;
@@ -61,11 +58,11 @@ public class CharacterPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name.setText(name);
     }
 
-    public void setProgress(DoubleProperty doubleProperty){
+    public void setProgress(DoubleProperty doubleProperty) {
         this.hpBar.progressProperty().bind(doubleProperty);
     }
 
@@ -73,16 +70,14 @@ public class CharacterPaneController {
         this.inventoryPane.getChildren().clear();
         final int[] i = {0};
         inventory.forEach((name, item) -> {
-            InteractionView interactionView = new InteractionView(item);
+            InteractionView<Item> interactionView = new InteractionView<>(item);
+            interactionView.setOnMouseClicked(event -> this.morlynnCastleController.launchCommandForInventory(interactionView));
+            interactionView.setOnDragDetected(event -> this.myStartDragAndDrop(event, interactionView));
             inventoryPane.add(interactionView, i[0] % this.inventoryPane.getColumnConstraints().size(), i[0] / this.inventoryPane.getColumnConstraints().size());
             i[0]++;
-            if (i[0]/this.inventoryPane.getColumnConstraints().size() > (this.inventoryPane.getRowConstraints().size() -1))
+            if (i[0] / this.inventoryPane.getColumnConstraints().size() > (this.inventoryPane.getRowConstraints().size() - 1))
                 this.addInventoryRow();
         });
-    }
-
-    public void removeInteractionView(InteractionView interactionView) {
-        this.inventoryPane.getChildren().remove(interactionView);
     }
 
     public void addInventoryRow() {
@@ -93,31 +88,19 @@ public class CharacterPaneController {
     }
 
 
-    @FXML
-    public void handleClick(MouseEvent event) {
-        EventTarget eventTarget = event.getTarget();
-        System.out.println(eventTarget);
-        if (eventTarget instanceof InteractionView) {
-            this.morlynnCastleController.launchCommandForInventory((InteractionView) eventTarget);
-        }
+    public void myStartDragAndDrop(MouseEvent event, InteractionView<Item> interactionView) {
+        Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(Color.TRANSPARENT);
+        content.putImage(interactionView.snapshot(snapshotParameters, null));
+        db.setContent(content);
+        event.consume();
+        this.morlynnCastleController.launchDrag(interactionView);
     }
 
 
-    @FXML
-    public void MyStartDragAndDrop(MouseEvent event) {
-        EventTarget eventTarget = event.getTarget();
-        if (eventTarget instanceof InteractionView) {
-            Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.putString("le drag and drop est capricieux");
-            db.setContent(content);
-            event.consume();
-            this.morlynnCastleController.launchDrag((InteractionView) eventTarget);
-        }
-    }
-
-
-    public void clearEquipment(){
+    public void clearEquipment() {
         this.weaponPane.setCenter(null);
         this.armorPane.setCenter(null);
         this.armorLabel.setText(null);
@@ -133,13 +116,13 @@ public class CharacterPaneController {
 
 
     public void addArmor(Armor armor) {
-        InteractionView armorView = new InteractionView(armor);
+        InteractionView<Armor> armorView = new InteractionView<>(armor);
         this.armorPane.setCenter(armorView);
         this.armorLabel.setText(armor.getName() + "\n" + "Armor class: " + armor.getArmorClass());
     }
 
     public void addWeapon(Weapon weapon) {
-        InteractionView weaponView = new InteractionView(weapon);
+        InteractionView<Weapon> weaponView = new InteractionView<>(weapon);
         this.weaponPane.setCenter(weaponView);
         this.weaponLabel.setText(weapon.getName() + "\n" + "Attack Power: " + weapon.getAttackPower());
     }

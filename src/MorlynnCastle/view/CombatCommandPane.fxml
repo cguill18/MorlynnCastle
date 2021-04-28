@@ -15,9 +15,9 @@
         <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Button fx:id="attackButton" onAction="#attack" mnemonicParsing="false" text="Attack" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308"/>
-        <Button fx:id="fleeButton" onAction="#flee" mnemonicParsing="false" text="Flee" GridPane.rowIndex="1" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308"/>
+        <Button onAction="#attack" mnemonicParsing="false" text="Attack" maxHeight="Infinity"
+                maxWidth="Infinity"/>
+        <Button onAction="#flee" mnemonicParsing="false" text="Flee" GridPane.rowIndex="1" maxHeight="Infinity"
+                maxWidth="Infinity"/>
     </children>
 </GridPane>

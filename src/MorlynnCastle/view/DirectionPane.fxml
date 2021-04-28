@@ -5,31 +5,31 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="directionPane" prefHeight="100.0" prefWidth="125.0" xmlns="http://javafx.com/javafx/"
+<GridPane xmlns="http://javafx.com/javafx/"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.DirectionPaneController">
     <columnConstraints>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="${100/3}" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="${100/3}" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="${100/3}" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Button fx:id="upButton" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#upAction"
+        <Button contentDisplay="TOP" maxHeight="Infinity"
+                maxWidth="Infinity" mnemonicParsing="false" onAction="#upAction"
                 style="-fx-background-image: url('/res/north_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                 GridPane.columnIndex="1"/>
-        <Button fx:id="leftButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        <Button maxHeight="Infinity" maxWidth="Infinity"
                 style="-fx-background-image: url('/res/west_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                 mnemonicParsing="false" onAction="#leftAction" GridPane.rowIndex="1"/>
-        <Button fx:id="rightButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        <Button maxHeight="Infinity" maxWidth="Infinity"
                 mnemonicParsing="false" onAction="#rightAction" GridPane.columnIndex="2"
                 style="-fx-background-image: url('/res/east_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                 GridPane.rowIndex="1"/>
-        <Button fx:id="bottomButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        <Button maxHeight="Infinity" maxWidth="Infinity"
                 mnemonicParsing="false" onAction="#bottomAction" GridPane.columnIndex="1"
                 style="-fx-background-image: url('/res/south_arrow.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                 GridPane.rowIndex="2"/>

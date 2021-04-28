@@ -1,7 +1,5 @@
 package MorlynnCastle;
 
-import MorlynnCastle.controller.MorlynnCastleController;
-import MorlynnCastle.model.game.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

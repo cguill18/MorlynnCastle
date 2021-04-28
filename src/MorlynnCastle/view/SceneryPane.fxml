@@ -5,28 +5,25 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane fx:id="sceneryPane"
-          onDragOver="#MyDragAndDrop"
-          onDragDropped="#MyEndDragAndDrop"
-          onMouseClicked="#handleClick"
           xmlns="http://javafx.com/javafx/"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="MorlynnCastle.controller.SceneryPaneController">
-<columnConstraints>
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-    <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.2" prefWidth="100.0" />
-</columnConstraints>
-<rowConstraints>
-    <RowConstraints fillHeight="true" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints fillHeight="true" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-<children>
-</children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/7}"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+    </children>
 </GridPane>

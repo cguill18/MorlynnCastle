@@ -1,15 +1,19 @@
 package MorlynnCastle.controller;
 
 import MorlynnCastle.model.game.Game;
+import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.TilePane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -25,8 +29,22 @@ public class MenuPaneController {
     @FXML
     public void start() {
         Game game = new Game();
+        String text ="\n"+ game.historyText() + "\n\n\n\n\n\n\n\n";
+        TextArea textArea = new TextArea(text);
+        textArea.setWrapText(true);
+        textArea.styleProperty().bind(Bindings.concat("-fx-font-size: 28; -fx-font-family: 'Book Antiqua';"));
+        this.vBoxRoot.getScene().setRoot(textArea);
         game.initGame();
-        this.launchGame(game);
+        Animation animation = new Timeline(
+                new KeyFrame(Duration.seconds(10),
+                        new KeyValue(textArea.scrollTopProperty(),300)));
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.seconds(3));
+        fade.setToValue(0);
+        fade.setNode(textArea);
+        animation.setOnFinished(actionEvent -> fade.play());
+        fade.setOnFinished(actionEvent -> this.launchGame(game,textArea.getScene()));
+        animation.play();
     }
 
     @FXML
@@ -43,8 +61,8 @@ public class MenuPaneController {
                 String savename = savePaneController.getSelection();
                 if (savename != null) {
                     game.load(savename);
-                    this.launchGame(game);
                     saveStage.close();
+                    this.launchGame(game,this.vBoxRoot.getScene());
                 }
             });
             saveStage.setTitle("Load");
@@ -63,7 +81,7 @@ public class MenuPaneController {
         Platform.exit();
     }
 
-    public void launchGame(Game game) {
+    public void launchGame(Game game, Scene scene) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MorlynnCastle.fxml"));
             Parent root = loader.load();
@@ -71,16 +89,19 @@ public class MenuPaneController {
             controller.initGame(game);
             controller.setMenuPaneController(this);
             controller.updateView();
-            this.vBoxRoot.getScene().setRoot(root);
+            scene.setRoot(root);
+            root.setOpacity(0);
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), root);
+            fadeTransition.setFromValue(0.);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
-    public void initialize(){
-        String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ;";
-        this.vBoxRoot.setStyle(styleGeneral + "-fx-background-image:url(\"/res/menu.png\")");
+    public void initialize() {
+        this.vBoxRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", vBoxRoot.widthProperty().divide(60).asString(), ";", vBoxRoot.getStyle()));
     }
 }

@@ -1,22 +1,19 @@
 package MorlynnCastle.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class CombatCommandPaneController {
-
-    @FXML
-    private Button attackButton;
-
-    @FXML
-    private Button fleeButton;
 
     private CombatPaneController combatPaneController;
 
     private Command command;
 
     public Command getCommand() {
-        return command;
+        return this.command;
+    }
+
+    public void resetCommand() {
+        this.command = null;
     }
 
     public void setCombatPaneController(CombatPaneController combatPaneController) {
@@ -24,12 +21,12 @@ public class CombatCommandPaneController {
     }
 
     @FXML
-    public void attack(){
+    public void attack() {
         this.command = Command.ATTACK;
     }
 
     @FXML
-    public void flee(){
+    public void flee() {
         this.combatPaneController.flee();
     }
 }

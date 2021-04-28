@@ -12,13 +12,11 @@
       maxWidth="-Infinity"
       minHeight="-Infinity"
       minWidth="-Infinity"
-      prefHeight="400.0"
-      prefWidth="600.0"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="MorlynnCastle.controller.ContainerPaneController">
     <children>
-        <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS" gridLinesVisible="true" onMouseClicked="#handleClick">
+        <GridPane fx:id="gridPane" VBox.vgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="${100/3}"/>
@@ -34,7 +32,7 @@
                 <Insets top="5.0" bottom="5.0"/>
             </padding>
             <children>
-                <Button fx:id="take" mnemonicParsing="false" text="Take all" onAction="#takeAll">
+                <Button mnemonicParsing="false" text="Take all" onAction="#takeAll">
                 </Button>
             </children>
             <VBox.margin>

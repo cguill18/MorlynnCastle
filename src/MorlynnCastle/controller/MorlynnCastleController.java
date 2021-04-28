@@ -12,7 +12,6 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -77,9 +77,6 @@ public class MorlynnCastleController {
     @FXML
     private MapPaneController mapPaneController;
 
-    @FXML
-    private MenuBar menuBar;
-
     private Game game;
 
     private Hero hero;
@@ -125,18 +122,6 @@ public class MorlynnCastleController {
         this.characterPaneController.updateEquipment(this.hero);
     }
 
-    public Game getGame() {
-        return this.game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public GridPane getGridPaneGame() {
-        return gridPaneGame;
-    }
-
     public BorderPane getBorderPaneRoot() {
         return borderPaneRoot;
     }
@@ -149,9 +134,10 @@ public class MorlynnCastleController {
         return this.commandPaneController.getCommand();
     }
 
-    public Usable getLaunchCommandArg1() {
-        return this.launchCommandArg1;
+    public void resetCommand() {
+        this.commandPaneController.resetCommand();
     }
+
 
     public void updateHp() {
         this.currentHp.set(this.hero.getCurrentHealthPoints());
@@ -161,7 +147,7 @@ public class MorlynnCastleController {
         System.out.println(this.ratioHp.get());
     }
 
-    public void launchCommand(InteractionView interactionView) {
+    public void launchCommand(InteractionView<Interaction> interactionView) {
         Interaction interaction = interactionView.getInteraction();
         if (this.commandPaneController.getCommand() != null) {
             switch (this.commandPaneController.getCommand()) {
@@ -182,9 +168,6 @@ public class MorlynnCastleController {
                         }
                     }
                     break;
-                case USE:
-                    this.dialogBoxController.addText("Please use an item in your inventory.\n");
-                    break;
                 case ATTACK:
                     if (interaction instanceof Attackable) {
                         this.attack((Attackable) interaction);
@@ -196,8 +179,7 @@ public class MorlynnCastleController {
                     }
                     break;
             }
-        } else {
-            this.dialogBoxController.addText("Please click a command before.\n");
+            this.resetCommand();
         }
         this.checkEnd();
     }
@@ -207,14 +189,14 @@ public class MorlynnCastleController {
             this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
         this.containerPaneController.setContainerLooking(interaction);
         this.containerPaneController.displayContainer(interaction.getContent());
-        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 2);
-        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 2);
+        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 3);
+        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 3);
         this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
         this.containerstage.setTitle("Content");
         this.containerstage.show();
     }
 
-    public void launchCommandForInventory(InteractionView interactionView) {
+    public void launchCommandForInventory(InteractionView<Item> interactionView) {
         Interaction interaction = interactionView.getInteraction();
         switch (this.commandPaneController.getCommand()) {
             case USE:
@@ -235,7 +217,7 @@ public class MorlynnCastleController {
         this.characterPaneController.updateEquipment(this.hero);
     }
 
-    public void launchDrop(InteractionView interactionView) {
+    public void launchDrop(InteractionView<Interaction> interactionView) {
         Interaction inte = interactionView.getInteraction();
         if (inte instanceof Receiver) {
             if (this.launchCommandArg1 != null) {
@@ -245,7 +227,7 @@ public class MorlynnCastleController {
         }
     }
 
-    public void launchDrag(InteractionView interactionView) {
+    public void launchDrag(InteractionView<Item> interactionView) {
         if (this.commandPaneController.getCommand() == Command.USE) {
             Interaction inte = interactionView.getInteraction();
             if (inte instanceof Usable)
@@ -270,19 +252,19 @@ public class MorlynnCastleController {
         boolean success = this.game.getHero().use(usable, receiver);
         if (success) {
             if (usable instanceof Key) {
-                this.useKey(usable, receiver);
+                this.useKey(receiver);
             } else if (usable instanceof Scroll) {
                 this.dialogBoxController.addText(((Scroll) usable).getEffect());
             } else this.dialogBoxController.addText("You have used this object successfully.\n");
         } else {
             if (usable instanceof Key)
                 this.dialogBoxController.addText("Wrong key.\n");
-            else this.dialogBoxController.addText("You can't use this item on an another.\n");
+            else this.dialogBoxController.addText("You can't use this item like this.\n");
         }
 
     }
 
-    private void useKey(Usable usable, Receiver receiver) {
+    private void useKey(Receiver receiver) {
         if (receiver instanceof DoorWithLock) {
             if (((DoorWithLock) receiver).getIsLocked()) {
                 ((DoorWithLock) receiver).setImage("locked_door.png");
@@ -369,9 +351,9 @@ public class MorlynnCastleController {
             this.characterPane.setDisable(true);
             for (int i = 0; i < dialog.getPlayerChoices().size(); i++) {
                 String answer = dialog.getDialogs().get(i);
-                EventHandler eventHandler = new EventHandler() {
+                EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
                     @Override
-                    public void handle(Event event) {
+                    public void handle(MouseEvent event) {
                         dialogBoxController.addText(answer);
                     }
                 };
@@ -390,7 +372,7 @@ public class MorlynnCastleController {
 
     public void setStageContainer() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         this.containerPaneController = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -436,13 +418,13 @@ public class MorlynnCastleController {
     }
 
 
-
     @FXML
     public void functionHelp() {
         Stage helpStage = new Stage();
         helpStage.setTitle("Help");
         TextArea textArea = new TextArea(this.game.helpText());
-        helpStage.setScene(new Scene(textArea,500,300));
+        textArea.setWrapText(true);
+        helpStage.setScene(new Scene(textArea, 500, 300));
         helpStage.show();
     }
 
@@ -499,7 +481,7 @@ public class MorlynnCastleController {
             Stage saveStage = new Stage();
             savePaneController.getBottomButton().setOnAction(event -> {
                 String savename = savePaneController.getSelection();
-                if (savename != null){
+                if (savename != null) {
                     this.load(savename);
                     saveStage.close();
                 }
@@ -551,18 +533,5 @@ public class MorlynnCastleController {
         alert.showAndWait();
         Platform.exit();
     }
-
-//    public void openInventory(){
-//        this.inventoryPaneController.displayInventory(this.hero.getInventory());
-//        Stage inventoryStage = new Stage();
-//        inventoryStage.initOwner(this.gridPaneRoot.getScene().getWindow());
-//        if (this.inventoryPane.getScene() == null){
-//            inventoryStage.setScene(new Scene(this.inventoryPane));
-//        }
-//        else
-//            inventoryStage.setScene(this.inventoryPane.getScene());
-//        inventoryStage.setTitle("Inventory");
-//        inventoryStage.show();
-//    }
 
 }

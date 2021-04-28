@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="characterPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0" xmlns="http://javafx.com/javafx/15.0.1"
+<VBox fx:id="characterPane" alignment="CENTER" xmlns="http://javafx.com/javafx/"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="MorlynnCastle.controller.CharacterPaneController">
     <children>
         <TabPane fx:id="tabPane" style="-fx-font-size:0.7em;-fx-padding: 5 -15 0 -5;"
@@ -30,9 +29,10 @@
                             <Label fx:id="name" style="-fx-font-size:1.5em;" text="Name">
                             </Label>
                             <ProgressBar fx:id="hpBar" prefHeight="${(characterPane.height * 0.05)}"
-                                         prefWidth="${(characterPane.width * 0.8)}" progress="1.0" stylesheets="@hpbar.css"/>
-                            <HBox fx:id="avatar" maxHeight="${(characterPane.height * 0.4)}"
-                                  maxWidth="${(characterPane.width * 0.5)}" prefHeight="110.0" prefWidth="54.0"
+                                         prefWidth="${(characterPane.width * 0.8)}" progress="1.0"
+                                         stylesheets="@hpbar.css"/>
+                            <HBox maxHeight="${(characterPane.height * 0.4)}"
+                                  maxWidth="${(characterPane.width * 0.5)}"
                                   style="-fx-background-image: url('/res/hero.png'); -fx-background-position: center; -fx-background-size: contain; -fx-background-repeat: no-repeat;"
                                   VBox.vgrow="ALWAYS">
                             </HBox>
@@ -43,8 +43,7 @@
                     <content>
                         <ScrollPane fx:id="scrollPane" fitToWidth="true" vbarPolicy="ALWAYS">
                             <content>
-                                <GridPane fx:id="inventoryPane" gridLinesVisible="true"
-                                          onDragDetected="#MyStartDragAndDrop" onMouseClicked="#handleClick">
+                                <GridPane fx:id="inventoryPane">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
                                         <ColumnConstraints hgrow="NEVER" percentWidth="25.0"/>
@@ -77,7 +76,8 @@
                                         <Label text="Weapon"></Label>
                                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <BorderPane fx:id="weaponPane" style="-fx-border-color:black" HBox.hgrow="ALWAYS">
+                                                <BorderPane fx:id="weaponPane" style="-fx-border-color:black"
+                                                            HBox.hgrow="ALWAYS">
                                                 </BorderPane>
                                             </children>
                                         </HBox>
@@ -97,7 +97,8 @@
                                         <Label text="Armor"></Label>
                                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <BorderPane fx:id="armorPane" style="-fx-border-color:black" HBox.hgrow="ALWAYS">
+                                                <BorderPane fx:id="armorPane" style="-fx-border-color:black"
+                                                            HBox.hgrow="ALWAYS">
                                                 </BorderPane>
                                             </children>
                                         </HBox>

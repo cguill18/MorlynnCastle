@@ -16,11 +16,11 @@ public class Game {
     private final Scanner scanner;
     private Interpreter interpreter;
 
-    public Game(){
+    public Game() {
         this.hero = new Hero();
         this.world = new World();
         this.scanner = null;
-        this.interpreter = new Interpreter(this.hero,this);
+        this.interpreter = new Interpreter(this.hero, this);
 
     }
 
@@ -28,7 +28,7 @@ public class Game {
         this.hero = new Hero();
         this.world = new World();
         this.scanner = input;
-        this.interpreter = new Interpreter(this.hero,this);
+        this.interpreter = new Interpreter(this.hero, this);
     }
 
     public Hero getHero() {
@@ -58,6 +58,21 @@ public class Game {
         System.out.println();
     }
 
+    public String historyText() {
+        String text = "Hello hero and welcome to Morlynn Castle.\n" +
+                "You are Otter Pendragon, a young nobleman wishing to prove himself. \n" +
+                "No time for pleasantries. This might be your one and only chance. " +
+                "The military are carrying out a coup d'etat and have taken the king hostage just now. " +
+                "Your mission, should you choose to accept it, is to kill the guards in the throne room to save the king and exit the castle. " +
+                "I hope the king knows the way out, because the main gate has closed just behind you. " +
+                "You managed to sneak into the castle through this one, but in order not to attract attention you didn't carry any weapons or armor. " +
+                "You will have to equip yourself by finding what you can in the castle. " +
+                "Some of the doors will be locked, luckily you can find a way to open them, keys should do the trick. " +
+                "Be careful, the guards might attack you. " +
+                "Good luck, you might need it. ";
+        return text;
+    }
+
     public void help() {
         System.out.println("To play this game, you will have to type combination of words in the command line.");
         System.out.println("When you play, the \"..._name\" in the description of the usable commands below must be replaced with the name of what you want to interact with.");
@@ -85,25 +100,24 @@ public class Game {
         System.out.println();
     }
 
-    public String helpText(){
-        String text = "To change pieces, use the arrows at the bottom right.\n" +
-                "To see the description of an object, move the mouse over it (without clicking), the description appears on the object.\n"+
-                "To see the interior of a chest click on the \"look\" button (bottom left) then on the trunk.\n" +
+    public String helpText() {
+        String text = "To move to another room, use the arrows at the bottom right.\n" +
+                "To see the description of an object, move the mouse over it (without clicking), the description appears on the object.\n" +
+                "To see the interior of a chest click on the \"look\" button (bottom left) then on the chest.\n" +
                 "To take an object click on the \"take\" button (bottom left) and then on the object, also works for the objects contained in the chests.\n" +
-                "You can only use items that are already in your inventory. Click on \"use\" (bottom left) then on the item.\n"+
-                "If you want to use an object on another one (ex: a key) you have to click on \"use\" and then drag and drop the object from your inventory on an object in the room.\n"+
+                "You can only use items that are already in your inventory. Click on \"use\" (bottom left) then on the item.\n" +
+                "If you want to use an object on another one (ex: a key) you have to click on \"use\" and then drag and drop the object from your inventory on an object in the room.\n" +
                 "To equip your character with a weapon or armor that you have picked up. Click on \"equip\" (bottom left), then on the weapon or armor in your inventory.\n" +
                 "To see the items in your inventory click on the \"inventory\" tab (middle right).\n" +
                 "To see your equipment, click on the \"equipment\" tab (middle right).\n" +
                 "To see your character and its life points, click on the \"character\" tab (middle right).\n" +
                 "To talk to a pnj, click on \"talk\" (bottom left), then on the pnj.\n" +
                 "To attack a pnj, click on \"attack\" (bottom left) then on the pnj.\n" +
-                "To flee during a fight click on \"flee\" (command available only in the combat interface).\n"+
-                "To quit the game, click on \"Help\" in the menu bar (top) and then on \"quit\".\n"+
+                "To flee during a fight click on \"flee\" (command available only in the combat interface).\n" +
+                "To quit the game, click on \"Help\" in the menu bar (top) and then on \"quit\".\n" +
                 "To save a game click on \"File\" in the menu bar (top) and then on \"save\". Enter the name of your save game.\n" +
-                "To restart a game click on \"file\" in the menu bar (top), then on \"load\". Choose your game.\n"+
-                "To see the general map of the game, click on the magnifying glass at the top right.\n"
-                ;
+                "To restart a game click on \"file\" in the menu bar (top), then on \"load\". Choose your game.\n" +
+                "To see the general map of the game, click on the magnifying glass at the top right.\n";
         return text;
     }
 
@@ -134,14 +148,14 @@ public class Game {
             oos.flush();
             oos.close();
             System.out.println("your progress has been successfully saved in" + fileName + ".");
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("It seems you can't save in this directory.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void save(String fileName){
+    public void save(String fileName) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName + ".sav"));
             oos.writeObject(this.running);
@@ -150,7 +164,7 @@ public class Game {
             oos.flush();
             oos.close();
             System.out.println("your progress has been successfully saved in" + fileName + ".");
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("It seems you can't save in this directory.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -158,7 +172,7 @@ public class Game {
 
     }
 
-    public String[] showSaveFiles(){
+    public String[] showSaveFiles() {
         String pathname = System.getProperty("user.dir");
         File file = new File(pathname);
         FilenameFilter filter = (f, name) -> name.endsWith(".sav");
@@ -169,7 +183,7 @@ public class Game {
         return filesNames;
     }
 
-    public File[] getSaveFiles(){
+    public File[] getSaveFiles() {
         String pathname = System.getProperty("user.dir");
         File file = new File(pathname);
         FilenameFilter filter = (f, name) -> name.endsWith(".sav");
@@ -177,7 +191,7 @@ public class Game {
     }
 
 
-    public boolean load(){
+    public boolean load() {
         boolean success = false;
         this.showSaveFiles();
         System.out.println("Type the name of the save file you wish to load, without extension, and press Return.");
@@ -187,28 +201,10 @@ public class Game {
             this.running = (boolean) ois.readObject();
             this.hero = (Hero) ois.readObject();
             this.world = (World) ois.readObject();
-            this.interpreter = new Interpreter(this.hero,this);
+            this.interpreter = new Interpreter(this.hero, this);
             success = true;
             System.out.println("The save has been successfully loaded.");
-        } catch (FileNotFoundException e){
-            System.out.println("This file doesn't exist.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error, the file you wish to load might not be a save or is corrupted.");
-        }
-        return success;
-    }
-    public boolean load(String fileName)
-    {
-        boolean success = false;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName + ".sav"));
-            this.running = (boolean) ois.readObject();
-            this.hero = (Hero) ois.readObject();
-            this.world = (World) ois.readObject();
-            this.interpreter = new Interpreter(this.hero,this);
-            success = true;
-            System.out.println("The save has been successfully loaded.");
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("This file doesn't exist.");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error, the file you wish to load might not be a save or is corrupted.");
@@ -216,7 +212,25 @@ public class Game {
         return success;
     }
 
-    public void initGame(){
+    public boolean load(String fileName) {
+        boolean success = false;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName + ".sav"));
+            this.running = (boolean) ois.readObject();
+            this.hero = (Hero) ois.readObject();
+            this.world = (World) ois.readObject();
+            this.interpreter = new Interpreter(this.hero, this);
+            success = true;
+            System.out.println("The save has been successfully loaded.");
+        } catch (FileNotFoundException e) {
+            System.out.println("This file doesn't exist.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error, the file you wish to load might not be a save or is corrupted.");
+        }
+        return success;
+    }
+
+    public void initGame() {
         this.history();
         this.help();
         this.world.setStart(this.hero);
@@ -230,7 +244,7 @@ public class Game {
         while (!(input.equals("start") || input.equals("load")) && scanner.hasNext()) {
             System.out.println("I didn't understand your command.");
         }
-        if (!(input.equals("load") && this.load())){
+        if (!(input.equals("load") && this.load())) {
             this.initGame();
         }
         this.hero.look();
@@ -255,14 +269,13 @@ public class Game {
         }
     }
 
-    public GameState checkEnd(){
-        if (this.hero.isAlive()){
+    public GameState checkEnd() {
+        if (this.hero.isAlive()) {
             if (this.hero.isGoalAchieved())
                 return GameState.END;
             else
                 return GameState.ALIVE;
-        }
-        else
+        } else
             return GameState.DEAD;
     }
 

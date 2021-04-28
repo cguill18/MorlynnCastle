@@ -5,32 +5,32 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="commandPane" prefHeight="100.0" prefWidth="158.0" xmlns="http://javafx.com/javafx"
+<GridPane fx:id="commandPane" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="MorlynnCastle.controller.CommandPaneController"
 >
     <columnConstraints>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" percentWidth="34.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" percentWidth="33.0"/>
-        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" percentWidth="33.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="34.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="33.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="33.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints fillHeight="true" percentHeight="50.0" vgrow="SOMETIMES"/>
-        <RowConstraints fillHeight="true" percentHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Button fx:id="takeButtonCommand" onAction="#take" mnemonicParsing="false" text="Take"
+        <Button onAction="#take" mnemonicParsing="false" text="Take"
                 maxHeight="Infinity" maxWidth="Infinity"/>
-        <Button fx:id="lookButtonCommand" onAction="#look" mnemonicParsing="false" text="Look" GridPane.rowIndex="1"
+        <Button onAction="#look" mnemonicParsing="false" text="Look" GridPane.rowIndex="1"
                 maxHeight="Infinity" maxWidth="Infinity"/>
-        <Button fx:id="useButtonCommand" onAction="#use" mnemonicParsing="false" text="Use" GridPane.columnIndex="1"
+        <Button onAction="#use" mnemonicParsing="false" text="Use" GridPane.columnIndex="1"
                 maxHeight="Infinity" maxWidth="Infinity"/>
-        <Button fx:id="equipButtonCommand" onAction="#equip" mnemonicParsing="false" text="Equip"
+        <Button onAction="#equip" mnemonicParsing="false" text="Equip"
                 GridPane.columnIndex="1" GridPane.rowIndex="1" maxHeight="Infinity"
                 maxWidth="Infinity"/>
-        <Button fx:id="attackButtonCommand" onAction="#attack" mnemonicParsing="false" text="Attack"
+        <Button onAction="#attack" mnemonicParsing="false" text="Attack"
                 GridPane.columnIndex="2" maxHeight="Infinity" maxWidth="Infinity"/>
-        <Button fx:id="talkButtonCommand" onAction="#talk" mnemonicParsing="false" text="Talk" GridPane.columnIndex="2"
+        <Button onAction="#talk" mnemonicParsing="false" text="Talk" GridPane.columnIndex="2"
                 GridPane.rowIndex="1" maxHeight="Infinity" maxWidth="Infinity"/>
     </children>
 </GridPane>

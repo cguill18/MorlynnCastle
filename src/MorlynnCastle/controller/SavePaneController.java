@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import java.io.File;
@@ -43,7 +42,7 @@ public class SavePaneController {
             return property;
         });
         fileLastModCol.setCellFactory(column -> {
-            TableCell<File, Long> cell = new TableCell<>() {
+            TableCell<File, Long> cell = new TableCell<File, Long>() {
 
                 @Override
                 protected void updateItem(Long item, boolean empty) {
