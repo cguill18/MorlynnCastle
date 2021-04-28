@@ -33,4 +33,11 @@ public class InteractionView<I extends Interaction> extends FlowPane {
         this.setStyle(url);
     }
 
+    public void changeTooltip(String text){
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(text);
+        Tooltip.install(this, tooltip);
+
+    }
+
 }

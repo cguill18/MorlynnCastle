@@ -198,16 +198,19 @@ public class MorlynnCastleController {
 
     public void launchCommandForInventory(InteractionView<Item> interactionView) {
         Interaction interaction = interactionView.getInteraction();
-        switch (this.commandPaneController.getCommand()) {
-            case USE:
-                if (interaction instanceof Usable) {
-                    this.use((Usable) interaction);
-                }
-                break;
-            case EQUIP:
-                if (interaction instanceof Equipable)
-                    this.equip((Equipable) interaction);
-                break;
+        if (this.commandPaneController.getCommand() != null) {
+            switch (this.commandPaneController.getCommand()) {
+                case USE:
+                    if (interaction instanceof Usable) {
+                        this.use((Usable) interaction);
+                    }
+                    break;
+                case EQUIP:
+                    if (interaction instanceof Equipable)
+                        this.equip((Equipable) interaction);
+                    break;
+            }
+            this.resetCommand();
         }
     }
 

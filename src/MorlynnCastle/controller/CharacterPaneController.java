@@ -71,6 +71,7 @@ public class CharacterPaneController {
         final int[] i = {0};
         inventory.forEach((name, item) -> {
             InteractionView<Item> interactionView = new InteractionView<>(item);
+            interactionView.changeTooltip(name+"\n"+item.getDescription());
             interactionView.setOnMouseClicked(event -> this.morlynnCastleController.launchCommandForInventory(interactionView));
             interactionView.setOnDragDetected(event -> this.myStartDragAndDrop(event, interactionView));
             inventoryPane.add(interactionView, i[0] % this.inventoryPane.getColumnConstraints().size(), i[0] / this.inventoryPane.getColumnConstraints().size());
