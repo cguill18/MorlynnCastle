@@ -526,7 +526,7 @@ public class MorlynnCastleController {
         alert.setContentText("Congratulations ! You reached the end of the game !");
         alert.getButtonTypes().add(ButtonType.OK);
         alert.showAndWait();
-        Platform.exit();
+        this.borderPaneRoot.getScene().setRoot(this.menuPaneController.getvBoxRoot());
     }
 
     public void gameOver() {
@@ -534,7 +534,7 @@ public class MorlynnCastleController {
         alert.setContentText("You died.\nGame Over.");
         alert.getButtonTypes().add(ButtonType.OK);
         alert.showAndWait();
-        Platform.exit();
+        this.borderPaneRoot.getScene().setRoot(this.menuPaneController.getvBoxRoot());
     }
 
 }
