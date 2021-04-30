@@ -20,6 +20,8 @@ import java.util.Map;
 
 public class CharacterPaneController {
 
+    /* --------------------------- attributs ---------------------------------- */
+    /** elements de la vue */
     @FXML
     private Label name;
 
@@ -47,13 +49,16 @@ public class CharacterPaneController {
     @FXML
     private Label armorLabel;
 
+    /** controleur principal */
     private MorlynnCastleController morlynnCastleController;
 
+    /* --------------------------------------- methodes -------------------------------------------*/
     @FXML
     public void initialize() {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
+    /** setter */
     public void setMorlynnCastleController(MorlynnCastleController morlynnCastleController) {
         this.morlynnCastleController = morlynnCastleController;
     }
@@ -62,10 +67,12 @@ public class CharacterPaneController {
         this.name.setText(name);
     }
 
+    /** mise à jour de la barre de vie */
     public void setProgress(DoubleProperty doubleProperty) {
         this.hpBar.progressProperty().bind(doubleProperty);
     }
 
+    /** met à jour la vue de l'inventaire */
     public void displayInventory(Map<String, Item> inventory) {
         this.inventoryPane.getChildren().clear();
         final int[] i = {0};
@@ -81,6 +88,7 @@ public class CharacterPaneController {
         });
     }
 
+    /** vue de l'inventaire, pour avoir un repartion equitable de la place des objets */
     public void addInventoryRow() {
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setVgrow(Priority.SOMETIMES);
@@ -88,7 +96,7 @@ public class CharacterPaneController {
         this.inventoryPane.getRowConstraints().add(rowConstraints);
     }
 
-
+    /** fonction qui detecte un drag and drop */
     public void myStartDragAndDrop(MouseEvent event, InteractionView<Item> interactionView) {
         Dragboard db = inventoryPane.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
@@ -100,7 +108,7 @@ public class CharacterPaneController {
         this.morlynnCastleController.launchDrag(interactionView);
     }
 
-
+    /** vide la vue de l'equipement */
     public void clearEquipment() {
         this.weaponPane.setCenter(null);
         this.armorPane.setCenter(null);
@@ -108,6 +116,7 @@ public class CharacterPaneController {
         this.weaponLabel.setText(null);
     }
 
+    /** met à jour la vue de l'equipement */
     public void updateEquipment(Hero hero) {
         if (hero.getArmor() != null)
             this.addArmor(hero.getArmor());
@@ -115,13 +124,14 @@ public class CharacterPaneController {
             this.addWeapon(hero.getWeapon());
     }
 
-
+    /** ajoute une armure dans la vue de l'equipement */
     public void addArmor(Armor armor) {
         InteractionView<Armor> armorView = new InteractionView<>(armor);
         this.armorPane.setCenter(armorView);
         this.armorLabel.setText(armor.getName() + "\n" + "Armor class: " + armor.getArmorClass());
     }
 
+    /** ajoute une arme dans la vue de l'equipement */
     public void addWeapon(Weapon weapon) {
         InteractionView<Weapon> weaponView = new InteractionView<>(weapon);
         this.weaponPane.setCenter(weaponView);

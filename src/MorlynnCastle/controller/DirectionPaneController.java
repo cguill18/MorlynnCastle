@@ -20,6 +20,7 @@ public class DirectionPaneController {
 
 
     //actions des boutons
+    //envoit l'ordre de changement de pièce et de déplacement du héros
     @FXML
     private void upAction() {
         this.morlynnCastleController.moveHero("north");
