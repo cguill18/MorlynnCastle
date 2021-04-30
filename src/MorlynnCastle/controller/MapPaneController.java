@@ -17,7 +17,7 @@ public class MapPaneController {
     @FXML
     private GridPane mapPane;
 
-    /*position des pièces dans la carte*/
+    /* les pièces dans la carte*/
     @FXML
     private FlowPane center;
 
@@ -65,8 +65,7 @@ public class MapPaneController {
         popup.setAutoHide(true);
     }
 
-    //fonctions de generation des pieces
-    //selon la direction sélectionnée
+    /*fonctions de generation des pieces, notamment les pièces adjacentes */
     public void generateMap(Place HeroPlace) {
         this.clearMap();
         String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ; -fx-background-repeat: no-repeat;";
