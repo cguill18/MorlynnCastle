@@ -8,14 +8,18 @@ import javafx.scene.layout.GridPane;
 
 import java.util.Map;
 
+
 public class CombatSceneryPaneController {
 
+    /* --------------------------------------- attributs -------------------------------------------*/
     @FXML
     private GridPane combatSceneryPane;
 
     private CombatPaneController combatPaneController;
 
     private CharacterView heroView;
+
+    /* --------------------------------------- methodes -------------------------------------------*/
 
     public CharacterView getHeroView() {
         return heroView;

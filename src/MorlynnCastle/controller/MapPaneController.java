@@ -13,11 +13,11 @@ import java.util.HashMap;
 
 public class MapPaneController {
 
-    /*La carte*/
+    /** La carte */
     @FXML
     private GridPane mapPane;
 
-    /*position des pièces dans la carte*/
+    /** position des pièces dans la carte */
     @FXML
     private FlowPane center;
 
@@ -33,13 +33,13 @@ public class MapPaneController {
     @FXML
     private FlowPane south;
 
-    /*sauvegarder les pieces et leur image*/
+    /** sauvegarder les pieces et leur image */
     private HashMap<String, String> imgPieces = new HashMap<>();
 
-    /*popup de la carte entière*/
+    /** popup de la carte entière */
     private Popup popup;
 
-    /*associe chaque pièce à son image*/
+    /** associe chaque pièce à son image */
     public MapPaneController() {
         this.imgPieces.put("hall", "hall.png");
         this.imgPieces.put("weapon_room", "weapon.png");
@@ -50,13 +50,12 @@ public class MapPaneController {
         this.imgPieces.put("exit", "exit.png");
     }
 
-    //fonctions d'initialisation
     @FXML
     public void initialize() {
         this.initPopup();
     }
 
-    /*initialisation du pop up pour afficher la carte*/
+    /**initialisation du pop up pour afficher la carte */
     private void initPopup() {
         this.popup = new Popup();
         ImageView img = new ImageView();
@@ -65,8 +64,11 @@ public class MapPaneController {
         popup.setAutoHide(true);
     }
 
-    //fonctions de generation des pieces
-    //selon la direction sélectionnée
+
+    /**
+     * fonction de generation des pieces dans la carte
+     * @param HeroPlace la pièce dans laquelle est le personnage joueur
+     */
     public void generateMap(Place HeroPlace) {
         this.clearMap();
         String styleGeneral = "-fx-background-position: center; -fx-background-size: 100% 100% ; -fx-background-repeat: no-repeat;";
@@ -104,7 +106,7 @@ public class MapPaneController {
     }
 
 
-    /*affiche la carte en entier après avoir utilisé la loupe*/
+    /** affiche la carte en entier après avoir utilisé la loupe */
     @FXML
     public void showMap() {
         if (!this.popup.isShowing())

@@ -6,17 +6,17 @@ public class CommandPaneController {
 
     private Command command;
 
-    /*récupère la commande*/
+    /** récupère la commande */
     public Command getCommand() {
         return command;
     }
 
-    /*remet à null command*/
+    /** remet à null command */
     public void resetCommand() {
         this.command = null;
     }
 
-    /*sauvegarde la commande effectuée*/
+    /** sauvegarde la commande effectuée */
     @FXML
     public void take() {
         this.command = Command.TAKE;

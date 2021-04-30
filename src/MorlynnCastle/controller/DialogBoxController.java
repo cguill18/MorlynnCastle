@@ -11,33 +11,40 @@ import javafx.scene.text.TextFlow;
 
 public class DialogBoxController {
 
-    /*Boite de dialogue*/
+    /** Boite de dialogue */
     @FXML
     private TextArea textArea;
     @FXML
     private TextFlow textFlow;
 
-    /*ajout du texte dans le TextArea visible*/
+    /** ajout du texte dans le TextArea visible */
     public void addText(String text) {
         this.textArea.appendText(text + "\n");
     }
 
-    /*Dialogue avec les personnages non joueurs*/
-    /*Met en place le TextFlow qui permet de choisir les dialogues*/
+    /**
+     * Dialogue avec les personnages non joueurs
+     * Met en place le TextFlow qui permet de choisir les dialogues
+     * */
     public void startDialog() {
         this.textFlow.setVisible(true);
         this.textFlow.setManaged(true);
     }
 
-    /*Fin des phases de dialogue*/
-    /*Fait disparaitre le TextFlow*/
+    /**
+     * Fin des phases de dialogue
+     * Fait disparaitre le TextFlow
+     * */
     public void endDialog() {
         this.textFlow.setVisible(false);
         this.textFlow.setManaged(false);
         this.textFlow.getChildren().clear();
     }
 
-    /*Permet de surligner les différents choix de dialogue*/
+    /**
+     * Ajout un choix de dialogue avec sa réponse en évènement
+     * Permet de surligner les différents choix de dialogue
+     * */
     public void addDialog(String text, EventHandler<MouseEvent> answer) {
         Text line = new Text(text + "\n");
         line.setOnMouseEntered(event -> {

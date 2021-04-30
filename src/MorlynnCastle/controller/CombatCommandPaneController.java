@@ -4,10 +4,15 @@ import javafx.fxml.FXML;
 
 public class CombatCommandPaneController {
 
+
+    /* --------------------------- attributs ---------------------------------- */
+
     private CombatPaneController combatPaneController;
 
-    /** Pour enregistrer la commande cliquée. */
+    /** Attribut pour enregistrer la commande cliquée. */
     private Command command;
+
+    /* --------------------------------------- methodes -------------------------------------------*/
 
     public Command getCommand() {
         return this.command;

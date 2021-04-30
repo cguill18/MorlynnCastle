@@ -72,7 +72,10 @@ public class CharacterPaneController {
         this.hpBar.progressProperty().bind(doubleProperty);
     }
 
-    /** met à jour la vue de l'inventaire */
+    /**
+     * met à jour la vue de l'inventaire et ajoute les évènements
+     * Ajoute des lignes d'inventaire si besoin
+     * */
     public void displayInventory(Map<String, Item> inventory) {
         this.inventoryPane.getChildren().clear();
         final int[] i = {0};
@@ -88,7 +91,7 @@ public class CharacterPaneController {
         });
     }
 
-    /** vue de l'inventaire, pour avoir un repartion equitable de la place des objets */
+    /** ajoute une ligne dans le gridpane avec les mêmes dimensions que les autres */
     public void addInventoryRow() {
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setVgrow(Priority.SOMETIMES);

@@ -84,7 +84,7 @@ public class MorlynnCastleController {
 
     private MenuPaneController menuPaneController;
 
-    /** attributs pour la liaison avec le model */
+    /** attributs pour la liaison avec le modèle */
     private Game game;
 
     private Hero hero;
@@ -92,7 +92,7 @@ public class MorlynnCastleController {
     /** attribut utilisé pour le drag and drop */
     private Usable launchCommandArg1;
 
-    /** propriété pour la progressBar des personnages */
+    /** propriété pour la progressBar du personnage */
     private DoubleProperty currentHp = new SimpleDoubleProperty();
     private DoubleProperty maxHp = new SimpleDoubleProperty();
     private DoubleProperty ratioHp = new SimpleDoubleProperty();
@@ -111,7 +111,7 @@ public class MorlynnCastleController {
         this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
     }
 
-    /** fonction de recuperation du model */
+    /** fonction de recuperation du modèle */
     public void initGame(Game game) {
         this.game = game;
         this.hero = this.game.getHero();
@@ -388,7 +388,7 @@ public class MorlynnCastleController {
         }
     }
 
-    /** creattion de la fenetre de l'interieur d'un coffre */
+    /** creation de la fenetre de l'interieur d'un coffre */
     public void setStageContainer() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = loader.load();
@@ -400,7 +400,7 @@ public class MorlynnCastleController {
         this.containerstage = stage;
     }
 
-    /** fonction qui appelle la fonction de déplacement du héros dans le modele et mise à jour de la vue */
+    /** fonction qui appelle la fonction de déplacement du héros dans le modèle et mise à jour de la vue */
     public void moveHero(String direction) {
         Door door = (Door) this.game.getHero().getPlace().getInteractions().get(direction);
         if (door != null) {

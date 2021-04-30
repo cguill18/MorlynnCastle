@@ -15,6 +15,9 @@ import javafx.scene.layout.GridPane;
 
 public class CombatPaneController {
 
+    /* --------------------------- attributs ---------------------------------- */
+    /** elements de la vue */
+
     @FXML
     private GridPane gridPaneRoot;
 
@@ -33,11 +36,16 @@ public class CombatPaneController {
     @FXML
     private CombatSceneryPaneController combatSceneryPaneController;
 
+    /** Attribut pour la communication avec le contrôleur général  */
     private MorlynnCastleController morlynnCastleController;
+
+    /** Attributs du modèle */
 
     public Combat combat;
 
     public Hero hero;
+
+    /* --------------------------------------- methodes -------------------------------------------*/
 
     /** On bind la police pour qu'elle se redimensionne avec la fenêtre */
     @FXML

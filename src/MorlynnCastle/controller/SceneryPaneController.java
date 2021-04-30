@@ -60,7 +60,7 @@ public class SceneryPaneController {
         this.displayRoomItems(place.getInteractions());
     }
 
-    /** methode pour générer sur la vue les objets de la piece */
+    /** methode pour générer sur la vue les objets de la piece e */
     public void displayRoomItems(Map<String, Interaction> interactions) {
         this.sceneryPane.getChildren().clear();
         for (Map.Entry<String, Interaction> objects : interactions.entrySet()) {
@@ -74,12 +74,12 @@ public class SceneryPaneController {
         }
     }
 
-    /** vide la scene des précédants objets */
+    /** vide la scene des précédents objets */
     public void removeInteractionView(InteractionView<Interaction> interactionView) {
         this.sceneryPane.getChildren().remove(interactionView);
     }
 
-    /** fonction qui detecte la fin du drag and drop du "use" */
+    /** fonction qui détecte la fin du drag and drop du "use" */
     @FXML
     public void myEndDragAndDrop(DragEvent event, InteractionView<Interaction> interactionView) {
         Dragboard db = event.getDragboard();
