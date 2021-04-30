@@ -17,7 +17,7 @@ public class MapPaneController {
     @FXML
     private GridPane mapPane;
 
-    /** position des pièces dans la carte */
+    /** pièces dans la carte */
     @FXML
     private FlowPane center;
 
