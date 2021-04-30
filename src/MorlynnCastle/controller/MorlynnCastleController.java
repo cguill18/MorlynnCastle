@@ -317,31 +317,23 @@ public class MorlynnCastleController {
     }
 
     public void attackNonPlayerCharacter(NonPlayerCharacter npc) {
-        try {
-            if (npc.isAlive()) {
-                if (this.hero.getOngoingCombat() == null) {
-                    this.startCombat(npc);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
-                    Parent root = loader.load();
-                    CombatPaneController combatPaneController = loader.getController();
-                    combatPaneController.setMorlynnCastleController(this);
-                    combatPaneController.initCombat(this.hero);
-                    this.gridPaneGame.getScene().setRoot(root);
-                }
+        this.hero.startCombat(npc);
+        if (this.hero.getOngoingCombat() == null)
+            this.dialogBoxController.addText("This character is dead.");
+        else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CombatPane.fxml"));
+                Parent root = loader.load();
+                CombatPaneController combatPaneController = loader.getController();
+                combatPaneController.setMorlynnCastleController(this);
+                combatPaneController.initCombat(this.hero);
+                this.gridPaneGame.getScene().setRoot(root);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-
-    public void startCombat(NonPlayerCharacter npc) {
-        if (!npc.isHostile()) {
-            npc.setHostile(true);
-        }
-        Combat c = new Combat(this.hero, this.hero.getPlace().getEnemiesInPlace());
-        this.hero.setOngoingCombat(c);
-    }
 
     private void talk(Talkable interaction) {
         Dialog dialog = interaction.talk();
@@ -396,6 +388,9 @@ public class MorlynnCastleController {
                 this.sceneryPaneController.displayRoomItems(this.game.getHero().getPlace().getInteractions());
                 String description = this.game.getHero().getPlace().getDescription();
                 this.dialogBoxController.addText(description);
+                if (this.hero.getPlace().randomEncoutner()) {
+                    this.attackNonPlayerCharacter(this.hero.getPlace().getAnEnemy());
+                }
             }
         } else {
             this.dialogBoxController.addText("Are you sure that a door exists there ?");

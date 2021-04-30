@@ -12,23 +12,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Combat implements Serializable {
 
     private Hero hero;
-    private final Map<String, Character> enemies = new HashMap<>();
+    private final Map<String, NonPlayerCharacter> enemies = new HashMap<>();
     private Interpreter combatInterpreter = null;
     private boolean running = true;
     private Scanner scanner = null;
 
-    public Combat(Hero hero, Map<String, Character> enemies, Scanner input) {
+    public Combat(Hero hero, Map<String, NonPlayerCharacter> enemies, Scanner input) {
         this.combatInterpreter = new Interpreter(hero, input);
         this.enemies.putAll(enemies);
         scanner = input;
     }
 
-    public Combat(Hero hero, Map<String, Character> enemies) {
+    public Combat(Hero hero, Map<String, NonPlayerCharacter> enemies) {
         this.enemies.putAll(enemies);
         this.hero = hero;
     }
 
-    public Map<String, Character> getEnemies() {
+    public Map<String, NonPlayerCharacter> getEnemies() {
         return this.enemies;
     }
 

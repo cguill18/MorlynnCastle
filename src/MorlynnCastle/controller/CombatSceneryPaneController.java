@@ -1,7 +1,7 @@
 package MorlynnCastle.controller;
 
-import MorlynnCastle.model.characters.Character;
 import MorlynnCastle.model.characters.Hero;
+import MorlynnCastle.model.characters.NonPlayerCharacter;
 import MorlynnCastle.view.CharacterView;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -25,7 +25,7 @@ public class CombatSceneryPaneController {
         this.combatPaneController = combatPaneController;
     }
 
-    public void displayCharacters(Hero hero, Map<String, Character> enemies) {
+    public void displayCharacters(Hero hero, Map<String, NonPlayerCharacter> enemies) {
         final int[] i = {0};
         this.heroView = new CharacterView(hero);
         combatSceneryPane.add(heroView, 1, 2);

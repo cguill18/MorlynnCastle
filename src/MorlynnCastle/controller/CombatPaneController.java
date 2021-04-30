@@ -93,14 +93,22 @@ public class CombatPaneController {
     }
 
     public void flee() {
-        this.textArea.appendText("You flee the fight.\n");
-        this.endCombat();
+        if (this.hero.flee()) {
+            this.textArea.appendText("You flee the fight.\n");
+            this.endCombat();
+        }
+        else {
+            this.textArea.appendText("You did not managed to run away.\n");
+            this.combatTurn();
+            if (!(this.combat.enemiesStillAlive() && this.hero.isAlive()))
+                this.endCombat();
+        }
     }
 
     public void combatTurn() {
         this.combat.getEnemies().values().stream().filter(Character::isAlive).forEach(enemy -> {
             int damage = this.combat.enemyTurn(hero, enemy);
-            String text = enemy.getName() + "attacks you.\n";
+            String text = enemy.getName() + " attacks you.\n";
             if (damage == 0)
                 text = text + "Miss !\nYou take no damage.";
             else {
@@ -108,7 +116,7 @@ public class CombatPaneController {
                 if (!this.hero.isAlive())
                     text = text + "You died.";
             }
-            this.textArea.appendText(text);
+            this.textArea.appendText(text+"\n");
             this.combatSceneryPaneController.getHeroView().updateHp();
         });
     }

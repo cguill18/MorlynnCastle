@@ -66,11 +66,11 @@ public class Place extends Interaction {
         this.interactions.remove(i.getName());
     }
 
-    public Map<String, Character> getEnemiesInPlace() {
-        Map<String, Character> enemies = new HashMap<>();
+    public Map<String, NonPlayerCharacter> getEnemiesInPlace() {
+        Map<String, NonPlayerCharacter> enemies = new HashMap<>();
         this.interactions.forEach((k, v) -> {
             if (v instanceof NonPlayerCharacter && ((NonPlayerCharacter) v).isAlive() && ((NonPlayerCharacter) v).isHostile()) {
-                enemies.put(((Character) v).getName(), (Character) v);
+                enemies.put(((NonPlayerCharacter) v).getName(), (NonPlayerCharacter) v);
             }
         });
         return enemies;
@@ -89,7 +89,9 @@ public class Place extends Interaction {
         return this.getEnemiesInPlace().keySet().stream().findFirst().get();
     }
 
-
+    public NonPlayerCharacter getAnEnemy(){
+        return this.getEnemiesInPlace().values().stream().findAny().get();
+    }
 }
 
 

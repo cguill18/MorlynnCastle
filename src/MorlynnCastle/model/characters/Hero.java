@@ -84,4 +84,18 @@ public class Hero extends Character {
         equipable.equip(this);
     }
 
+    public void startCombat(NonPlayerCharacter npc) {
+        if (npc.isAlive()) {
+            if (!npc.isHostile()) {
+                npc.setHostile(true);
+            }
+            Combat c = new Combat(this, this.getPlace().getEnemiesInPlace());
+            this.setOngoingCombat(c);
+        }
+    }
+
+    public boolean flee(){
+        return !this.getPlace().randomEncoutner();
+    }
+
 }
