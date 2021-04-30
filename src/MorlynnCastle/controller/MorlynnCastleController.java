@@ -35,6 +35,7 @@ import javafx.event.EventHandler;
 
 public class MorlynnCastleController {
 
+    /** attributs pour la liaison avec les différentes partie de la vue */
     @FXML
     private BorderPane borderPaneRoot;
 
@@ -77,23 +78,28 @@ public class MorlynnCastleController {
     @FXML
     private MapPaneController mapPaneController;
 
-    private Game game;
-
-    private Hero hero;
-
-    private Usable launchCommandArg1;
-
     private Stage containerstage;
 
     private ContainerPaneController containerPaneController;
 
     private MenuPaneController menuPaneController;
 
+    /** attributs pour la liaison avec le model */
+    private Game game;
+
+    private Hero hero;
+
+    /** attribut utilisé pour le drag and drop */
+    private Usable launchCommandArg1;
+
+    /** propriété pour la progressBar des personnages */
     private DoubleProperty currentHp = new SimpleDoubleProperty();
     private DoubleProperty maxHp = new SimpleDoubleProperty();
     private DoubleProperty ratioHp = new SimpleDoubleProperty();
 
+    /*------------------------------------------- methodes ------------------------------------------------*/
 
+    /** fonction d'initalisation de la vue */
     @FXML
     public void initialize() throws IOException {
         this.launchCommandArg1 = null;
@@ -105,6 +111,7 @@ public class MorlynnCastleController {
         this.gridPaneGame.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneGame.widthProperty().divide(60).asString(), ";", gridPaneGame.getStyle()));
     }
 
+    /** fonction de recuperation du model */
     public void initGame(Game game) {
         this.game = game;
         this.hero = this.game.getHero();
@@ -113,6 +120,7 @@ public class MorlynnCastleController {
         this.ratioHp.bind(Bindings.divide(this.currentHp, this.maxHp));
     }
 
+    /** fonction de mise à jour de la vue */
     public void updateView() {
         this.characterPaneController.setName(this.hero.getName());
         this.sceneryPaneController.initScenery(this.hero.getPlace());
@@ -122,6 +130,7 @@ public class MorlynnCastleController {
         this.characterPaneController.updateEquipment(this.hero);
     }
 
+    /** getter et setter */
     public BorderPane getBorderPaneRoot() {
         return borderPaneRoot;
     }
@@ -134,11 +143,12 @@ public class MorlynnCastleController {
         return this.commandPaneController.getCommand();
     }
 
+    /** met à null la commande */
     public void resetCommand() {
         this.commandPaneController.resetCommand();
     }
 
-
+    /** mise à jour des points de vie du personnage */
     public void updateHp() {
         this.currentHp.set(this.hero.getCurrentHealthPoints());
         this.maxHp.set(this.hero.getMaxHealthPoints());
@@ -147,6 +157,11 @@ public class MorlynnCastleController {
         System.out.println(this.ratioHp.get());
     }
 
+    /**
+     * fonction qui analyse et appelle les bonnes methodes de commande
+     * en fonction de la commande cliquée dans le CommandPane,
+     * cette methode est appellée par le SceneryPaneController
+     * */
     public void launchCommand(InteractionView<Interaction> interactionView) {
         Interaction interaction = interactionView.getInteraction();
         if (this.commandPaneController.getCommand() != null) {
@@ -184,18 +199,10 @@ public class MorlynnCastleController {
         this.checkEnd();
     }
 
-    private void look(Container interaction) {
-        if (this.containerstage.getOwner() == null)
-            this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
-        this.containerPaneController.setContainerLooking(interaction);
-        this.containerPaneController.displayContainer(interaction.getContent());
-        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 3);
-        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 3);
-        this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
-        this.containerstage.setTitle("Content");
-        this.containerstage.show();
-    }
-
+    /**
+     * fonction qui d'analyse des commande, comme celle ci dessus
+     * cette methode est appellée par le CharacterPaneController
+     * */
     public void launchCommandForInventory(InteractionView<Item> interactionView) {
         Interaction interaction = interactionView.getInteraction();
         if (this.commandPaneController.getCommand() != null) {
@@ -214,12 +221,16 @@ public class MorlynnCastleController {
         }
     }
 
-    private void equip(Equipable equipable) {
-        this.hero.equip(equipable);
-        this.characterPaneController.displayInventory(this.hero.getInventory());
-        this.characterPaneController.updateEquipment(this.hero);
+    /** fonction qui debute le drag and drop apres un "use", permet de stocker l'objet*/
+    public void launchDrag(InteractionView<Item> interactionView) {
+        if (this.commandPaneController.getCommand() == Command.USE) {
+            Interaction inte = interactionView.getInteraction();
+            if (inte instanceof Usable)
+                this.launchCommandArg1 = (Usable) inte;
+        }
     }
 
+    /** fonction qui termine le drag and drop apres un "use", permet de récuperer l'objet */
     public void launchDrop(InteractionView<Interaction> interactionView) {
         Interaction inte = interactionView.getInteraction();
         if (inte instanceof Receiver) {
@@ -230,14 +241,25 @@ public class MorlynnCastleController {
         }
     }
 
-    public void launchDrag(InteractionView<Item> interactionView) {
-        if (this.commandPaneController.getCommand() == Command.USE) {
-            Interaction inte = interactionView.getInteraction();
-            if (inte instanceof Usable)
-                this.launchCommandArg1 = (Usable) inte;
-        }
+    /** --------- methodes pour le lancement des commandes ------- */
+
+    private void look(Container interaction) {
+        if (this.containerstage.getOwner() == null)
+            this.containerstage.initOwner(this.borderPaneRoot.getScene().getWindow());
+        this.containerPaneController.setContainerLooking(interaction);
+        this.containerPaneController.displayContainer(interaction.getContent());
+        this.containerstage.setWidth(this.gridPaneGame.getWidth() / 3);
+        this.containerstage.setHeight(this.gridPaneGame.getHeight() / 3);
+        this.containerstage.setOnCloseRequest(windowEvent -> this.containerPaneController.setContainerLooking(null));
+        this.containerstage.setTitle("Content");
+        this.containerstage.show();
     }
 
+    private void equip(Equipable equipable) {
+        this.hero.equip(equipable);
+        this.characterPaneController.displayInventory(this.hero.getInventory());
+        this.characterPaneController.updateEquipment(this.hero);
+    }
 
     private void use(Usable usable) {
         boolean success = this.game.getHero().use(usable);
@@ -267,6 +289,7 @@ public class MorlynnCastleController {
 
     }
 
+    /** permet une mettre la vue à jour, la porte fermée devient ouverte etc */
     private void useKey(Receiver receiver) {
         if (receiver instanceof DoorWithLock) {
             if (((DoorWithLock) receiver).getIsLocked()) {
@@ -298,17 +321,18 @@ public class MorlynnCastleController {
         }
     }
 
+    /** fonctions spécifiques aux coffres */
     public void takeFromContainer(Container container, Item item) {
         this.hero.takeFromContainer(container, item);
         this.dialogBoxController.addText("You add this " + item.getName() + " to your inventory.\n");
         this.characterPaneController.displayInventory(this.hero.getInventory());
     }
 
+    /** permet de prendre l'entièreté du contenu d'un coffre */
     public void takeAllFromContainer(Container container) {
         this.hero.takeAllFromContainer(container);
         this.characterPaneController.displayInventory(this.hero.getInventory());
     }
-
 
     public void attack(Attackable attackable) {
         if (attackable instanceof NonPlayerCharacter) {
@@ -333,7 +357,6 @@ public class MorlynnCastleController {
             }
         }
     }
-
 
     private void talk(Talkable interaction) {
         Dialog dialog = interaction.talk();
@@ -365,6 +388,7 @@ public class MorlynnCastleController {
         }
     }
 
+    /** creattion de la fenetre de l'interieur d'un coffre */
     public void setStageContainer() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContainerPane.fxml"));
         Parent root = loader.load();
@@ -376,6 +400,7 @@ public class MorlynnCastleController {
         this.containerstage = stage;
     }
 
+    /** fonction qui appelle la fonction de déplacement du héros dans le modele et mise à jour de la vue */
     public void moveHero(String direction) {
         Door door = (Door) this.game.getHero().getPlace().getInteractions().get(direction);
         if (door != null) {
@@ -398,6 +423,7 @@ public class MorlynnCastleController {
         this.checkEnd();
     }
 
+    /** fonction appelée par le quit de la menuBar, quite le jeu ou revient à la page d'accueil */
     @FXML
     public void functionQuit() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -415,7 +441,7 @@ public class MorlynnCastleController {
         }
     }
 
-
+    /** fonction appelée par le help de la menuBar, affiche l'utilisation des commandes */
     @FXML
     public void functionHelp() {
         Stage helpStage = new Stage();
@@ -426,6 +452,7 @@ public class MorlynnCastleController {
         helpStage.show();
     }
 
+    /** fonction de sauvegarde de la partie, genere la fenetre de sauvegarde */
     @FXML
     public void functionSave() {
         try {
@@ -468,6 +495,7 @@ public class MorlynnCastleController {
         }
     }
 
+    /** fonction pour charger une partie sauvegardée, ouvre la fenetre de sauvegarde */
     @FXML
     public void functionLoad() {
         try {
@@ -495,6 +523,7 @@ public class MorlynnCastleController {
         }
     }
 
+    /** fonction auxiliaire le la fonction précedante, met à jour la vue pour correspondre à la sauvegarde */
     public void load(String filename) {
         this.game.load(filename);
         this.hero = this.game.getHero();
@@ -506,6 +535,7 @@ public class MorlynnCastleController {
 
     }
 
+    /** fonction qui verifie si le héros est mort ou si il a atteind l'objectif */
     public void checkEnd() {
         switch (this.game.checkEnd()) {
             case DEAD:
@@ -516,6 +546,7 @@ public class MorlynnCastleController {
         }
     }
 
+    /** fenetre qui marque la fin du jeu reussit */
     public void end() {
         Alert alert = new Alert(AlertType.NONE);
         alert.setContentText("Congratulations ! You reached the end of the game !");
@@ -524,6 +555,7 @@ public class MorlynnCastleController {
         this.borderPaneRoot.getScene().setRoot(this.menuPaneController.getvBoxRoot());
     }
 
+    /** fenetre qui marque la fin du jeu après avoir été tué */
     public void gameOver() {
         Alert alert = new Alert(AlertType.NONE);
         alert.setContentText("You died.\nGame Over.");
