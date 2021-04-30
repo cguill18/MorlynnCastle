@@ -39,6 +39,7 @@ public class CombatPaneController {
 
     public Hero hero;
 
+    /** On bind la police pour qu'elle se redimensionne avec la fenêtre */
     @FXML
     public void initialize() {
         gridPaneRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", gridPaneRoot.widthProperty().divide(60).asString(), ";", gridPaneRoot.getStyle()));
@@ -49,6 +50,7 @@ public class CombatPaneController {
         this.morlynnCastleController = morlynnCastleController;
     }
 
+    /** Initialise les attributs nécessaires au déroulement du combat ainsi que la communication entre les différents contrôleurs. */
     public void initCombat(Hero hero) {
         this.hero = hero;
         this.combat = hero.getOngoingCombat();
@@ -57,20 +59,26 @@ public class CombatPaneController {
         this.combatSceneryPaneController.displayCharacters(this.hero, this.combat.getEnemies());
     }
 
+    /**
+     * Méthode appelé lorsqu'on clique sur un CharacterView.
+     * Lance la commande retenu par le commandpanecontroller, s'il y en a une puis la remet à null.
+     * Pour l'instant, seulement la commande ATTACK fonctionne comme cela.
+     * */
     public void launchCommand(CharacterView characterView) {
         if (this.combatCommandPaneController.getCommand() != null) {
-            switch (this.combatCommandPaneController.getCommand()) {
-                case ATTACK:
-                    this.attackCharacter(characterView);
-                    break;
-                case FLEE:
-                    this.flee();
-                    break;
+            if (this.combatCommandPaneController.getCommand() == Command.ATTACK) {
+                this.attackCharacter(characterView);
             }
             this.combatCommandPaneController.resetCommand();
         }
     }
 
+    /**
+     * Attaque un personnage non joueur
+     * Réalise l'affichage correspondant dans le textArea
+     * Puis lance le tour des ennemis et vérfie si le combat est fini
+     * @param characterView
+     */
     public void attackCharacter(CharacterView characterView) {
         NonPlayerCharacter npc = (NonPlayerCharacter) characterView.getInteractionView().getInteraction();
         int damage = this.hero.attack(npc);
@@ -92,6 +100,10 @@ public class CombatPaneController {
             this.endCombat();
     }
 
+    /**
+     *  Mets fin au combat si la fuite a fonctionné
+     *  Sinon, lance le tour des ennemis
+     */
     public void flee() {
         if (this.hero.flee()) {
             this.textArea.appendText("You flee the fight.\n");
@@ -105,6 +117,10 @@ public class CombatPaneController {
         }
     }
 
+    /**
+     * Tour des ennemis
+     * Chaque personnage vivant attaque le héros
+     */
     public void combatTurn() {
         this.combat.getEnemies().values().stream().filter(Character::isAlive).forEach(enemy -> {
             int damage = this.combat.enemyTurn(hero, enemy);
@@ -121,6 +137,9 @@ public class CombatPaneController {
         });
     }
 
+    /**
+     * Sort du combat après avoir fermé un Alert
+     */
     public void endCombat() {
         Alert alert = new Alert(AlertType.NONE, "Fin du combat", ButtonType.OK);
         alert.showAndWait();

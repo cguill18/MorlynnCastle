@@ -31,6 +31,13 @@ public class SavePaneController {
         return bottomButton;
     }
 
+    /**
+     * Initialise la TableView qui prend des fichiers File en contenu
+     * Génère les colonnes File name et Date
+     * Pour la colonne File name, les valeurs correspondent au nom du fichier sans l'extension
+     * Pour la colonne Date, on transforme la valeur lastModified qui est un Long en un String
+     * à partir d'un objet Date et d'un SimpleDateFormat
+     */
     @FXML
     public void initialize() {
         tableView.setPlaceholder(new Label("No save detected."));
@@ -64,11 +71,18 @@ public class SavePaneController {
         });
     }
 
+    /**
+     * Remplit le contenu de la TableView avec les fichiers en paramètres
+     * @param files Tableau de fichiers de sauvegarde
+     */
     public void fillList(File[] files) {
         ObservableList<File> content = FXCollections.observableArrayList(files);
         tableView.setItems(content);
     }
 
+    /**
+     * Récupère la sélection de la TableView et renvoie uniquement le nom du fichier de sauvegarde
+     */
     public String getSelection() {
         File selectedItem = this.tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null)

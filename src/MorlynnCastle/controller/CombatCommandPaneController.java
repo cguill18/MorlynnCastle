@@ -6,6 +6,7 @@ public class CombatCommandPaneController {
 
     private CombatPaneController combatPaneController;
 
+    /** Pour enregistrer la commande cliquée. */
     private Command command;
 
     public Command getCommand() {

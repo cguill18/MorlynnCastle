@@ -26,6 +26,9 @@ public class MenuPaneController {
         return vBoxRoot;
     }
 
+    /**
+     * Lance le jeu avec l'introduction
+     */
     @FXML
     public void start() {
         Game game = new Game();
@@ -47,6 +50,9 @@ public class MenuPaneController {
         animation.play();
     }
 
+    /**
+     * Génère l'interface de sauvegarde puis lance le jeu à partir de la sauvegarde sélectionnée
+     */
     @FXML
     public void load() {
         Game game = new Game();
@@ -81,6 +87,11 @@ public class MenuPaneController {
         Platform.exit();
     }
 
+    /**
+     * Lance le jeu à partir du Game en paramètres avec une animation de fondu
+     * @param game
+     * @param scene
+     */
     public void launchGame(Game game, Scene scene) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MorlynnCastle.fxml"));
@@ -100,6 +111,7 @@ public class MenuPaneController {
         }
     }
 
+    /** On bind la police pour qu'elle se redimensionne avec la fenêtre */
     @FXML
     public void initialize() {
         this.vBoxRoot.styleProperty().bind(Bindings.concat("-fx-font-size:", vBoxRoot.widthProperty().divide(60).asString(), ";", vBoxRoot.getStyle()));

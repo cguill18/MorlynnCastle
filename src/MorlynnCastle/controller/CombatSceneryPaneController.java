@@ -25,6 +25,11 @@ public class CombatSceneryPaneController {
         this.combatPaneController = combatPaneController;
     }
 
+    /**
+     * Génère les images des personnages et ajoute l'évènement cliquable
+     * @param hero le personnage joueur
+     * @param enemies la map des personnages hostiles
+     */
     public void displayCharacters(Hero hero, Map<String, NonPlayerCharacter> enemies) {
         final int[] i = {0};
         this.heroView = new CharacterView(hero);
