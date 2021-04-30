@@ -148,7 +148,7 @@ public class MorlynnCastleController {
         this.commandPaneController.resetCommand();
     }
 
-    /** mise à jour des points de vie du personnage */
+    /** mise à jour des points de vie du personnage dans la vue */
     public void updateHp() {
         this.currentHp.set(this.hero.getCurrentHealthPoints());
         this.maxHp.set(this.hero.getMaxHealthPoints());
